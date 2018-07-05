@@ -65,3 +65,9 @@
         position: initial;
     }
 }
+
+.table>thead>tr>th {
+    color: black;
+    font-size: 14px;
+    font-weight: 800;
+}

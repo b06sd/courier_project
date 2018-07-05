@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "48f3c869e27a55903cbfaa963dd28d0f",
+=======
+    "content-hash": "d5bca48e56bbf3a25645858fcab9c285",
+>>>>>>> courierproject_ridwanm
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1265,6 +1269,7 @@
                 "uuid"
             ],
             "time": "2018-01-20T00:28:24+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "spatie/laravel-permission",
@@ -1329,6 +1334,8 @@
                 "spatie"
             ],
             "time": "2018-06-14T02:52:40+00:00"
+=======
+>>>>>>> courierproject_ridwanm
         },
         {
             "name": "swiftmailer/swiftmailer",
