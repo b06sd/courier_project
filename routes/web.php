@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
 	return view('index');
 });
+
+Route::get('/courier', function () {
+	return view('courier');
+});

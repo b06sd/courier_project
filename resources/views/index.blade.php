@@ -1,4 +1,10 @@
 @extends('layouts.dashboard')
 @section('content')
-	O ti wa online!!!!
+	<div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+				O ti wa online!!!!
+			</div>
+		</div>
+	</div>
 @endsection

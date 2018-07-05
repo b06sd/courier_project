@@ -51,13 +51,13 @@
 
             <ul class="nav">
                 <li class="active">
-                    <a href="dashboard.html">
+                    <a href="/dashboard">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="user.html">
+                    <a href="/courier">
                         <i class="pe-7s-box2"></i>
                         <p>Courier</p>
                     </a>
@@ -100,14 +100,12 @@
 
 
         <div class="content">
-
             @yield('content')
-
         </div>
 
-
-        <footer class="footer">
-            <div class="col-xs-12">
+        <div class="col-xs-12">
+            <hr class="featurette">
+            <footer class="footer">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
                 <p class="copyright">
@@ -115,8 +113,8 @@
                 </p>
                 </div>
                 <div class="col-sm-4"></div>
-            </div>
-        </footer>
+            </footer>
+        </div>
 
     </div>
 </div>
@@ -127,9 +125,6 @@
     <!--   Core JS Files   -->
     <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
@@ -143,8 +138,6 @@
 	<script type="text/javascript">
     	$(document).ready(function(){
 
-        	demo.initChartist();
-
         	$.notify({
             	message: "Welcome to <b>A-Courier</b>"
 
@@ -155,5 +148,5 @@
 
     	});
 	</script>
-
+    @stack('scripts')
 </html>
