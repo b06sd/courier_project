@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="" name="description"/>
     <meta content="webthemez" name="author"/>
-    <title>{{ config('app.name', 'Comix') }}</title>
+    <title>{{ config('app.name', 'A Courier') }}</title>
     <link href="{{ asset('access/css/bootstrap.min.css') }}" rel="stylesheet" id="bootstrap-css">
     <link href="{{ asset('access/css/font-awesome.css') }}" rel="stylesheet"/>
     <link href="{{ asset('access/site.css') }}" rel="stylesheet" id="bootstrap-css">

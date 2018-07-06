@@ -7,8 +7,13 @@
             <div class="col-md-4">
                 <section class="login-form">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><h5><i class="fa fa-truck"></i> <b>LOGIN</b></h5></div>
-
+                      <div class="panel-heading clearfix">
+                        <div class="pull-left"><h5><i class="fa fa-lock"></i> <b>LOGIN</b></h5></div>
+                        <div class="pull-right">
+                          <span style="font-size:11px;">Don't have any account?</span>
+                          <a class="btn btn-default btn-xs login-link" href="{{ route('register') }}" style="margin-top:-2px;"><i class="fa fa-plus-circle"></i> Sign up</a>
+                        </div>
+                      </div>
                         <div class="panel-body">
                             <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                                 {{ csrf_field() }}

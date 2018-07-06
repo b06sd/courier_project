@@ -14,16 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-	return view('index');
-});
-
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/courier', function () {
-	return view('courier');
+Auth::routes();
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles','RoleController');
+    Route::resource('permissions','PermissionController');
+    Route::resource('users','UserController');
+
+    Route::resource('courier', 'CourierController');
+    Route::resource('consignees', 'ConsigneeController');
 });
