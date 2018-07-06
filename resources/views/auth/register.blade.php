@@ -7,7 +7,7 @@
         <div class="col-md-4">
             <section class="login-form">
               <div class="panel panel-default">
-                <div class="panel-heading"><h5><i class="fa fa-truck"></i> <b>REGISTER</b></h5></div>
+                <div class="panel-heading"><h5><i class="fa fa-plus"></i> <b>REGISTER</b></h5></div>
                 <div class="panel-body">
                     <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                         @csrf
@@ -59,6 +59,13 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="form-group row">
+                            <div class="col-md-12 controls">
+                              Already have an account?
+                              <a href="{{ route('login') }}" class="primary-font login-link"> Sign In</a>
                             </div>
                         </div>
                     </form>
