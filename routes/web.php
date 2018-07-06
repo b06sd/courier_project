@@ -27,3 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/courier', function () {
 	return view('courier');
 });
+
+Route::get('/consignee', function (){
+	return view('consignee');
+});
