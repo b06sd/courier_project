@@ -63,13 +63,18 @@
                     </a>
                 </li>
                 <li>
-                    <a href="table.html">
+                    <a href="/consignee">
                         <i class="pe-7s-note2"></i>
                         <p>Consignee</p>
                     </a>
                 </li>
                 <li class="active-pro">
-                    <a href="typography.html">
+                    <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                         <i class="pe-7s-power"></i>
                         <p>Logout</p>
                     </a>

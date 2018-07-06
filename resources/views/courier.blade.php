@@ -93,10 +93,6 @@
             <input type="date" class="form-control" name="date_delivered" id="date_delivered" value="" />
         </div>
         <div class="form-group">
-            <label for="">Consignee's Address</label>
-            <textarea class="form-control" name="cons_address" value="" rows="6"></textarea>
-        </div>
-        <div class="form-group">
             <label for="">Mode of Payment</label>
             <select name="mod_pay" id="mod_pay" class="form-control">
                 <option value="">Select a Payment</option>

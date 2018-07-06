@@ -23,7 +23,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles','RoleController');
     Route::resource('permissions','PermissionController');
     Route::resource('users','UserController');
+});
 
-    Route::resource('courier', 'CourierController');
-    Route::resource('consignees', 'ConsigneeController');
+Route::get('/courier', function () {
+	return view('courier');
+});
+
+Route::get('/consignee', function (){
+	return view('consignee');
 });
