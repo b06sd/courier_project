@@ -11,15 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Auth\LoginController@showLoginForm');
+
 
 
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('roles','RoleController');
     Route::resource('permissions','PermissionController');
     Route::resource('users','UserController');
