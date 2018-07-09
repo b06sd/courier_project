@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.template')
 @section('content')
   <h4 style="margin-top: 0;"><b>Courier</b></h4>
   <hr class="featurette">
@@ -17,7 +17,7 @@
 		        <label for="">Shipper's Name</label>
 		            <select name="ship_name" id="ship_name" class="form-control">
 		                <option value="">Select Client</option>
-		                <option value="1">FIRS</option>                                    
+		                <option value="1">FIRS</option>
 		            </select>
 		  	</div>
 		  	<div id="client_detail" class="hidden">
@@ -59,7 +59,7 @@
                 <select name="client_consignee" class="form-control" required="required" id="client_consignee">
                 <option value="">Select Consignee</option>
                 <option value="new">New</option>
-                <option value='1'>Kingsley Udenewu</option>                                    
+                <option value='1'>Kingsley Udenewu</option>
             	</select>
         </div>
         <div id="consignee_details" class="hidden">
@@ -79,7 +79,7 @@
                 <label for="">Consignee's Email</label>
                 <input type="email" class="form-control" name="cons_email" value="" />
             </div>
-        </div>        
+        </div>
         <div class="form-group">
             <label for="">Pickup Date</label>
             <input type="date" class="form-control" name="date_picked" id="date_picked" value="" />

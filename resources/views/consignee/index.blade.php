@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.template')
 @section('content')
   <h4 style="margin-top: 0;"><b>Courier</b></h4>
   <hr class="featurette">
@@ -35,7 +35,7 @@
 	    </form>
 		</div>
 		<div class="col-sm-4">
-			
+
 		</div>
     </div>
     <div id="view-consignee" class="tab-pane fade">
