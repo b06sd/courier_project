@@ -22,19 +22,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{--@foreach ($users as $user)--}}
-                                {{--<tr>--}}
-                                {{--<td>{{ $user->name }}</td>--}}
-                                {{--<td>{{ $user->email }}</td>--}}
-                                {{--<td>{{ $user->phone }}</td>--}}
-                                {{--<td>--}}
-                                {{--<a href="{{ URL::to('users/'.$user->id.'/edit') }}" class="btn btn-warning pull-left">Edit</a>--}}
-                                {{--{!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}--}}
-                                {{--{!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}--}}
-                                {{--{!! Form::close() !!}--}}
-                                {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--@endforeach--}}
+                                @foreach ($users as $user)
+                                {{-- <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->phone }}</td>
+                                <td>
+                                <a href="{{ URL::to('users/'.$user->id.'/edit') }}" class="btn btn-warning pull-left">Edit</a>
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::close() !!}
+                                </td>
+                                </tr> --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -44,7 +44,7 @@
     </div>
 @endsection
 
-@section('script')
+@push('scripts')
     <script src="{{ asset('temp/js/lib/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js') }}"></script>
@@ -83,4 +83,4 @@
             });
         })
     </script>
-@endsection
+@endpush
