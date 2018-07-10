@@ -301,8 +301,7 @@
             </div>
             <!-- End Sidebar scroll-->
           </div>
-=======
->>>>>>> cb9ae49f909d0929588bb905442ba08bfdd89283
+
           @include('_partials.sidebar')
           <!-- End Left Sidebar  -->
           <!-- Page wrapper  -->
