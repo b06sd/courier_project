@@ -427,7 +427,7 @@
           <!--Custom JavaScript -->
 
           <script src="{{ asset('temp/js/custom.min.js') }}"></script>
-          @stack('scripts')
+          @yield('scripts')
         </body>
 
         </html>
