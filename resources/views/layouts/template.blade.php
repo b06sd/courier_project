@@ -44,11 +44,7 @@
           <!-- Logo -->
           <div class="navbar-header">
             <a class="navbar-brand" href="index.html">
-              <!-- Logo icon -->
-              <b><img src="{{ asset('temp/images/logo.png') }}" alt="homepage" class="dark-logo" /></b>
-              <!--End Logo icon -->
-              <!-- Logo text -->
-              <span><img src="{{ asset('temp/images/logo-text.png') }}" alt="homepage" class="dark-logo" /></span>
+              <b>APEX</b>
             </a>
           </div>
           <!-- End Logo -->
@@ -329,6 +325,7 @@
               <!-- Insert Pages Here -->
 
               <!-- Container fluid  -->
+              <!-- During implementation this div should be dynamic and should be role based  -->
               {{--  <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row">
