@@ -28,7 +28,7 @@
   <!--[if lt IE 9]>
   <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
+<![endif]-->
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -44,13 +44,8 @@
         <nav class="navbar top-navbar navbar-expand-md navbar-light">
           <!-- Logo -->
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
-              <!-- Logo icon -->
-              <b><img src="{{ asset('temp/images/logo.png') }}" alt="homepage" class="dark-logo" /></b>
-              <!--End Logo icon -->
-              <!-- Logo text -->
-              <span><img src="{{ asset('temp/images/logo-text.png') }}" alt="homepage" class="dark-logo" /></span>
-            </a>
+            <a class="navbar-brand" href="/home">
+              <b>APEX</b>
           </div>
           <!-- End Logo -->
           <div class="navbar-collapse">
@@ -259,52 +254,8 @@
           </div>
           <!-- End header header -->
           <!-- Left Sidebar  -->
-          <div class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-              <!-- Sidebar navigation-->
-              <nav class="sidebar-nav">
-                <ul id="sidebarnav">
-                  <li class="nav-devider"></li>
-                  <li class="nav-label">Home</li>
-                  <li> <a class=""   href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a></li>
-                  <hr/>
-                  <li class="nav-label">LOGISTICS</li>
-                  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-truck"></i><span class="hide-menu">Logistics Management</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                      <li><a href="#">Manage Consignee</a></li>
-                      <li><a href="#">Manage Courier</a></li>
-                    </ul>
-                  </li>
-                  <hr/>
-                  <li class="nav-label">CRM</li>
-                  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Customer Management</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                      <li><a href="chart-flot.html">Flot</a></li>
-                      <li><a href="chart-morris.html">Morris</a></li>
-                      <li><a href="chart-chartjs.html">ChartJs</a></li>
-                      <li><a href="chart-chartist.html">Chartist </a></li>
-                      <li><a href="chart-amchart.html">AmChart</a></li>
-                      <li><a href="chart-echart.html">EChart</a></li>
-                      <li><a href="chart-sparkline.html">Sparkline</a></li>
-                      <li><a href="chart-peity.html">Peity</a></li>
-                    </ul>
-                  </li>
-                  <hr/>
-                  <li class="nav-label">PROFILE</li>
-                  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">User Management</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                      <li><a href="{{ route('permissions.index') }}">Manage Permissions</a></li>
-                      <li><a href="#">Manage Roles</a></li>
-                      <li><a href="{{ route('users.index') }}">Manage Users</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-              <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-          </div>
+
+          @include('_partials.sidebar')
           <!-- End Left Sidebar  -->
           <!-- Page wrapper  -->
           <div class="page-wrapper">
@@ -331,6 +282,7 @@
               <!-- Insert Pages Here -->
 
               <!-- Container fluid  -->
+              <!-- During implementation this div should be dynamic and should be role based  -->
               {{--  <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row">
@@ -398,7 +350,19 @@
               </div>
               <!-- End Container fluid  -->
               <!-- footer -->
-              <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="#">Apex</a></footer>
+
+                <footer class="footer">
+                  <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <p style="text-align: center;">
+                      &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Apex</a>, made by coders
+                    </p>
+                  </div>
+                  <div class="col-md-4"></div>
+                  </div>
+                </footer>
+
               <!-- End footer -->
             </div>
             <!-- End Page wrapper  -->
@@ -440,7 +404,8 @@
           <!-- scripit init-->
 
           <script src="{{ asset('temp/js/custom.min.js') }}"></script>
-          @yield('script')
+
+          @stack('scripts')
         </body>
 
         </html>

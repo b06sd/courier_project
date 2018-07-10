@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Account;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ConsigneeController extends Controller
+class AccountsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class ConsigneeController extends Controller
      */
     public function index()
     {
-        return view('consignee.index');
+        //
+        return view('accounts.index');
     }
 
     /**
