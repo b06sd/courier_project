@@ -358,7 +358,7 @@
                   <div class="col-md-4"></div>
                   <div class="col-md-4">
                     <p style="text-align: center;">
-                      &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Apex</a>, made by coders
+                      &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">{{ config('app.name') }}</a>, made by coders
                     </p>
                   </div>
                   <div class="col-md-4"></div>
