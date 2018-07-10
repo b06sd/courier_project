@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Datatables;
+use Yajra\DataTables\Facades\DataTables;
 use App\Events\NewUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -112,10 +112,11 @@ class UserController extends Controller
     }
 
     public function allUsers(){
-        $users = User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-            ->select(DB::raw('users.id as id, users.name as name, email, phone, roles.name as rolename'))
-            ->get();
+//        $users = User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+//            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+//            ->select(DB::raw('users.id as id, users.name as name, email, phone, roles.name as rolename'))
+//            ->get();
+        $users = User::all();
 
         return Datatables::of($users)
             ->addColumn('action', function ($user) {
