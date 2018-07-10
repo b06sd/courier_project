@@ -24,4 +24,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users','UserController');
     Route::resource('courier','CourierController');
     Route::resource('consignee','ConsigneeController');
+
+    // CRM Routes
+    Route::resource('accounts', 'Account\AccountsController');
 });
