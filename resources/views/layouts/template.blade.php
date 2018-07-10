@@ -44,18 +44,8 @@
         <nav class="navbar top-navbar navbar-expand-md navbar-light">
           <!-- Logo -->
           <div class="navbar-header">
-<<<<<<< HEAD
-            <a class="navbar-brand" href="index.html">
-              <b>APEX</b>
-=======
             <a class="navbar-brand" href="/home">
-              <!-- Logo icon -->
-              <b><img src="{{ asset('temp/images/logo.png') }}" alt="homepage" class="dark-logo" /></b>
-              <!--End Logo icon -->
-              <!-- Logo text -->
-              <span><img src="{{ asset('temp/images/logo-text.png') }}" alt="homepage" class="dark-logo" /></span>
->>>>>>> 7929acbdb986fa486039ca6a73a827d5fc086d7f
-            </a>
+              <b>APEX</b>
           </div>
           <!-- End Logo -->
           <div class="navbar-collapse">
