@@ -22,12 +22,13 @@
   <link href="{{ asset('temp/css/lib/owl.theme.default.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('temp/css/helper.css') }}" rel="stylesheet">
   <link href="{{ asset('temp/css/style.css') }}" rel="stylesheet">
+  @yield('styles')
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
   <!--[if lt IE 9]>
   <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
+<![endif]-->
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -43,13 +44,8 @@
         <nav class="navbar top-navbar navbar-expand-md navbar-light">
           <!-- Logo -->
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
-              <!-- Logo icon -->
-              <b><img src="{{ asset('temp/images/logo.png') }}" alt="homepage" class="dark-logo" /></b>
-              <!--End Logo icon -->
-              <!-- Logo text -->
-              <span><img src="{{ asset('temp/images/logo-text.png') }}" alt="homepage" class="dark-logo" /></span>
-            </a>
+            <a class="navbar-brand" href="/home">
+              <b>APEX</b>
           </div>
           <!-- End Logo -->
           <div class="navbar-collapse">
@@ -174,53 +170,53 @@
                     </li>
                     <!-- End Comment -->
                     <!-- Messages -->
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle text-muted  " href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-envelope"></i>
-                        <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
-                        <ul>
-                          <li>
-                            <div class="drop-title">You have 4 new messages</div>
-                          </li>
-                          <li>
-                            <div class="message-center">
-                              <!-- Message -->
-                              <a href="#">
-                                <div class="user-img"> <img src="images/users/5.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                  <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span>
-                                </div>
-                              </a>
-                              <!-- Message -->
-                              <a href="#">
-                                <div class="user-img"> <img src="images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                  <h5>John Doe</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span>
-                                </div>
-                              </a>
-                              <!-- Message -->
-                              <a href="#">
-                                <div class="user-img"> <img src="images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                  <h5>Mr. John</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
-                                </div>
-                              </a>
-                              <!-- Message -->
-                              <a href="#">
-                                <div class="user-img"> <img src="images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                  <h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
-                                </div>
-                              </a>
-                            </div>
-                          </li>
-                          <li>
-                            <a class="nav-link text-center" href="javascript:void(0);"> <strong>See all e-Mails</strong> <i class="fa fa-angle-right"></i> </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
+                    {{--<li class="nav-item dropdown">--}}
+                      {{--<a class="nav-link dropdown-toggle text-muted  " href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-envelope"></i>--}}
+                        {{--<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>--}}
+                      {{--</a>--}}
+                      {{--<div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">--}}
+                        {{--<ul>--}}
+                          {{--<li>--}}
+                            {{--<div class="drop-title">You have 4 new messages</div>--}}
+                          {{--</li>--}}
+                          {{--<li>--}}
+                            {{--<div class="message-center">--}}
+                              {{--<!-- Message -->--}}
+                              {{--<a href="#">--}}
+                                {{--<div class="user-img"> <img src="images/users/5.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>--}}
+                                {{--<div class="mail-contnet">--}}
+                                  {{--<h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span>--}}
+                                {{--</div>--}}
+                              {{--</a>--}}
+                              {{--<!-- Message -->--}}
+                              {{--<a href="#">--}}
+                                {{--<div class="user-img"> <img src="images/users/2.jpg" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>--}}
+                                {{--<div class="mail-contnet">--}}
+                                  {{--<h5>John Doe</h5> <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span>--}}
+                                {{--</div>--}}
+                              {{--</a>--}}
+                              {{--<!-- Message -->--}}
+                              {{--<a href="#">--}}
+                                {{--<div class="user-img"> <img src="images/users/3.jpg" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>--}}
+                                {{--<div class="mail-contnet">--}}
+                                  {{--<h5>Mr. John</h5> <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>--}}
+                                {{--</div>--}}
+                              {{--</a>--}}
+                              {{--<!-- Message -->--}}
+                              {{--<a href="#">--}}
+                                {{--<div class="user-img"> <img src="images/users/4.jpg" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>--}}
+                                {{--<div class="mail-contnet">--}}
+                                  {{--<h5>Michael Qin</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>--}}
+                                {{--</div>--}}
+                              {{--</a>--}}
+                            {{--</div>--}}
+                          {{--</li>--}}
+                          {{--<li>--}}
+                            {{--<a class="nav-link text-center" href="javascript:void(0);"> <strong>See all e-Mails</strong> <i class="fa fa-angle-right"></i> </a>--}}
+                          {{--</li>--}}
+                        {{--</ul>--}}
+                      {{--</div>--}}
+                    {{--</li>--}}
                     <!-- End Messages -->
                     <!-- Profile -->
                     @guest
@@ -234,8 +230,8 @@
                       <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                         <ul class="dropdown-user">
                           <li><a href="#"><i class="ti-user"></i> Profile</a></li>
-                          <li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
-                          <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                          {{--<li><a href="#"><i class="ti-wallet"></i> Balance</a></li>--}}
+                          {{--<li><a href="#"><i class="ti-email"></i> Inbox</a></li>--}}
                           <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
                           <li>
                             <a href="{{ route('logout') }}"
@@ -258,66 +254,23 @@
           </div>
           <!-- End header header -->
           <!-- Left Sidebar  -->
-          <div class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-              <!-- Sidebar navigation-->
-              <nav class="sidebar-nav">
-                <ul id="sidebarnav">
-                  <li class="nav-devider"></li>
-                  <li class="nav-label">Home</li>
-                  <li> <a class=""   href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a></li>
-                  <hr/>
-                  <li class="nav-label">LOGISTICS</li>
-                  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-truck"></i><span class="hide-menu">Logistics Management</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                      <li><a href="#">Manage Consignee</a></li>
-                      <li><a href="#">Manage Courier</a></li>
-                    </ul>
-                  </li>
-                  <hr/>
-                  <li class="nav-label">CRM</li>
-                  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Customer Management</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                      <li><a href="chart-flot.html">Flot</a></li>
-                      <li><a href="chart-morris.html">Morris</a></li>
-                      <li><a href="chart-chartjs.html">ChartJs</a></li>
-                      <li><a href="chart-chartist.html">Chartist </a></li>
-                      <li><a href="chart-amchart.html">AmChart</a></li>
-                      <li><a href="chart-echart.html">EChart</a></li>
-                      <li><a href="chart-sparkline.html">Sparkline</a></li>
-                      <li><a href="chart-peity.html">Peity</a></li>
-                    </ul>
-                  </li>
-                  <hr/>
-                  <li class="nav-label">PROFILE</li>
-                  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">User Management</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                      <li><a href="#">Manage Permissions</a></li>
-                      <li><a href="#">Manage Roles</a></li>
-                      <li><a href="#">Manage Users</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-              <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-          </div>
+
+          @include('_partials.sidebar')
           <!-- End Left Sidebar  -->
           <!-- Page wrapper  -->
           <div class="page-wrapper">
             <!-- Bread crumb -->
-            <div class="row page-titles">
-              <div class="col-md-5 align-self-center">
-                <h3 class="text-primary">Dashboard</h3> </div>
-                <div class="col-md-7 align-self-center">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Dashboard</li>
-                  </ol>
-                </div>
-              </div>
+            {{--<div class="row page-titles">--}}
+              {{--<div class="col-md-5 align-self-center">--}}
+                {{--<h3 class="text-primary">Dashboard</h3> --}}
+              {{--</div>--}}
+                {{--<div class="col-md-7 align-self-center">--}}
+                  {{--<ol class="breadcrumb">--}}
+                    {{--<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>--}}
+                    {{--<li class="breadcrumb-item active">Dashboard</li>--}}
+                  {{--</ol>--}}
+                {{--</div>--}}
+              {{--</div>--}}
               <!-- End Bread crumb -->
 
               <!-- Insert Pages Here -->
@@ -329,6 +282,7 @@
               <!-- Insert Pages Here -->
 
               <!-- Container fluid  -->
+              <!-- During implementation this div should be dynamic and should be role based  -->
               {{--  <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row">
@@ -396,7 +350,19 @@
               </div>
               <!-- End Container fluid  -->
               <!-- footer -->
-              <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="#">Apex</a></footer>
+
+                <footer class="footer">
+                  <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <p style="text-align: center;">
+                      &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Apex</a>, made by coders
+                    </p>
+                  </div>
+                  <div class="col-md-4"></div>
+                  </div>
+                </footer>
+
               <!-- End footer -->
             </div>
             <!-- End Page wrapper  -->
@@ -417,37 +383,29 @@
 
 
           <!-- Amchart -->
-          <script src="{{ asset('temp/js/lib/morris-chart/raphael-min.js') }}"></script>
-          <script src="{{ asset('temp/js/lib/morris-chart/morris.js') }}"></script>
-          <script src="{{ asset('temp/js/lib/morris-chart/dashboard1-init.js') }}"></script>
+          {{--<script src="{{ asset('temp/js/lib/morris-chart/raphael-min.js') }}"></script>--}}
+          {{--<script src="{{ asset('temp/js/lib/morris-chart/morris.js') }}"></script>--}}
+          {{--<script src="{{ asset('temp/js/lib/morris-chart/dashboard1-init.js') }}"></script>--}}
 
 
-          <script src="{{ asset('temp/js/lib/calendar-2/moment.latest.min.js') }}"></script>
-          <!-- scripit init-->
-          <script src="{{ asset('temp/js/lib/calendar-2/semantic.ui.min.js') }}"></script>
-          <!-- scripit init-->
-          <script src="{{ asset('temp/js/lib/calendar-2/prism.min.js') }}"></script>
-          <!-- scripit init-->
-          <script src="{{ asset('temp/js/lib/calendar-2/pignose.calendar.min.js') }}"></script>
-          <!-- scripit init-->
-          <script src="{{ asset('temp/js/lib/calendar-2/pignose.init.js') }}"></script>
+          {{--<script src="{{ asset('temp/js/lib/calendar-2/moment.latest.min.js') }}"></script>--}}
+          {{--<!-- scripit init-->--}}
+          {{--<script src="{{ asset('temp/js/lib/calendar-2/semantic.ui.min.js') }}"></script>--}}
+          {{--<!-- scripit init-->--}}
+          {{--<script src="{{ asset('temp/js/lib/calendar-2/prism.min.js') }}"></script>--}}
+          {{--<!-- scripit init-->--}}
+          {{--<script src="{{ asset('temp/js/lib/calendar-2/pignose.calendar.min.js') }}"></script>--}}
+          {{--<!-- scripit init-->--}}
+          {{--<script src="{{ asset('temp/js/lib/calendar-2/pignose.init.js') }}"></script>--}}
 
-          <script src="{{ asset('temp/js/lib/owl-carousel/owl.carousel.min.js') }}"></script>
-          <script src="{{ asset('temp/js/lib/owl-carousel/owl.carousel-init.js') }}"></script>
-          <script src="{{ asset('temp/js/scripts.js') }}"></script>
+          {{--<script src="{{ asset('temp/js/lib/owl-carousel/owl.carousel.min.js') }}"></script>--}}
+          {{--<script src="{{ asset('temp/js/lib/owl-carousel/owl.carousel-init.js') }}"></script>--}}
+          {{--<script src="{{ asset('temp/js/scripts.js') }}"></script>--}}
           <!-- scripit init-->
 
           <script src="{{ asset('temp/js/custom.min.js') }}"></script>
 
-          <!-- Global site tag (gtag.js) - Google Analytics -->
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-          <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'UA-23581568-13');
-          </script>
+          @stack('scripts')
         </body>
 
         </html>
