@@ -276,7 +276,7 @@
                   <li class="nav-label">CRM</li>
                   <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Customer Management</span></a>
                     <ul aria-expanded="false" class="collapse">
-                      <li><a href="chart-flot.html">Flot</a></li>
+                      <li><a href="{{ route('accounts.index') }}">Manage Account</a></li>
                       <li><a href="chart-morris.html">Morris</a></li>
                       <li><a href="chart-chartjs.html">ChartJs</a></li>
                       <li><a href="chart-chartist.html">Chartist </a></li>
