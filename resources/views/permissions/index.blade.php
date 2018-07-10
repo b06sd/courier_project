@@ -39,7 +39,7 @@
     </div>
 @endsection
 
-@push('script')
+@section('script')
     <script src="{{ asset('temp/js/lib/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js') }}"></script>
@@ -72,4 +72,4 @@
             });
         })
     </script>
-@endpush
+@endsection
