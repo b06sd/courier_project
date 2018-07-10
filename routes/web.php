@@ -27,4 +27,5 @@ Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
 
     Route::get('allUsers', 'UserController@allUsers')->name('getAllUsers');
     Route::get('getAllPermissions', 'PermissionController@getAllPermissions')->name('getAllPermissions');
+    Route::resource('accounts', 'Account\AccountsController');
 });

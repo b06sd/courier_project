@@ -28,7 +28,7 @@
   <!--[if lt IE 9]>
   <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
+<![endif]-->
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -44,13 +44,8 @@
         <nav class="navbar top-navbar navbar-expand-md navbar-light">
           <!-- Logo -->
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">
-              <!-- Logo icon -->
-              <b><img src="{{ asset('temp/images/logo.png') }}" alt="homepage" class="dark-logo" /></b>
-              <!--End Logo icon -->
-              <!-- Logo text -->
-              <span><img src="{{ asset('temp/images/logo-text.png') }}" alt="homepage" class="dark-logo" /></span>
-            </a>
+            <a class="navbar-brand" href="/home">
+              <b>APEX</b>
           </div>
           <!-- End Logo -->
           <div class="navbar-collapse">
@@ -305,6 +300,7 @@
             </div>
             <!-- End Sidebar scroll-->
           </div>
+          @include('_partials.sidebar')
           <!-- End Left Sidebar  -->
           <!-- Page wrapper  -->
           <div class="page-wrapper">
@@ -331,6 +327,7 @@
               <!-- Insert Pages Here -->
 
               <!-- Container fluid  -->
+              <!-- During implementation this div should be dynamic and should be role based  -->
               {{--  <div class="container-fluid">
                 <!-- Start Page Content -->
                 <div class="row">
@@ -398,7 +395,19 @@
               </div>
               <!-- End Container fluid  -->
               <!-- footer -->
-              <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="#">Apex</a></footer>
+
+                <footer class="footer">
+                  <div class="row">
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+                    <p style="text-align: center;">
+                      &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Apex</a>, made by coders
+                    </p>
+                  </div>
+                  <div class="col-md-4"></div>
+                  </div>
+                </footer>
+
               <!-- End footer -->
             </div>
             <!-- End Page wrapper  -->
@@ -417,30 +426,8 @@
           <script src="{{ asset('temp/js/lib/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
           <!--Custom JavaScript -->
 
-
-          <!-- Amchart -->
-          {{--<script src="{{ asset('temp/js/lib/morris-chart/raphael-min.js') }}"></script>--}}
-          {{--<script src="{{ asset('temp/js/lib/morris-chart/morris.js') }}"></script>--}}
-          {{--<script src="{{ asset('temp/js/lib/morris-chart/dashboard1-init.js') }}"></script>--}}
-
-
-          {{--<script src="{{ asset('temp/js/lib/calendar-2/moment.latest.min.js') }}"></script>--}}
-          {{--<!-- scripit init-->--}}
-          {{--<script src="{{ asset('temp/js/lib/calendar-2/semantic.ui.min.js') }}"></script>--}}
-          {{--<!-- scripit init-->--}}
-          {{--<script src="{{ asset('temp/js/lib/calendar-2/prism.min.js') }}"></script>--}}
-          {{--<!-- scripit init-->--}}
-          {{--<script src="{{ asset('temp/js/lib/calendar-2/pignose.calendar.min.js') }}"></script>--}}
-          {{--<!-- scripit init-->--}}
-          {{--<script src="{{ asset('temp/js/lib/calendar-2/pignose.init.js') }}"></script>--}}
-
-          {{--<script src="{{ asset('temp/js/lib/owl-carousel/owl.carousel.min.js') }}"></script>--}}
-          {{--<script src="{{ asset('temp/js/lib/owl-carousel/owl.carousel-init.js') }}"></script>--}}
-          {{--<script src="{{ asset('temp/js/scripts.js') }}"></script>--}}
-          <!-- scripit init-->
-
           <script src="{{ asset('temp/js/custom.min.js') }}"></script>
-          @yield('script')
+          @stack('scripts')
         </body>
 
         </html>
