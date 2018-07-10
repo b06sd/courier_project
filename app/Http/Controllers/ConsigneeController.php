@@ -13,7 +13,7 @@ class ConsigneeController extends Controller
      */
     public function index()
     {
-        //
+        return view('consignee.index');
     }
 
     /**
