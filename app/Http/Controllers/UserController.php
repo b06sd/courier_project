@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Datatables;
 use App\Events\NewUser;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -15,7 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -92,7 +97,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -104,5 +109,27 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function allUsers(){
+        $users = User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->select(DB::raw('users.id as id, users.name as name, email, phone, roles.name as rolename'))
+            ->get();
+
+        return Datatables::of($users)
+            ->addColumn('action', function ($user) {
+                if (Auth::user()->hasAnyPermission('Edit User') && !Auth::user()->hasAnyPermission('Delete User')){
+                    return '<a data-edit-user="'.$user->id.'" class="btn btn-xs btn-primary edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                }
+                if (Auth::user()->hasAnyPermission('Delete User') && !Auth::user()->hasAnyPermission('Edit User')){
+                    return '<a  data-delete-user="'.$user->id.'"  class="btn btn-xs btn-danger del_user"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+                }
+                if (Auth::user()->hasAnyPermission('Delete User') && Auth::user()->hasAnyPermission('Edit User')){
+                    return '<a data-edit-user="'.$user->id.'" class="btn btn-xs btn-primary edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
+                    '<a  data-delete-user="'.$user->id.'"  class="btn btn-xs btn-danger del_user"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+                }
+            })
+            ->make(true);
     }
 }
