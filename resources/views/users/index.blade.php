@@ -22,8 +22,9 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">User Management</div>
-
                 <div class="card-body">
+                    <button class="btn btn-info btn-flat pull-right m-t-10" data-toggle="modal"
+                            data-target="#permission-modal">Add User</button>
                     <div class="table-responsive m-t-40">
                         <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="users_table">
                             <thead>
@@ -140,13 +141,13 @@
                 if (r == true) {
                     $.ajax({
                         type: 'post',
-                        url: "companys/"+val,
+                        url: "users/"+val,
                         data: {
                             '_method': 'DELETE',
                             'id': val
                         },
                         success: function(data) {
-                            window.location.href = "{{ route('companys.index') }}";
+                            window.location.href = "{{ route('users.index') }}";
                         }
                     });
                 }
