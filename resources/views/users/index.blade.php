@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('style')
+@section('styles')
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                {{--@foreach ($users as $user)--}}
                                 {{-- <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
@@ -34,7 +34,7 @@
                                 {!! Form::close() !!}
                                 </td>
                                 </tr> --}}
-                                @endforeach
+                                {{--@endforeach--}}
                             </tbody>
                         </table>
                     </div>
@@ -44,7 +44,7 @@
     </div>
 @endsection
 
-@push('scripts')
+@section('scripts')
     <script src="{{ asset('temp/js/lib/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js') }}"></script>
@@ -67,7 +67,7 @@
                     "processing": "Processing Request"
                 },
                 "ajax":{
-                    url :"{{ route('getAllUsers') }}", // json datasource
+                    url :"{{ route('allUsers') }}", // json datasource
                     type: "get"
                 },
                 searchDelay: 350,
@@ -77,10 +77,67 @@
                     { data: 'name', name:'name' },
                     { data: 'email', name: 'email' },
                     { data: 'phone', name: 'phone' },
-                    { data: 'rolename', name: 'rolename '},
                     { data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
+
+            $(document).on('click', '.edit_user', function(ev) {
+                ev.preventDefault();
+                var val = $(this).data('edit-user');
+
+                $.ajax({
+                    url: 'users/'+val,
+                    type: 'GET',
+                    beforeSend: function ()
+                    {
+
+                    },
+                    success: function(response) {
+//                        console.log(response);
+
+                        $('#edit_user_form')
+                            .find('[name="name"]').val(response.name).end()
+                            .find('[name="email"]').val(response.email).end()
+                            .find('[name="phone"]').val(response.phone).end();
+
+
+                        $('.roles').each(function (index, e) {
+                            if($(this).val() == response.role_id){
+                                $(this).prop('checked', true);
+                            }
+                        });
+
+
+                        $("#edit_user_form").attr("action", "users/"+response.id);
+                        $("#user-modal-edit").modal({backdrop: 'static', keyboard: true});
+                    },
+                    error: function(response) {
+                        alert('Operation failed');
+                    }
+                });
+            });
+
+            $(document).on('click', '.del_user', function(ev) {
+                ev.preventDefault();
+                var val = $(this).data('delete-user');
+
+                var r = confirm("Do you want to delete this user");
+                if (r == true) {
+                    $.ajax({
+                        type: 'post',
+                        url: "companys/"+val,
+                        data: {
+                            '_method': 'DELETE',
+                            'id': val
+                        },
+                        success: function(data) {
+                            window.location.href = "{{ route('companys.index') }}";
+                        }
+                    });
+                }
+//                $('#company_form').hide();
+//                $('#company-modal-edit').modal('show');
+            });
         })
     </script>
-@endpush
+@endsection

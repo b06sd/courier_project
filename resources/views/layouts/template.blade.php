@@ -22,12 +22,14 @@
   <link href="{{ asset('temp/css/lib/owl.theme.default.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('temp/css/helper.css') }}" rel="stylesheet">
   <link href="{{ asset('temp/css/style.css') }}" rel="stylesheet">
+
   @yield('styles')
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
   <!--[if lt IE 9]>
   <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
   <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
 <![endif]-->
 </head>
 
@@ -55,62 +57,63 @@
               <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
               <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
               <!-- Messages -->
-              <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-large"></i></a>
-                <div class="dropdown-menu animated zoomIn">
-                  <ul class="mega-dropdown-menu row">
+              {{--<li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-large"></i></a>--}}
+                {{--<div class="dropdown-menu animated zoomIn">--}}
+                  {{--<ul class="mega-dropdown-menu row">--}}
 
 
-                    <li class="col-lg-3  m-b-30">
-                      <h4 class="m-b-20">CONTACT US</h4>
-                      <!-- Contact -->
-                      <form>
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="exampleInputname1" placeholder="Enter Name"> </div>
-                          <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Enter email"> </div>
-                            <div class="form-group">
-                              <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Message"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-info">Submit</button>
-                          </form>
-                        </li>
-                        <li class="col-lg-3 col-xlg-3 m-b-30">
-                          <h4 class="m-b-20">List style</h4>
-                          <!-- List style -->
-                          <ul class="list-style-none">
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                          </ul>
-                        </li>
-                        <li class="col-lg-3 col-xlg-3 m-b-30">
-                          <h4 class="m-b-20">List style</h4>
-                          <!-- List style -->
-                          <ul class="list-style-none">
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                          </ul>
-                        </li>
-                        <li class="col-lg-3 col-xlg-3 m-b-30">
-                          <h4 class="m-b-20">List style</h4>
-                          <!-- List style -->
-                          <ul class="list-style-none">
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
+                    {{--<li class="col-lg-3  m-b-30">--}}
+                      {{--<h4 class="m-b-20">CONTACT US</h4>--}}
+                      {{--<!-- Contact -->--}}
+                      {{--<form>--}}
+                        {{--<div class="form-group">--}}
+                          {{--<input type="text" class="form-control" id="exampleInputname1" placeholder="Enter Name"> </div>--}}
+                          {{--<div class="form-group">--}}
+                            {{--<input type="email" class="form-control" placeholder="Enter email"> </div>--}}
+                            {{--<div class="form-group">--}}
+                              {{--<textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Message"></textarea>--}}
+                            {{--</div>--}}
+                            {{--<button type="submit" class="btn btn-info">Submit</button>--}}
+                          {{--</form>--}}
+                        {{--</li>--}}
+                        {{--<li class="col-lg-3 col-xlg-3 m-b-30">--}}
+                          {{--<h4 class="m-b-20">List style</h4>--}}
+                          {{--<!-- List style -->--}}
+                          {{--<ul class="list-style-none">--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                          {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li class="col-lg-3 col-xlg-3 m-b-30">--}}
+                          {{--<h4 class="m-b-20">List style</h4>--}}
+                          {{--<!-- List style -->--}}
+                          {{--<ul class="list-style-none">--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                          {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li class="col-lg-3 col-xlg-3 m-b-30">--}}
+                          {{--<h4 class="m-b-20">List style</h4>--}}
+                          {{--<!-- List style -->--}}
+                          {{--<ul class="list-style-none">--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                            {{--<li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>--}}
+                          {{--</ul>--}}
+                        {{--</li>--}}
+                      {{--</ul>--}}
+                    {{--</div>--}}
+                  {{--</li>--}}
                   <!-- End Messages -->
+
                 </ul>
                 <!-- User profile and search -->
                 <ul class="navbar-nav my-lg-0">
@@ -254,68 +257,23 @@
           </div>
           <!-- End header header -->
           <!-- Left Sidebar  -->
-          <div class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-              <!-- Sidebar navigation-->
-              <nav class="sidebar-nav">
-                <ul id="sidebarnav">
-                  <li class="nav-devider"></li>
-                  <li class="nav-label">Home</li>
-                  <li> <a class=""   href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard </span></a></li>
-                  <hr/>
-                  <li class="nav-label">LOGISTICS</li>
-                  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-truck"></i><span class="hide-menu">Logistics Management</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                      <li><a href="#">Manage Consignee</a></li>
-                      <li><a href="#">Manage Courier</a></li>
-                    </ul>
-                  </li>
-                  <hr/>
-                  <li class="nav-label">CRM</li>
-                  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Customer Management</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                      <li><a href="chart-flot.html">Flot</a></li>
-                      <li><a href="chart-morris.html">Morris</a></li>
-                      <li><a href="chart-chartjs.html">ChartJs</a></li>
-                      <li><a href="chart-chartist.html">Chartist </a></li>
-                      <li><a href="chart-amchart.html">AmChart</a></li>
-                      <li><a href="chart-echart.html">EChart</a></li>
-                      <li><a href="chart-sparkline.html">Sparkline</a></li>
-                      <li><a href="chart-peity.html">Peity</a></li>
-                    </ul>
-                  </li>
-                  <hr/>
-                  <li class="nav-label">PROFILE</li>
-                  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">User Management</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                      <li><a href="{{ route('permissions.index') }}">Manage Permissions</a></li>
-                      <li><a href="#">Manage Roles</a></li>
-                      <li><a href="{{ route('users.index') }}">Manage Users</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-              <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-          </div>
+
+
           @include('_partials.sidebar')
           <!-- End Left Sidebar  -->
           <!-- Page wrapper  -->
           <div class="page-wrapper">
             <!-- Bread crumb -->
-            {{--<div class="row page-titles">--}}
-              {{--<div class="col-md-5 align-self-center">--}}
-                {{--<h3 class="text-primary">Dashboard</h3> --}}
-              {{--</div>--}}
-                {{--<div class="col-md-7 align-self-center">--}}
-                  {{--<ol class="breadcrumb">--}}
-                    {{--<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>--}}
-                    {{--<li class="breadcrumb-item active">Dashboard</li>--}}
-                  {{--</ol>--}}
-                {{--</div>--}}
-              {{--</div>--}}
+            <div class="row page-titles">
+              <div class="col-md-5 align-self-center">
+                <h3 class="text-primary">Dashboard</h3> </div>
+                <div class="col-md-7 align-self-center">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                  </ol>
+                </div>
+              </div>
               <!-- End Bread crumb -->
 
               <!-- Insert Pages Here -->
@@ -387,11 +345,188 @@
 
                 --}}
 
+            <!-- Add User Modal Here -->
+            <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Create User
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        {!! Form::open(array('url' => 'users')) !!}
+                        <div class="form-group">
+                          {!! Form::label('Name', 'Name') !!}
+                          {!! Form::text('name', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('email', 'Email') !!}
+                          {!! Form::email('email', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('Phone Number', 'Phone Number') !!}
+                          {!! Form::text('phone', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="row form-group">
+                          @foreach ($roles as $role)
+                            <div class="col-sm-2">
+                              {!! Form::checkbox('roles[]',  $role->id ) !!}
+                              {!! Form::label($role->name, ucfirst($role->name)) !!}
+                            </div>
+                          @endforeach
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('password', 'Password') !!}<br>
+                          {!! Form::password('password', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('password', 'Confirm Password') !!}<br>
+                          {!! Form::password('password_confirmation', array('class' => 'form-control')) !!}
+                        </div>
+                        {!! Form::submit('Register', array('class' => 'btn btn-primary')) !!}
+                        {!! Form::close() !!}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End User modal -->
+
+            <!-- Edit User Modal Here -->
+            <div id="user-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Edit User
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        {!! Form::open(array('id' => 'edit_user_form')) !!}
+                        {{ method_field('PATCH') }}
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                          {!! Form::label('Name edit', 'Name') !!}
+                          {!! Form::text('name', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('email edit', 'Email') !!}
+                          {!! Form::email('email', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('Phone Number edit', 'Phone Number') !!}
+                          {!! Form::text('phone', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="row form-group">
+                          @foreach ($roles as $role)
+                            <div class="col-sm-2">
+                              {!! Form::checkbox('roles[]',  $role->id, '', array('class' => 'roles') ) !!}
+                              {!! Form::label($role->name, ucfirst($role->name)) !!}
+                            </div>
+                          @endforeach
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('password edit', 'Password') !!}<br>
+                          {!! Form::password('password', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('password edit', 'Confirm Password') !!}<br>
+                          {!! Form::password('password_confirmation', array('class' => 'form-control')) !!}
+                        </div>
+                        {!! Form::submit('Update User', array('class' => 'btn btn-primary')) !!}
+                        {!! Form::close() !!}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End User modal -->
+
+            <!-- Add Permission Modal Here -->
+            <div id="permission-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Create Permission
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        {{ Form::open(array('url' => 'permissions')) }}
+                        <div class="form-group">
+                          {{ Form::label('permission_name', 'Name') }}
+                          {{ Form::text('name', '', array('class' => 'form-control')) }}
+                        </div>
+                        @if(!$roles->isEmpty())
+                          <p>Assign Permission to Roles</p>
+                          @foreach ($roles as $role)
+                            {{ Form::checkbox('roles[]',  $role->id ) }}
+                            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+                          @endforeach
+                        @endif
+                        <br>
+                        {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                        {{ Form::close() }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Permission Modal -->
+
+            <!-- Add Role Modal Here -->
+            <div id="role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Create Role
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        {{ Form::open(array('url' => 'roles')) }}
+                        <div class="form-group row">
+                          {{ Form::label('name', 'Name') }}
+                          {{ Form::text('name', null, array('class' => 'form-control')) }}
+                        </div>
+                        <h5><b>Assign Permissions</b></h5>
+                        <div class='form-group row'>
+                          @foreach ($permissions as $permission)
+                            <div class='col-sm-3'>
+                              {{ Form::checkbox('permissions[]',  $permission->id) }}
+                              {{ Form::label($permission->name, ucfirst($permission->name)) }}
+                            </div>
+                          @endforeach
+                        </div>
+                        <div class='form-group row'>
+                          {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                        </div>
+                        {{ Form::close() }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Role Modal -->
 
 
 
 
-                <!-- End PAge Content -->
+
+                <!-- End Page Content -->
               </div>
               <!-- End Container fluid  -->
               <!-- footer -->
@@ -401,7 +536,7 @@
                   <div class="col-md-4"></div>
                   <div class="col-md-4">
                     <p style="text-align: center;">
-                      &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">Apex</a>, made by coders
+                      &copy; <script>document.write(new Date().getFullYear())</script> <a href="#">{{ config('app.name') }}</a>, made by coders
                     </p>
                   </div>
                   <div class="col-md-4"></div>
@@ -427,7 +562,7 @@
           <!--Custom JavaScript -->
 
           <script src="{{ asset('temp/js/custom.min.js') }}"></script>
-          @stack('scripts')
+          @yield('scripts')
         </body>
 
         </html>

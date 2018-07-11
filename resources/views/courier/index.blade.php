@@ -162,7 +162,7 @@
 </div>
 </div>
 @stop
-@push('scripts')
+@section('scripts')
 <script type="text/javascript">
 
     $('#ship_name').change(function(){
@@ -193,4 +193,4 @@
     });
 
 </script>
-@endpush
+@endsection

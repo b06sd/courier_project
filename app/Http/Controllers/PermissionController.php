@@ -84,15 +84,16 @@ class PermissionController extends Controller
         $permission = Permission::select('id', 'name')->get();
         return Datatables::of($permission)
             ->addColumn('action', function ($permission) {
-                if (Auth::user()->hasAnyPermission('Edit Permission') && !Auth::user()->hasAnyPermission('Delete Permission')){
-                    return '<a data-edit-permission="'.$permission->id.'" class="btn btn-xs btn-primary edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-                }
-                if (Auth::user()->hasAnyPermission('Delete Permission') && !Auth::user()->hasAnyPermission('Edit Permission')){
-                    return '<a  data-delete-permission="'.$permission->id.'"  class="btn btn-xs btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
-                }
-                if (Auth::user()->hasAnyPermission('Delete Permission') && Auth::user()->hasAnyPermission('Edit Permission')){
-                    return '<a data-edit-permission="'.$permission->id.'" class="btn btn-xs btn-primary edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.'<a  data-delete-comp="'.$permission->id.'"  class="btn btn-xs btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
-                }
+//                if (Auth::user()->hasAnyPermission('Edit Permission') && !Auth::user()->hasAnyPermission('Delete Permission')){
+//                    return '<a data-edit-permission="'.$permission->id.'" class="btn btn-xs btn-primary edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+//                }
+//                if (Auth::user()->hasAnyPermission('Delete Permission') && !Auth::user()->hasAnyPermission('Edit Permission')){
+//                    return '<a  data-delete-permission="'.$permission->id.'"  class="btn btn-xs btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+//                }
+//                if (Auth::user()->hasAnyPermission('Delete Permission') && Auth::user()->hasAnyPermission('Edit Permission')){
+//                    return '<a data-edit-permission="'.$permission->id.'" class="btn btn-xs btn-primary edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.'<a  data-delete-comp="'.$permission->id.'"  class="btn btn-xs btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+//                }
+                return '<div class="input-group-flat btn-group"><a data-edit-permission="'.$permission->id.'" class="btn btn-info edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.'<a  data-delete-comp="'.$permission->id.'"  class="btn btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a></div>';
             })
             ->make(true);
     }
