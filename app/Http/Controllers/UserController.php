@@ -120,16 +120,20 @@ class UserController extends Controller
 
         return Datatables::of($users)
             ->addColumn('action', function ($user) {
-                if (Auth::user()->hasAnyPermission('Edit User') && !Auth::user()->hasAnyPermission('Delete User')){
-                    return '<a data-edit-user="'.$user->id.'" class="btn btn-xs btn-primary edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-                }
-                if (Auth::user()->hasAnyPermission('Delete User') && !Auth::user()->hasAnyPermission('Edit User')){
-                    return '<a  data-delete-user="'.$user->id.'"  class="btn btn-xs btn-danger del_user"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
-                }
-                if (Auth::user()->hasAnyPermission('Delete User') && Auth::user()->hasAnyPermission('Edit User')){
-                    return '<a data-edit-user="'.$user->id.'" class="btn btn-xs btn-primary edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
-                    '<a  data-delete-user="'.$user->id.'"  class="btn btn-xs btn-danger del_user"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
-                }
+//                if (Auth::user()->hasAnyPermission('Edit User') && !Auth::user()->hasAnyPermission('Delete User')){
+//                    return '<a data-edit-user="'.$user->id.'" class="btn btn-xs btn-primary edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+//                }
+//                if (Auth::user()->hasAnyPermission('Delete User') && !Auth::user()->hasAnyPermission('Edit User')){
+//                    return '<a  data-delete-user="'.$user->id.'"  class="btn btn-xs btn-danger del_user"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+//                }
+//                if (Auth::user()->hasAnyPermission('Delete User') && Auth::user()->hasAnyPermission('Edit User')){
+//                    return '<a data-edit-user="'.$user->id.'" class="btn btn-xs btn-primary edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
+//                    '<a  data-delete-user="'.$user->id.'"  class="btn btn-xs btn-danger del_user"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+//                }
+                return '<a data-edit-user="'.$user->id.'" class="btn btn-flat btn-info 
+                edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
+                '<a  data-delete-user="'.$user->id.'"  class="btn btn-flat btn-danger  del_user"><i class="glyphicon 
+                glyphicon-edit"></i> Delete</a>';
             })
             ->make(true);
     }

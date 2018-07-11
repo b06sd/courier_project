@@ -9,18 +9,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-
-                        <h2>User Management</h2>
-
-                    {{--<div class="col-sm-8">--}}
-                        {{--<a href="{{ route('users.index') }}" class="btn btn-default pull-right">Users</a>--}}
-                        {{--<a href="{{ route('roles.index') }}" class="btn btn-danger pull-right">Roles</a>--}}
-                        {{--<a href="{{ URL::to('permissions/create') }}" class="btn btn-success pull-right">Add Permission</a>--}}
-                    {{--</div>--}}
-
+                    <h2>Permission Management</h2>
                 </div>
 
                 <div class="card-body">
+                    <button class="btn btn-info btn-flat pull-right m-t-10" data-toggle="modal"
+                            data-target="#permission-modal">Add
+                        Permission</button>
                     <div class="table-responsive m-t-40">
                         <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="permissions_table">
                             <thead>
@@ -37,6 +32,35 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Permission Modal Here -->
+    <div id="permission-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Permission
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ Form::open(array('url' => 'permissions', 'id' => 'permission_form')) }}
+                            {{ method_field('PATCH') }}
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                {{ Form::label('permission_name', 'Name') }}
+                                {{ Form::text('name', '', array('class' => 'form-control')) }}
+                            </div>
+                            {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                            {{ Form::close() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Permission Modal -->
 @endsection
 
 @section('scripts')
@@ -52,7 +76,10 @@
     <script>
         $(document).ready(function () {
             var dataTable = $('#permissions_table').DataTable({
-                //fixedHeader: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
                 "processing": true,
                 "serverSide": true,
                 "language": {

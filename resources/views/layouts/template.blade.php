@@ -345,11 +345,188 @@
 
                 --}}
 
+            <!-- Add User Modal Here -->
+            <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Create User
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        {!! Form::open(array('url' => 'users')) !!}
+                        <div class="form-group">
+                          {!! Form::label('Name', 'Name') !!}
+                          {!! Form::text('name', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('email', 'Email') !!}
+                          {!! Form::email('email', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('Phone Number', 'Phone Number') !!}
+                          {!! Form::text('phone', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="row form-group">
+                          @foreach ($roles as $role)
+                            <div class="col-sm-2">
+                              {!! Form::checkbox('roles[]',  $role->id ) !!}
+                              {!! Form::label($role->name, ucfirst($role->name)) !!}
+                            </div>
+                          @endforeach
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('password', 'Password') !!}<br>
+                          {!! Form::password('password', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('password', 'Confirm Password') !!}<br>
+                          {!! Form::password('password_confirmation', array('class' => 'form-control')) !!}
+                        </div>
+                        {!! Form::submit('Register', array('class' => 'btn btn-primary')) !!}
+                        {!! Form::close() !!}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End User modal -->
+
+            <!-- Edit User Modal Here -->
+            <div id="user-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Edit User
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        {!! Form::open(array('id' => 'edit_user_form')) !!}
+                        {{ method_field('PATCH') }}
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                          {!! Form::label('Name edit', 'Name') !!}
+                          {!! Form::text('name', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('email edit', 'Email') !!}
+                          {!! Form::email('email', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('Phone Number edit', 'Phone Number') !!}
+                          {!! Form::text('phone', '', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="row form-group">
+                          @foreach ($roles as $role)
+                            <div class="col-sm-2">
+                              {!! Form::checkbox('roles[]',  $role->id, '', array('class' => 'roles') ) !!}
+                              {!! Form::label($role->name, ucfirst($role->name)) !!}
+                            </div>
+                          @endforeach
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('password edit', 'Password') !!}<br>
+                          {!! Form::password('password', array('class' => 'form-control')) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('password edit', 'Confirm Password') !!}<br>
+                          {!! Form::password('password_confirmation', array('class' => 'form-control')) !!}
+                        </div>
+                        {!! Form::submit('Update User', array('class' => 'btn btn-primary')) !!}
+                        {!! Form::close() !!}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End User modal -->
+
+            <!-- Add Permission Modal Here -->
+            <div id="permission-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Create Permission
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        {{ Form::open(array('url' => 'permissions')) }}
+                        <div class="form-group">
+                          {{ Form::label('permission_name', 'Name') }}
+                          {{ Form::text('name', '', array('class' => 'form-control')) }}
+                        </div>
+                        @if(!$roles->isEmpty())
+                          <p>Assign Permission to Roles</p>
+                          @foreach ($roles as $role)
+                            {{ Form::checkbox('roles[]',  $role->id ) }}
+                            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+                          @endforeach
+                        @endif
+                        <br>
+                        {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                        {{ Form::close() }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Permission Modal -->
+
+            <!-- Add Role Modal Here -->
+            <div id="role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Create Role
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        {{ Form::open(array('url' => 'roles')) }}
+                        <div class="form-group row">
+                          {{ Form::label('name', 'Name') }}
+                          {{ Form::text('name', null, array('class' => 'form-control')) }}
+                        </div>
+                        <h5><b>Assign Permissions</b></h5>
+                        <div class='form-group row'>
+                          @foreach ($permissions as $permission)
+                            <div class='col-sm-3'>
+                              {{ Form::checkbox('permissions[]',  $permission->id) }}
+                              {{ Form::label($permission->name, ucfirst($permission->name)) }}
+                            </div>
+                          @endforeach
+                        </div>
+                        <div class='form-group row'>
+                          {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                        </div>
+                        {{ Form::close() }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End Role Modal -->
 
 
 
 
-                <!-- End PAge Content -->
+
+                <!-- End Page Content -->
               </div>
               <!-- End Container fluid  -->
               <!-- footer -->
