@@ -30,4 +30,5 @@ Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
   
     // CRM Routes
     Route::resource('accounts', 'Account\AccountsController');
+
 });
