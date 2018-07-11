@@ -17,7 +17,7 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
+//Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('roles','RoleController');
     Route::resource('permissions','PermissionController');
@@ -25,9 +25,9 @@ Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
     Route::resource('courier','CourierController');
     Route::resource('consignee','ConsigneeController');
   
-    Route::get('allUsers', 'UserController@allUsers')->name('getAllUsers');
+    Route::get('allUsers', 'UserController@allUsers')->name('allUsers');
     Route::get('getAllPermissions', 'PermissionController@getAllPermissions')->name('getAllPermissions');
   
     // CRM Routes
     Route::resource('accounts', 'Account\AccountsController');
-});
+//});

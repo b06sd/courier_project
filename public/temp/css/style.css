@@ -2690,6 +2690,10 @@ table.dataTable thead .sorting::after {
 .btn {
   padding: 7px 12px;
   cursor: pointer;
+  color:#ffffff;
+  border-radius: 0px;
+  color:#ffffff;
+  font-weight: 600;
 }
 .btn-group label {
   color: #ffffff !important;
@@ -4898,6 +4902,7 @@ footer p {
 }
 .input-group-flat .btn {
   border-radius: 0;
+  color: #ffffff;
 }
 .input-group-rounded .form-control {
   border-radius: 100px;
