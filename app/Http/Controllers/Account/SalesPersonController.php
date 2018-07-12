@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
-class AccountsController extends Controller
+class SalesPersonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        //
-        return view('accounts.index');
+        return view('salesperson.index');
     }
 
     /**
@@ -27,18 +24,7 @@ class AccountsController extends Controller
      */
     public function create()
     {
-      //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function list()
-    {
-      $accounts = Account::all();
-      return view('accounts.list', compact('accounts'));
+        //
     }
 
     /**

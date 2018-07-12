@@ -25,10 +25,15 @@ Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
     Route::resource('courier','CourierController');
     Route::resource('consignee','ConsigneeController');
 
-  
+
     Route::get('allUsers', 'UserController@allUsers')->name('allUsers');
     Route::get('getAllPermissions', 'PermissionController@getAllPermissions')->name('getAllPermissions');
-  
+
     // CRM Routes
     Route::resource('accounts', 'Account\AccountsController');
+    Route::get('/list', 'Account\AccountsController@list')->name('accounts.list');
+
+    // Sales Person
+    Route::resource('salesperson', 'Account\SalesPersonController');
+
 });
