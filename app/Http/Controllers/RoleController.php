@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class RoleController extends Controller
@@ -58,8 +59,12 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        $permissions = Permission::all();
-        return response()->json(compact('role', 'permissions'));
+//          return Role::join('role_has_permissions', 'roles.id', '=', 'role_has_permissions.role_id')
+//            ->select(DB::raw('roles.*, permission_id'))
+//            ->where('roles.id', '=', $role->id)
+//            ->get();
+
+        return Role::with('permissions')->where('roles.id', '=', $role->id)->get();
     }
 
     /**
@@ -80,9 +85,21 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $this->validate($request, [
+            'name'=>'required|max:10|unique:roles,name,'.$role->id,
+            'permissions' =>'required',
+        ]);
+
+        $input = $request->except(['permissions']);
+        $role->fill($input)->save();
+        if($request->permissions <> ''){
+            $role->permissions()->sync($request->permissions);
+        }
+
+        flash('Operation successful')->success();
+        return redirect()->route('roles.index');
     }
 
     /**
