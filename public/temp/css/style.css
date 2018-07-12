@@ -2347,13 +2347,13 @@ textarea {
   background: #1976d2 none repeat scroll 0 0;
   color: #ffffff;
 }
-.modal-dialog {
-  margin: 30px auto;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%) !important;
-  width: 70%;
-}
+/*.modal-dialog {*/
+  /*margin: 30px auto;*/
+  /*position: relative;*/
+  /*top: 50%;*/
+  /*transform: translateY(-50%) !important;*/
+  /*width: 70%;*/
+/*}*/
 .modal-header .close {
   font-size: 14px;
   margin-right: 15px;
@@ -2692,7 +2692,6 @@ table.dataTable thead .sorting::after {
   cursor: pointer;
   color:#ffffff;
   border-radius: 0px;
-  color:#ffffff;
   font-weight: 600;
 }
 .btn-group label {
@@ -3029,6 +3028,7 @@ table.dataTable thead .sorting::after {
   -webkit-transition: 0.2s ease-in;
   -o-transition: 0.2s ease-in;
   transition: 0.2s ease-in;
+  color:#ffffff !important;
 }
 .btn-info:hover {
   background: #1976d2;
@@ -3195,6 +3195,7 @@ table.dataTable thead .sorting::after {
   -webkit-transition: 0.2s ease-in;
   -o-transition: 0.2s ease-in;
   transition: 0.2s ease-in;
+  color:#ffffff !important;
 }
 .btn-danger:hover {
   background: #ef5350;
@@ -5972,10 +5973,10 @@ tbody tr td:last-child {
   margin: 0px;
   top: 3px;
 }
-#event-modal .modal-dialog,
-#add-category .modal-dialog {
-  max-width: 600px;
-}
+/*#event-modal .modal-dialog,*/
+/*#add-category .modal-dialog {*/
+  /*max-width: 600px;*/
+/*}*/
 .flotTip {
   background: #252525;
   border: 1px solid #252525;
