@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -45,7 +46,7 @@ class RoleController extends Controller
         if($request->permissions <> ''){
             $user->permissions()->attach($request->permissions);
         }
-//        flash('Operation successful')->success();
+        flash('Operation successful')->success();
         return redirect()->route('roles.index');
     }
 
@@ -55,9 +56,10 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        $permissions = Permission::all();
+        return response()->json(compact('role', 'permissions'));
     }
 
     /**
@@ -89,9 +91,12 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->permissions()->detach();
+        $role->delete();
+        flash('Operation successful')->success();
+        return response ()->json ();
     }
 
     public function allRoles()

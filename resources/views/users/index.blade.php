@@ -16,7 +16,14 @@
     </div>
   </div>
   <!-- End Bread crumb -->
-  <div class="container-fluid">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            @include('flash::message')
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
     <div class="content">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -109,7 +116,7 @@
 
                     },
                     success: function(response) {
-//                        console.log(response);
+                        console.log(response);
 
                         $('#edit_user_form')
                             .find('[name="name"]').val(response.name).end()
@@ -128,6 +135,7 @@
                         $("#user-modal-edit").modal({backdrop: 'static', keyboard: true});
                     },
                     error: function(response) {
+                        console.log(response);
                         alert('Operation failed');
                     }
                 });
@@ -151,9 +159,7 @@
                         }
                     });
                 }
-//                $('#company_form').hide();
-//                $('#company-modal-edit').modal('show');
             });
-        })
+        });
     </script>
 @endsection

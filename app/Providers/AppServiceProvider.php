@@ -33,6 +33,12 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with(array('roles' => $roles, 'permissions' => $permissions, 'users' => $users));
         });
+
+        view()->composer('roles.index', function($view) {
+            $permissions = Permission::get();
+
+            $view->with(array('permissions' => $permissions));
+        });
     }
 
     /**
