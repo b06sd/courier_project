@@ -145,31 +145,57 @@ class PermissionClearanceMiddleware
                 }
             }
 
-            //Add Company Permission here
-//            if ($request->is('companys')) //If user is editing a post
-//            {
-//                if (!Auth::user()->hasAnyPermission('Edit Companys')) {
-//                    abort('401');
-//                } else {
-//                    return $next($request);
-//                }
-//            }
-//            if($request->is('companys/create')){
-//                if (!Auth::user()->hasPermissionTo('Add Companys')){
-//                    abort(401, 'Unauthorized action.');
-//                }
-//                else{
-//                    return $next($request);
-//                }
-//            }
-//            if ($request->is('companys/*')) //If user is editing a post
-//            {
-//                if (!Auth::user()->hasAnyPermission(['Edit Companys', 'Delete Companys'])) {
-//                    abort('401');
-//                } else {
-//                    return $next($request);
-//                }
-//            }
+//            Add Account CRM Permission here
+            if ($request->is('accounts')) //If user is editing a post
+            {
+                if (!Auth::user()->hasAnyPermission('Edit Account')) {
+                    abort('401');
+                } else {
+                    return $next($request);
+                }
+            }
+            if($request->is('accounts/create')){
+                if (!Auth::user()->hasPermissionTo('Add Account')){
+                    abort(401, 'Unauthorized action.');
+                }
+                else{
+                    return $next($request);
+                }
+            }
+            if ($request->is('accounts/*')) //If user is editing a post
+            {
+                if (!Auth::user()->hasAnyPermission(['Edit Account', 'Delete Account'])) {
+                    abort('401');
+                } else {
+                    return $next($request);
+                }
+            }
+
+            //Sales CRM Permission here
+            if ($request->is('sales')) //If user is editing a post
+            {
+                if (!Auth::user()->hasAnyPermission('Edit Sale')) {
+                    abort('401');
+                } else {
+                    return $next($request);
+                }
+            }
+            if($request->is('sales/create')){
+                if (!Auth::user()->hasPermissionTo('Add Sale')){
+                    abort(401, 'Unauthorized action.');
+                }
+                else{
+                    return $next($request);
+                }
+            }
+            if ($request->is('sales/*')) //If user is editing a post
+            {
+                if (!Auth::user()->hasAnyPermission(['Edit Sale', 'Delete Sale'])) {
+                    abort('401');
+                } else {
+                    return $next($request);
+                }
+            }
         }
         return $next($request);
     }
