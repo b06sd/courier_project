@@ -15,6 +15,15 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('full_name');
+            $table->text('description');
+            $table->string('address_street_1');
+            $table->string('address_street_2');
+            $table->string('city');
+            $table->string('state');
+            $table->string('zip_code');
+            $table->string('country');
+            $table->string('phone');
             $table->timestamps();
         });
     }
