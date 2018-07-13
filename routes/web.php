@@ -29,7 +29,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('allUsers', 'UserController@allUsers')->name('allUsers');
     Route::get('allConsignees', 'ConsigneeController@allConsignees')->name('allConsignees');
     Route::get('getAllPermissions', 'PermissionController@getAllPermissions')->name('getAllPermissions');
-  
+
     // CRM Routes
     Route::resource('accounts', 'Account\AccountsController');
+    Route::get('/list', 'Account\AccountsController@list')->name('accounts.list');
+
+    // Sales Person
+    Route::resource('salesperson', 'Account\SalesPersonController');
+
 });
