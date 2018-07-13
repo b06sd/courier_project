@@ -7,7 +7,7 @@
     <!-- Bread crumb -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-primary">User Management</h3> </div>
+            <h3 class="text-primary">Role Management</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Users</a></li>
@@ -16,6 +16,13 @@
         </div>
     </div>
     <!-- End Bread crumb -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                @include('flash::message')
+             </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="content">
             <div class="row justify-content-center">
@@ -45,6 +52,91 @@
             </div>
         </div>
     </div>
+
+    <!-- Add Role Modal Here -->
+    <div id="role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create Role
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+
+                        {{ Form::open(array('url' => 'roles')) }}
+                        <div class="form-group row">
+                            {{ Form::label('name', 'Name') }}
+                            {{ Form::text('name', null, array('class' => 'form-control')) }}
+                        </div>
+                        <h5><b>Assign Permissions</b></h5>
+                        <div class='form-group row'>
+                            @foreach ($permissions as $permission)
+                                <div class='col-sm-3'>
+                                    {{ Form::checkbox('permissions[]',  $permission->id) }}
+                                    {{ Form::label($permission->name, ucfirst($permission->name)) }}
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class='form-group row'>
+                            {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                        </div>
+                        {{ Form::close() }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Role Modal -->
+
+    <!-- Edit Role Modal Here -->
+    <div id="role-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Role
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+
+                        {{ Form::open(array('url' => 'roles', 'id' => 'role_form')) }}
+                        {{ method_field('PATCH') }}
+                        {{ csrf_field() }}
+                        <div class="form-group row">
+                            {{ Form::label('role-name', 'Name') }}
+                            {{ Form::text('name', null, array('class' => 'form-control')) }}
+                        </div>
+                        <h5><b>Assign Permissions</b></h5>
+                        <div class='form-group row'>
+                            @foreach ($permissions as $permission)
+                                <div class='col-sm-3'>
+
+                                    <input class="roles" name="permissions[]" type="checkbox" value="{{ $permission->id
+                                    }}">
+                                    <label for="Delete Permission">{{ $permission->name }}</label>
+
+                                    {{--{{ Form::checkbox('permissions[]',  $permission->id, '', array('class' =>--}}
+                                    {{--'roles')) }}--}}
+                                    {{--{{ Form::label($permission->name, ucfirst($permission->name)) }}--}}
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class='form-group row'>
+                            {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                        </div>
+                        {{ Form::close() }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Role Modal -->
 @endsection
 
 @section('scripts')
@@ -84,35 +176,31 @@
                 ]
             });
 
-            $(document).on('click', '.edit_user', function(ev) {
+            $(document).on('click', '.edit_role', function(ev) {
                 ev.preventDefault();
-                var val = $(this).data('edit-user');
+                var val = $(this).data('edit-role');
 
                 $.ajax({
-                    url: 'users/'+val,
+                    url: 'roles/'+val,
                     type: 'GET',
                     beforeSend: function ()
                     {
 
                     },
                     success: function(response) {
-//                        console.log(response);
+                        //unset all checkbox selected initially
+                        $('.roles').prop("checked",false);
+                        console.log(response[0].permissions);
 
-                        $('#edit_user_form')
-                                .find('[name="name"]').val(response.name).end()
-                                .find('[name="email"]').val(response.email).end()
-                                .find('[name="phone"]').val(response.phone).end();
+                        $('#role_form').find('[name="name"]').val(response[0].name).end();
 
-
-                        $('.roles').each(function (index, e) {
-                            if($(this).val() == response.role_id){
-                                $(this).prop('checked', true);
-                            }
+                        $.each(response[0].permissions , function(index, val) {
+                            console.log(val.id);
+                            $('input[value="'+ val.id +'"]').prop("checked",true);
                         });
 
-
-                        $("#edit_user_form").attr("action", "users/"+response.id);
-                        $("#user-modal-edit").modal({backdrop: 'static', keyboard: true});
+                        $("#role_form").attr("action", "roles/"+response[0].id);
+                        $("#role-modal-edit").modal({backdrop: 'static', keyboard: true});
                     },
                     error: function(response) {
                         alert('Operation failed');
@@ -120,21 +208,21 @@
                 });
             });
 
-            $(document).on('click', '.del_user', function(ev) {
+            $(document).on('click', '.del_role', function(ev) {
                 ev.preventDefault();
-                var val = $(this).data('delete-user');
+                var val = $(this).data('delete-role');
 
-                var r = confirm("Do you want to delete this user");
+                var r = confirm("Do you want to delete this role");
                 if (r == true) {
                     $.ajax({
                         type: 'post',
-                        url: "users/"+val,
+                        url: "roles/"+val,
                         data: {
                             '_method': 'DELETE',
                             'id': val
                         },
                         success: function(data) {
-                            window.location.href = "{{ route('users.index') }}";
+                            window.location.href = "{{ route('roles.index') }}";
                         }
                     });
                 }

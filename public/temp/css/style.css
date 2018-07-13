@@ -2834,6 +2834,7 @@ table.dataTable thead .sorting::after {
   -webkit-transition: 0.2s ease-in;
   -o-transition: 0.2s ease-in;
   transition: 0.2s ease-in;
+  color: #ffffff !important;
 }
 .btn-primary:hover {
   background: #5c4ac7;
@@ -5409,7 +5410,7 @@ tbody tr th {
 }
 tbody tr td {
   font-family: 'Poppins', sans-serif;
-  color: #99abb4;
+  color: #222222;
 }
 tbody tr td:last-child {
   text-align: right;
@@ -5835,19 +5836,25 @@ tbody tr td:last-child {
   color: #4680ff;
 }
 .alert-success {
-  background-color: #93ede9;
-  border-color: #93ede9;
-  color: #26dad2;
+  background-color: #a2d88c;
+  border-color: #a2d88c;
+  color: #ffffff;
+  font-weight: 600;
+    padding: 14px;
 }
 .alert-warning {
   background-color: #ffeacd;
   border-color: #ffeacd;
-  color: #ffb64d;
+  color: #ffffff;
+  font-weight: 600;
+    padding: 14px;
 }
 .alert-danger {
-  background-color: #fedee5;
-  border-color: #fedee5;
-  color: #fc6180;
+  background-color: #ec3f65;
+  border-color: #ec3f65;
+  color: #ffffff;
+  font-weight:600;
+    padding: 14px;
 }
 .alert-pink {
   background-color: #f8e4fb;

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 
 class AccountsController extends Controller
 {
@@ -27,7 +25,7 @@ class AccountsController extends Controller
      */
     public function create()
     {
-      //
+        //
     }
 
     /**
@@ -37,8 +35,7 @@ class AccountsController extends Controller
      */
     public function list()
     {
-      $accounts = Account::all();
-      return view('accounts.list', compact('accounts'));
+        //
     }
 
     /**

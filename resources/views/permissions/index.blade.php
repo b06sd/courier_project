@@ -7,7 +7,7 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">User Management</h3> </div>
+    <h3 class="text-primary">Permission Management</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Permission</a></li>
@@ -16,7 +16,14 @@
     </div>
   </div>
   <!-- End Bread crumb -->
-  <div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                @include('flash::message')
+            </div>
+        </div>
+    </div>
+<div class="container-fluid">
     <div class="content">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -51,7 +58,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Create Permission
+                    <h4 class="modal-title">Update Permission
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                     </h4>
                 </div>
@@ -111,6 +118,52 @@
                     { data: 'action', name:'action' }
 
                 ]
+            });
+
+            $(document).on('click', '.edit_permission', function(ev) {
+                ev.preventDefault();
+                var val = $(this).data('edit-permission');
+
+                $.ajax({
+                    url: 'permissions/'+val,
+                    type: 'GET',
+                    beforeSend: function ()
+                    {
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        if(response.name !== ""){
+
+                            $('#permission_form').find('[name="name"]').val(response.name).end();
+                            $("#permission_form").attr("action", "permissions/"+response.id);
+
+                            $("#permission-modal-edit").modal({backdrop: 'static', keyboard: true});
+                        }
+                    },
+                    error: function(response) {
+                        alert('Operation failed');
+                    }
+                });
+            });
+
+            $(document).on('click', '.del_permission', function(ev) {
+                ev.preventDefault();
+                var val = $(this).data('delete-permission');
+
+                var r = confirm("Do you want to delete this permission");
+                if (r == true) {
+                    $.ajax({
+                        type: 'post',
+                        url: "permissions/"+val,
+                        data: {
+                            '_method': 'DELETE',
+                            'id': val
+                        },
+                        success: function(data) {
+                            window.location.href = "{{ route('permissions.index') }}";
+                        }
+                    });
+                }
             });
         })
     </script>

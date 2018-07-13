@@ -15,7 +15,6 @@ class PermissionController extends Controller
     }
 
     public function show(Permission $permission){
-//        return view('permissions.show', compact('permission'));
         return response()->json($permission);
     }
 
@@ -68,32 +67,24 @@ class PermissionController extends Controller
 
     public function destroy(Permission $permission)
     {
-        $delete =  $this->model->delete($permission->id);
-
-        if($delete){
-            flash('Operation successful')->success();
-            return redirect()->route('permissions.index');
-        }
-        else{
-            flash('Operation failed')->error();
-            return redirect()->route('permissions.index');
-        }
+        $permission->delete();
+        flash('Operation successful')->success();
+        return response ()->json ();
     }
 
     public function getAllPermissions(){
         $permission = Permission::select('id', 'name')->get();
         return Datatables::of($permission)
             ->addColumn('action', function ($permission) {
-//                if (Auth::user()->hasAnyPermission('Edit Permission') && !Auth::user()->hasAnyPermission('Delete Permission')){
-//                    return '<a data-edit-permission="'.$permission->id.'" class="btn btn-xs btn-primary edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-//                }
-//                if (Auth::user()->hasAnyPermission('Delete Permission') && !Auth::user()->hasAnyPermission('Edit Permission')){
-//                    return '<a  data-delete-permission="'.$permission->id.'"  class="btn btn-xs btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
-//                }
-//                if (Auth::user()->hasAnyPermission('Delete Permission') && Auth::user()->hasAnyPermission('Edit Permission')){
-//                    return '<a data-edit-permission="'.$permission->id.'" class="btn btn-xs btn-primary edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.'<a  data-delete-comp="'.$permission->id.'"  class="btn btn-xs btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
-//                }
-                return '<div class="input-group-flat btn-group"><a data-edit-permission="'.$permission->id.'" class="btn btn-info edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.'<a  data-delete-comp="'.$permission->id.'"  class="btn btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a></div>';
+                if (Auth::user()->hasAnyPermission('Edit Permission') && !Auth::user()->hasAnyPermission('Delete Permission')){
+                    return '<a data-edit-permission="'.$permission->id.'" class="btn btn-xs btn-primary edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                }
+                if (Auth::user()->hasAnyPermission('Delete Permission') && !Auth::user()->hasAnyPermission('Edit Permission')){
+                    return '<a  data-delete-permission="'.$permission->id.'"  class="btn btn-xs btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+                }
+                if (Auth::user()->hasAnyPermission('Delete Permission') && Auth::user()->hasAnyPermission('Edit Permission')){
+                    return '<a data-edit-permission="'.$permission->id.'" class="btn btn-xs btn-primary edit_permission"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.'<a  data-delete-permission="'.$permission->id.'"  class="btn btn-xs btn-danger del_permission"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+                }
             })
             ->make(true);
     }
