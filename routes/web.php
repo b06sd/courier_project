@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
 
     // Sales Person
     Route::resource('sales', 'Account\SalesController');
+    Route::get('/allSales', 'Account\SalesController@allSales')->name('allSales');
 
     //Product routes
     Route::resource('products', 'Product\ProductController');
