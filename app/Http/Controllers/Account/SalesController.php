@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SalesPersonController extends Controller
+class SalesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SalesPersonController extends Controller
      */
     public function index()
     {
-        return view('salesperson.index');
+        return view('sales.index');
     }
 
     /**
