@@ -35,6 +35,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/list', 'Account\AccountsController@list')->name('accounts.list');
 
     // Sales Person
-    Route::resource('salesperson', 'Account\SalesPersonController');
+    Route::resource('sales', 'Account\SalesController');
 
 });

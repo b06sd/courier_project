@@ -26,7 +26,7 @@
                                    </ul>
                                </li>
 
-          <li><a href="{{ route('salesperson.index' )}}">Manage Sales Person</a></li>
+          <li><a href="{{ route('sales.index' )}}">Manage Sales</a></li>
       </ul>
   </li>
   <hr/>
