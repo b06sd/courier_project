@@ -115,9 +115,14 @@
                         <div class='form-group row'>
                             @foreach ($permissions as $permission)
                                 <div class='col-sm-3'>
-                                    {{ Form::checkbox('permissions[]',  $permission->id, '', array('class' =>
-                                    'roles')) }}
-                                    {{ Form::label($permission->name, ucfirst($permission->name)) }}
+
+                                    <input class="roles" name="permissions[]" type="checkbox" value="{{ $permission->id
+                                    }}">
+                                    <label for="Delete Permission">{{ $permission->name }}</label>
+
+                                    {{--{{ Form::checkbox('permissions[]',  $permission->id, '', array('class' =>--}}
+                                    {{--'roles')) }}--}}
+                                    {{--{{ Form::label($permission->name, ucfirst($permission->name)) }}--}}
                                 </div>
                             @endforeach
                         </div>
@@ -183,28 +188,18 @@
 
                     },
                     success: function(response) {
-//                        console.log(response.permissions);
+                        //unset all checkbox selected initially
+                        $('.roles').prop("checked",false);
+                        console.log(response[0].permissions);
 
-                        $('#role_form').find('[name="name"]').val(response.role.name).end();
+                        $('#role_form').find('[name="name"]').val(response[0].name).end();
 
-                        $.each(response.permissions, function (index, value) {
-                            if(value.id === response.permissions[index].id){
-//                                console.log(response.permissions[index].id);
-                                $('.roles input[value="'+value.id+'"]').prop("checked",true);
-                            }
+                        $.each(response[0].permissions , function(index, val) {
+                            console.log(val.id);
+                            $('input[value="'+ val.id +'"]').prop("checked",true);
                         });
 
-//                        $.each(response.permissions , function(index, val) {
-//                            console.log(response.permissions[index].id);
-//                            if(val.id == response.permissions[index].id){
-////                                $(".roles [value='"+ val.id +"']").prop('checked', true);
-////                                $(this).prop('checked', true);
-//                                $('.roles input[type=checkbox]').prop('checked', true);
-//                            }
-//                        });
-
-
-                        $("#role_form").attr("action", "users/"+response.id);
+                        $("#role_form").attr("action", "roles/"+response[0].id);
                         $("#role-modal-edit").modal({backdrop: 'static', keyboard: true});
                     },
                     error: function(response) {
