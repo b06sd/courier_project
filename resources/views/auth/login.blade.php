@@ -1,79 +1,83 @@
-@extends('layouts.access')
+@extends('layouts.auth_template')
 
 @section('content')
-    <div class="container">
-        <div class="row" id="pwd-container">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <section class="login-form">
-                    <div class="panel panel-default">
-                      <div class="panel-heading clearfix">
-                        <div class="pull-left"><h5><i class="fa fa-lock"></i> <b>LOGIN</b></h5></div>
-                        <div class="pull-right">
-                          <span style="font-size:11px;">Don't have any account?</span>
-                          <a class="btn btn-default btn-xs login-link" href="{{ route('register') }}" style="margin-top:-2px;"><i class="fa fa-plus-circle"></i> Sign up</a>
-                        </div>
-                      </div>
-                        <div class="panel-body">
-                            <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                                {{ csrf_field() }}
+<body class="fix-header fix-sidebar">
+    <!-- Preloader - style you can find in spinners.css -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <!-- Main wrapper  -->
+    <div id="main-wrapper">
 
-                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <div class="col-md-12">
+        <div class="unix-login">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="login-content card">
+                            <div class="login-form">
+                                <h4>Login</h4>
+                                <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                                {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <label>Email address</label>
                                         <input id="email" type="email" class="form-control input-lg" name="email"
                                                value="{{ old('email') }}" required autofocus placeholder="Email">
 
-                                        @if ($errors->has('email'))
+                                               @if ($errors->has('email'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                         @endif
                                     </div>
-                                </div>
-
-                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Password</label>
                                         <input id="password" type="password" class="form-control input-lg" name="password" placeholder="Password"
                                                required>
 
-                                        @if ($errors->has('password'))
+                                               @if ($errors->has('password'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                         @endif
                                     </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <div class="checkbox">
+                                    <div class="checkbox">
                                             <label>
                                                 <input type="checkbox"
                                                        name="remember" {{ old('remember') ? 'checked' : '' }}> Remember
                                                 Me
                                             </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                        <label class="pull-right">
+                                                <a href="{{ route('password.request') }}">Forgotten Password?</a>
+                                            </label>
 
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary">
-                                            Login
-                                        </button>
-
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            Forgot Your Password?
-                                        </a>
                                     </div>
-                                </div>
-                            </form>
+                                    <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
+                                    {{-- <div class="register-link m-t-15 text-center">
+                                        <p>Don't have account ? <a href="{{ route('register') }}"> Sign Up Here</a></p>
+                                    </div> --}}
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
-            <div class="col-md-4"></div>
         </div>
+
     </div>
-    </div>
+    <!-- All Jquery -->
+          <script src="{{ asset('temp/js/lib/jquery/jquery.min.js') }}"></script>
+          <!-- Bootstrap tether Core JavaScript -->
+          <script src="{{ asset('temp/js/lib/bootstrap/js/popper.min.js') }}"></script>
+          <script src="{{ asset('temp/js/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+          <!-- slimscrollbar scrollbar JavaScript -->
+          <script src="{{ asset('temp/js/jquery.slimscroll.js') }}"></script>
+          <!--Menu sidebar -->
+          <script src="{{ asset('temp/js/sidebarmenu.js') }}"></script>
+          <!--stickey kit -->
+          <script src="{{ asset('temp/js/lib/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
+          <!--Custom JavaScript -->
+
+          <script src="{{ asset('temp/js/custom.min.js') }}"></script>
+</body>
 @endsection

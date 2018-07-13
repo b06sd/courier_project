@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Consignee;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class ConsigneeController extends Controller
 {
@@ -13,7 +16,8 @@ class ConsigneeController extends Controller
      */
     public function index()
     {
-        return view('consignee.index');
+        $consignees = Consignee::all();
+        return view('consignee.index', compact('consignees'));
     }
 
     /**
@@ -34,7 +38,24 @@ class ConsigneeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'name' => 'required|max:50',
+            'address' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        $consignee = new Consignee;
+
+        $consignee->name = request('name');
+        $consignee->address = request('address');
+        $consignee->phone_number = request('phone_number');
+        $consignee->email = request('email');
+
+        $consignee->save();
+
+        return redirect('/consignee');
+
     }
 
     /**
@@ -45,7 +66,9 @@ class ConsigneeController extends Controller
      */
     public function show($id)
     {
-        //
+        return Consignee::select(DB::raw('id, name, address, email, phone_number'))
+            ->where('id', '=', $id)
+            ->first();
     }
 
     /**
@@ -66,9 +89,31 @@ class ConsigneeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Consignee $consignee)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:50',
+            'address' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        $update = Consignee::where('id', $consignee->id)->update([
+            'name'=> $request->name,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email
+        ]);
+
+        if($update){
+            flash('Operation successful')->success();
+            return redirect()->route('consignee.index');
+
+        }
+        else{
+            flash('Operation failed')->error();
+            return redirect()->route('consignee.index');
+        }
     }
 
     /**
@@ -80,5 +125,21 @@ class ConsigneeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function allConsignees()
+    {
+
+        $consignees = Consignee::all();
+
+        return Datatables::of($consignees)
+            ->addColumn('action', function ($consignee) {
+
+                return '<a data-edit-consignee="'.$consignee->id.'" class="btn btn-flat btn-info 
+                edit_consignee"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
+                '<a  data-delete-consignee="'.$consignee->id.'"  class="btn btn-flat btn-danger  del_consignee"><i class="glyphicon 
+                glyphicon-edit"></i> Delete</a>';
+            })
+            ->make(true);
     }
 }

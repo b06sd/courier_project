@@ -1,16 +1,37 @@
 @extends('layouts.template')
 
-@section('style')
+@section('styles')
 @endsection
 
 @section('content')
-
+<!-- Bread crumb -->
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h3 class="text-primary">User Management</h3> </div>
+    <div class="col-md-7 align-self-center">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Users</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </div>
+  </div>
+  <!-- End Bread crumb -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            @include('flash::message')
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="content">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">User Management</div>
-
                 <div class="card-body">
+                    <button class="btn btn-info btn-flat pull-right m-t-10" data-toggle="modal"
+                            data-target="#user-modal">Add User</button>
                     <div class="table-responsive m-t-40">
                         <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="users_table">
                             <thead>
@@ -22,7 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                {{--@foreach ($users as $user)--}}
                                 {{-- <tr>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
@@ -34,7 +55,7 @@
                                 {!! Form::close() !!}
                                 </td>
                                 </tr> --}}
-                                @endforeach
+                                {{--@endforeach--}}
                             </tbody>
                         </table>
                     </div>
@@ -42,9 +63,11 @@
             </div>
         </div>
     </div>
+  </div>
+</div>    
 @endsection
 
-@push('scripts')
+@section('scripts')
     <script src="{{ asset('temp/js/lib/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js') }}"></script>
@@ -67,7 +90,7 @@
                     "processing": "Processing Request"
                 },
                 "ajax":{
-                    url :"{{ route('getAllUsers') }}", // json datasource
+                    url :"{{ route('allUsers') }}", // json datasource
                     type: "get"
                 },
                 searchDelay: 350,
@@ -77,10 +100,66 @@
                     { data: 'name', name:'name' },
                     { data: 'email', name: 'email' },
                     { data: 'phone', name: 'phone' },
-                    { data: 'rolename', name: 'rolename '},
                     { data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
-        })
+
+            $(document).on('click', '.edit_user', function(ev) {
+                ev.preventDefault();
+                var val = $(this).data('edit-user');
+
+                $.ajax({
+                    url: 'users/'+val,
+                    type: 'GET',
+                    beforeSend: function ()
+                    {
+
+                    },
+                    success: function(response) {
+                        console.log(response);
+
+                        $('#edit_user_form')
+                            .find('[name="name"]').val(response.name).end()
+                            .find('[name="email"]').val(response.email).end()
+                            .find('[name="phone"]').val(response.phone).end();
+
+
+                        $('.roles').each(function (index, e) {
+                            if($(this).val() == response.role_id){
+                                $(this).prop('checked', true);
+                            }
+                        });
+
+
+                        $("#edit_user_form").attr("action", "users/"+response.id);
+                        $("#user-modal-edit").modal({backdrop: 'static', keyboard: true});
+                    },
+                    error: function(response) {
+                        console.log(response);
+                        alert('Operation failed');
+                    }
+                });
+            });
+
+            $(document).on('click', '.del_user', function(ev) {
+                ev.preventDefault();
+                var val = $(this).data('delete-user');
+
+                var r = confirm("Do you want to delete this user");
+                if (r == true) {
+                    $.ajax({
+                        type: 'post',
+                        url: "users/"+val,
+                        data: {
+                            '_method': 'DELETE',
+                            'id': val
+                        },
+                        success: function(data) {
+                            window.location.href = "{{ route('users.index') }}";
+                        }
+                    });
+                }
+            });
+        });
     </script>
-@endpush
+@endsection

@@ -1,26 +1,41 @@
 @extends('layouts.template')
 
-@section('style')
+@section('styles')
 @endsection
 
 @section('content')
-
+<!-- Bread crumb -->
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h3 class="text-primary">Permission Management</h3> </div>
+    <div class="col-md-7 align-self-center">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Permission</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </div>
+  </div>
+  <!-- End Bread crumb -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                @include('flash::message')
+            </div>
+        </div>
+    </div>
+<div class="container-fluid">
+    <div class="content">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-
-                        <h2>User Management</h2>
-
-                    {{--<div class="col-sm-8">--}}
-                        {{--<a href="{{ route('users.index') }}" class="btn btn-default pull-right">Users</a>--}}
-                        {{--<a href="{{ route('roles.index') }}" class="btn btn-danger pull-right">Roles</a>--}}
-                        {{--<a href="{{ URL::to('permissions/create') }}" class="btn btn-success pull-right">Add Permission</a>--}}
-                    {{--</div>--}}
-
+                    <h2>Manage Permission</h2>
                 </div>
 
                 <div class="card-body">
+                    <button class="btn btn-info btn-flat pull-right m-t-10" data-toggle="modal"
+                            data-target="#permission-modal">Add
+                        Permission</button>
                     <div class="table-responsive m-t-40">
                         <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="permissions_table">
                             <thead>
@@ -37,9 +52,40 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit Permission Modal Here -->
+    <div id="permission-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Permission
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ Form::open(array('url' => 'permissions', 'id' => 'permission_form')) }}
+                            {{ method_field('PATCH') }}
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                {{ Form::label('permission_name', 'Name') }}
+                                {{ Form::text('name', '', array('class' => 'form-control')) }}
+                            </div>
+                            {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
+                            {{ Form::close() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+    <!-- End Permission Modal -->
 @endsection
 
-@section('script')
+@section('scripts')
     <script src="{{ asset('temp/js/lib/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js') }}"></script>
@@ -52,7 +98,10 @@
     <script>
         $(document).ready(function () {
             var dataTable = $('#permissions_table').DataTable({
-                //fixedHeader: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
                 "processing": true,
                 "serverSide": true,
                 "language": {
@@ -69,6 +118,52 @@
                     { data: 'action', name:'action' }
 
                 ]
+            });
+
+            $(document).on('click', '.edit_permission', function(ev) {
+                ev.preventDefault();
+                var val = $(this).data('edit-permission');
+
+                $.ajax({
+                    url: 'permissions/'+val,
+                    type: 'GET',
+                    beforeSend: function ()
+                    {
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        if(response.name !== ""){
+
+                            $('#permission_form').find('[name="name"]').val(response.name).end();
+                            $("#permission_form").attr("action", "permissions/"+response.id);
+
+                            $("#permission-modal-edit").modal({backdrop: 'static', keyboard: true});
+                        }
+                    },
+                    error: function(response) {
+                        alert('Operation failed');
+                    }
+                });
+            });
+
+            $(document).on('click', '.del_permission', function(ev) {
+                ev.preventDefault();
+                var val = $(this).data('delete-permission');
+
+                var r = confirm("Do you want to delete this permission");
+                if (r == true) {
+                    $.ajax({
+                        type: 'post',
+                        url: "permissions/"+val,
+                        data: {
+                            '_method': 'DELETE',
+                            'id': val
+                        },
+                        success: function(data) {
+                            window.location.href = "{{ route('permissions.index') }}";
+                        }
+                    });
+                }
             });
         })
     </script>

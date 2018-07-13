@@ -33,9 +33,9 @@
   <li class="nav-label">PROFILE</li>
   <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">User Management</span></a>
     <ul aria-expanded="false" class="collapse">
-      <li><a href="#">Manage Permissions</a></li>
-      <li><a href="#">Manage Roles</a></li>
-      <li><a href="#">Manage Users</a></li>
+      <li><a href="{{ route('permissions.index') }}">Manage Permissions</a></li>
+      <li><a href="{{ route('roles.index') }}">Manage Roles</a></li>
+      <li><a href="{{ route('users.index') }}">Manage Users</a></li>
   </ul>
 </li>
 </ul>
