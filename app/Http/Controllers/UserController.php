@@ -77,6 +77,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+
+        //
+
         return User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
             ->select(DB::raw('users.id as id, users.name as name, email, phone, roles.name as rolename, roles.id as role_id'))
