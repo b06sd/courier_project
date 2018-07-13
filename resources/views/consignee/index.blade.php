@@ -39,7 +39,9 @@
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h4 class="modal-title">Create New Consignee</h4>
+												<h4 class="modal-title">Create new Consignee
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+											</h4>
 											</div>
 											<div class="modal-body">
 												<div class="form-group">
@@ -60,8 +62,7 @@
 												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-												<button type="submit" class="btn btn-outline-success">Submit</button>
+												<button type="submit" class="btn btn-outline-primary">Submit</button>
 											</div>
 										</div>
 									</div>
