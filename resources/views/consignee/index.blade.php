@@ -15,6 +15,13 @@
 			</ol>
 		</div>
 	</div>
+	<div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                @include('flash::message')
+             </div>
+        </div>
+    </div>
 	<!-- End Bread crumb -->
 	<div class="container-fluid">
 		<div class="content">
@@ -32,7 +39,7 @@
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h4 class="modal-title">Create Permission</h4>
+												<h4 class="modal-title">Create New Consignee</h4>
 											</div>
 											<div class="modal-body">
 												<div class="form-group">
