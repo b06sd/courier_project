@@ -60,6 +60,48 @@
 									</div>
 								</div>
 							</form>
+							{{-- Consignee Edit modal --}}
+							<div id="consignee-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+								<div class="modal-dialog modal-lg">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Edit Consignee
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+											</h4>
+										</div>
+										<div class="modal-body">
+											<div class="row">
+												<div class="col-md-12">
+													{!! Form::open(array('id' => 'edit_consignee_form')) !!}
+													{{ method_field('PATCH') }}
+													{{ csrf_field() }}
+													<div class="form-group">
+														{!! Form::label('Name edit', 'Name') !!}
+														{!! Form::text('name', '', array('class' => 'form-control')) !!}
+													</div>
+													<div class="form-group">
+														{!! Form::label('address edit', 'Address') !!}
+														{!! Form::textarea('address', '', array('class' => 'form-control')) !!}
+													</div>
+													<div class="form-group">
+														{!! Form::label('email edit', 'Email') !!}
+														{!! Form::email('email', '', array('class' => 'form-control')) !!}
+													</div>
+													<div class="form-group">
+														{!! Form::label('Phone Number edit', 'Phone Number') !!}
+														{!! Form::text('phone_number', '', array('class' => 'form-control')) !!}
+													</div>
+													<div class="modal-footer">
+														{!! Form::submit('Update User', array('class' => 'btn btn-primary')) !!}
+													</div>
+													{!! Form::close() !!}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							{{-- End of consignee edit modal --}}
 							<div class="table-responsive m-t-40">
 								<table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="consignee_table">
 									<thead>
@@ -134,33 +176,34 @@
 	})
 
 	$(document).on('click', '.edit_consignee', function(ev) {
-                ev.preventDefault();
-                var val = $(this).data('edit-consignee');
+		ev.preventDefault();
+		var val = $(this).data('edit-consignee');
 
-                $.ajax({
-                    url: 'consignee/'+val,
-                    type: 'GET',
-                    beforeSend: function ()
-                    {
+		$.ajax({
+			url: 'consignee/'+val,
+			type: 'GET',
+			beforeSend: function ()
+			{
 
-                    },
-                    success: function(response) {
-//                        console.log(response);
+			},
+			success: function(response) {
+				console.log(response);
 
-                        $('#edit_consignee_form')
-                            .find('[name="name"]').val(response.name).end()
-                            .find('[name="email"]').val(response.email).end()
-                            .find('[name="phone_number"]').val(response.phone_number).end();
+				$('#edit_consignee_form')
+				.find('[name="name"]').val(response.name).end()
+				.find('[name="address"]').val(response.address).end()
+				.find('[name="phone_number"]').val(response.phone_number).end()
+				.find('[name="email"]').val(response.email).end();
 
-
-                        $("#edit_consignee_form").attr("action", "consignee/"+response.id);
-                        $("#consignee-modal-edit").modal({backdrop: 'static', keyboard: true});
-                    },
-                    error: function(response) {
-                        alert('Operation failed');
-                    }
-                });
-            });
+				$("#edit_consignee_form").attr("action", "consignee/"+response.id);
+				$("#consignee-modal-edit").modal({backdrop: 'static', keyboard: true});
+			},
+			error: function(response) {
+				console.log(response);
+				alert('Operation failed');
+			}
+		});
+	});
 
 </script>
 @endsection

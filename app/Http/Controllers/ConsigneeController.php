@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Consignee;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class ConsigneeController extends Controller
@@ -65,7 +66,9 @@ class ConsigneeController extends Controller
      */
     public function show($id)
     {
-        //
+        return Consignee::select(DB::raw('id, name, address, email, phone_number'))
+            ->where('id', '=', $id)
+            ->first();
     }
 
     /**
@@ -86,9 +89,31 @@ class ConsigneeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Consignee $consignee)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:50',
+            'address' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        $update = Consignee::where('id', $consignee->id)->update([
+            'name'=> $request->name,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email
+        ]);
+
+        if($update){
+            flash('Operation successful')->success();
+            return redirect()->route('consignee.index');
+
+        }
+        else{
+            flash('Operation failed')->error();
+            return redirect()->route('consignee.index');
+        }
     }
 
     /**
