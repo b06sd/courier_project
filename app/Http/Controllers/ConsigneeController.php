@@ -54,6 +54,8 @@ class ConsigneeController extends Controller
 
         $consignee->save();
 
+        flash('Consignee Succesfully added!')->success();
+
         return redirect('/consignee');
 
     }

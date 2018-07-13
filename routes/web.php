@@ -17,7 +17,7 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('roles','RoleController');
     Route::resource('permissions','PermissionController');
@@ -29,7 +29,17 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('allUsers', 'UserController@allUsers')->name('allUsers');
     Route::get('allConsignees', 'ConsigneeController@allConsignees')->name('allConsignees');
     Route::get('getAllPermissions', 'PermissionController@getAllPermissions')->name('getAllPermissions');
-  
+
     // CRM Routes
     Route::resource('accounts', 'Account\AccountsController');
+    Route::get('/list', 'Account\AccountsController@list')->name('accounts.list');
+
+    // Sales Person
+    Route::resource('sales', 'Account\SalesController');
+    Route::get('/allSales', 'Account\SalesController@allSales')->name('allSales');
+
+    //Product routes
+    Route::resource('products', 'Product\ProductController');
+    Route::get('/allProducts', 'Product\ProductController@allProducts')->name('allProducts');
+
 });
