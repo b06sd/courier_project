@@ -18,6 +18,7 @@ class CreateSalesTable extends Migration
             $table->integer('consignee_id');
             $table->integer('courier_id');
             $table->integer('product_id');
+            $table->string('product_name');
             $table->integer('quantity');
             $table->timestamps();
         });
