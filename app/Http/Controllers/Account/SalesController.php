@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AccountsController extends Controller
+class SalesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class AccountsController extends Controller
      */
     public function index()
     {
-        //
-        return view('accounts.index');
+        return view('sales.index');
     }
 
     /**
@@ -24,16 +23,6 @@ class AccountsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function list()
     {
         //
     }

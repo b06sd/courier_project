@@ -19,14 +19,14 @@
       <li class="nav-label">CRM</li>
       <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Customer Management</span></a>
         <ul aria-expanded="false" class="collapse">
-          <li><a href="chart-flot.html">Flot</a></li>
-          <li><a href="chart-morris.html">Morris</a></li>
-          <li><a href="chart-chartjs.html">ChartJs</a></li>
-          <li><a href="chart-chartist.html">Chartist </a></li>
-          <li><a href="chart-amchart.html">AmChart</a></li>
-          <li><a href="chart-echart.html">EChart</a></li>
-          <li><a href="chart-sparkline.html">Sparkline</a></li>
-          <li><a href="chart-peity.html">Peity</a></li>
+          <li> <a class="has-arrow" href="#" aria-expanded="false">Manage Account</a>
+               <ul aria-expanded="false" class="collapse">
+                   <li><a href="{{ route('accounts.index')}}">Account Information</a></li>
+                   <li><a href="{{ route('accounts.list')}}">Account List</a></li>
+               </ul>
+           </li>
+          <li><a href="{{ route('sales.index' )}}">Manage Sales</a></li>
+          <li><a href="{{ route('products.index' )}}">Manage Products</a></li>
       </ul>
   </li>
   <hr/>
