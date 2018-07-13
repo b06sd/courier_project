@@ -1,96 +1,135 @@
 @extends('layouts.template')
+
+@section('styles')
+@endsection
+
 @section('content')
 <!-- Bread crumb -->
 <div class="row page-titles">
-  <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Logistic Management</h3> </div>
-    <div class="col-md-7 align-self-center">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Consignee</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
-      </ol>
-    </div>
-  </div>
-  <!-- End Bread crumb -->
-<div class="container-fluid">
-	<div class="content">
-		<div class="card">
-			<div class="card-body p-b-0">
-				<h4 class="card-title">Consignee Management</h4>
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs customtab" role="tablist">
-					<li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#add-consignee" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Add Consignee</span></a> </li>
-					<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#view-consignee" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">View Consignee</span></a> </li>
-				</ul>
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div class="tab-pane active show" id="add-consignee" role="tabpanel">
-						<div class="p-20">
-							<h5>Add Consignee</h5>
-							<hr class="featurette">
-							<div class="col-sm-8">
-								<form>
-									<div class="form-group">
-										<label for="">Name</label>
-										<input type="text" class="form-control" name="name" value="" />
-									</div>
-									<div class="form-group">
-										<label for="">Address</label>
-										<textarea class="form-control" name="address" value="" rows="8"></textarea>
-									</div>
-									<div class="form-group">
-										<label for="">Phone Number</label>
-										<input type="text" class="form-control" name="phone" value="" />
-									</div>
-									<div class="form-group">
-										<label for="">Email</label>
-										<input type="email" class="form-control" name="email" value="" />
-									</div>
-									<div class="form-group">
-										<button class="btn btn-success" type="submit" id="consignee_btn">Submit</button>
-									</div>
-								</form>
-							</div>
-							<div class="col-sm-4">
-
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane p-20" id="view-consignee" role="tabpanel">
-						<h5>View Consignee</h5>
-						<table class="table table-borderless" id="users-table">
-							<thead>
-								<tr>
-									<th scope="col">Name</th>
-									<th scope="col">Phone Number</th>
-									<th scope="col">Email</th>
-									<th scope="col">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>@mdo</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<td>@fat</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td colspan="2">Larry the Bird</td>
-									<td>@twitter</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+	<div class="col-md-5 align-self-center">
+		<h3 class="text-primary">User Management</h3> </div>
+		<div class="col-md-7 align-self-center">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="javascript:void(0)">Manage Users</a></li>
+				<li class="breadcrumb-item active">Dashboard</li>
+			</ol>
 		</div>
 	</div>
+	<!-- End Bread crumb -->
+	<div class="container-fluid">
+		<div class="content">
+			<div class="row justify-content-center">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">Consignee Management</div>
+						<div class="card-body">
+							<button class="btn btn-outline-info btn-flat pull-right m-t-10" data-toggle="modal"
+							data-target="#add-consignee">Add Consignee</button>
+							<br>
+							<form method="post" action="/consignee">
+								@csrf
+								<div class="modal fade" id="add-consignee" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog modal-lg" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title">Create Permission</h4>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<label for="">Name</label>
+													<input type="text" class="form-control" name="name" value="" />
+												</div>
+												<div class="form-group">
+													<label for="">Address</label>
+													<textarea class="form-control" name="address" value="" rows="8"></textarea>
+												</div>
+												<div class="form-group">
+													<label for="">Phone Number</label>
+													<input type="text" class="form-control" name="phone_number" value="" />
+												</div>
+												<div class="form-group">
+													<label for="">Email</label>
+													<input type="email" class="form-control" name="email" value="" />
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-outline-success">Submit</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div class="table-responsive m-t-40">
+								<table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="consignee_table">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Email</th>
+											<th>Phone</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										{{--@foreach ($users as $user)--}}
+                                {{-- <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->phone }}</td>
+                                <td>
+                                <a href="{{ URL::to('users/'.$user->id.'/edit') }}" class="btn btn-warning pull-left">Edit</a>
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::close() !!}
+                                </td>
+                            </tr> --}}
+                            {{--@endforeach--}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-@stop
+</div>
+</div>    
+@endsection
+
+@section('scripts')
+<script src="{{ asset('temp/js/lib/datatables/datatables.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js') }}"></script>
+{{--    <script src="{{ asset('temp/js/lib/datatables/datatables-init.js }}"></script>--}}
+<script>
+	$(document).ready(function () {
+		var dataTable = $('#consignee_table').DataTable({
+			dom: 'Bfrtip',
+			buttons: [
+			'copy', 'csv', 'excel', 'pdf', 'print'
+			],
+			"processing": true,
+			"serverSide": true,
+			"language": {
+				"processing": "Processing Request"
+			},
+			"ajax":{
+                    url :"{{ route('allConsignees') }}", // json datasource
+                    type: "get"
+                },
+                searchDelay: 350,
+                "lengthMenu": [[10, 25, 50, 100, 200, 500], [10, 25, 50, 100, 200, 500]],
+                aoColumns: [
+                { data: 'name', name:'name' },
+                { data: 'email', name: 'email' },
+                { data: 'phone_number', name: 'phone_number' },
+                { data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
+            });
+	})
+</script>
+@endsection
