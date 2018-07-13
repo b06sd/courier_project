@@ -20,13 +20,13 @@
       <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cogs"></i><span class="hide-menu">Customer Management</span></a>
         <ul aria-expanded="false" class="collapse">
           <li> <a class="has-arrow" href="#" aria-expanded="false">Manage Account</a>
-                                   <ul aria-expanded="false" class="collapse">
-                                       <li><a href="{{ route('accounts.index')}}">Account Information</a></li>
-                                       <li><a href="{{ route('accounts.list')}}">Account List</a></li>
-                                   </ul>
-                               </li>
-
+               <ul aria-expanded="false" class="collapse">
+                   <li><a href="{{ route('accounts.index')}}">Account Information</a></li>
+                   <li><a href="{{ route('accounts.list')}}">Account List</a></li>
+               </ul>
+           </li>
           <li><a href="{{ route('sales.index' )}}">Manage Sales</a></li>
+          <li><a href="{{ route('products.index' )}}">Manage Products</a></li>
       </ul>
   </li>
   <hr/>
