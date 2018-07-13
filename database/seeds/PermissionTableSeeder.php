@@ -41,7 +41,11 @@ class PermissionTableSeeder extends Seeder
             'View Courier',
             'Add Courier',
             'Edit Courier',
-            'Delete Courier'
+            'Delete Courier',
+            'View Product',
+            'Add Product',
+            'Edit Product',
+            'Delete Product',
          ];
 
 
