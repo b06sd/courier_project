@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Consignee;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class ConsigneeController extends Controller
@@ -65,7 +66,9 @@ class ConsigneeController extends Controller
      */
     public function show($id)
     {
-        //
+        return Consignee::select(DB::raw('id, name, address, email, phone_number'))
+            ->where('id', '=', $id)
+            ->first();
     }
 
     /**
@@ -86,9 +89,31 @@ class ConsigneeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Consignee $consignee)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:50',
+            'address' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required|email'
+        ]);
+
+        $update = Consignee::where('id', $consignee->id)->update([
+            'name'=> $request->name,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email
+        ]);
+
+        if($update){
+            flash('Operation successful')->success();
+            return redirect()->route('consignee.index');
+
+        }
+        else{
+            flash('Operation failed')->error();
+            return redirect()->route('consignee.index');
+        }
     }
 
     /**
@@ -104,27 +129,15 @@ class ConsigneeController extends Controller
 
     public function allConsignees()
     {
-//        $users = User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-//            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-//            ->select(DB::raw('users.id as id, users.name as name, email, phone, roles.name as rolename'))
-//            ->get();
+
         $consignees = Consignee::all();
 
         return Datatables::of($consignees)
             ->addColumn('action', function ($consignee) {
-//                if (Auth::user()->hasAnyPermission('Edit User') && !Auth::user()->hasAnyPermission('Delete User')){
-//                    return '<a data-edit-user="'.$user->id.'" class="btn btn-xs btn-primary edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
-//                }
-//                if (Auth::user()->hasAnyPermission('Delete User') && !Auth::user()->hasAnyPermission('Edit User')){
-//                    return '<a  data-delete-user="'.$user->id.'"  class="btn btn-xs btn-danger del_user"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
-//                }
-//                if (Auth::user()->hasAnyPermission('Delete User') && Auth::user()->hasAnyPermission('Edit User')){
-//                    return '<a data-edit-user="'.$user->id.'" class="btn btn-xs btn-primary edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
-//                    '<a  data-delete-user="'.$user->id.'"  class="btn btn-xs btn-danger del_user"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
-//                }
-                return '<a data-edit-user="'.$consignee->id.'" class="btn btn-flat btn-info 
-                edit_user"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
-                '<a  data-delete-user="'.$consignee->id.'"  class="btn btn-flat btn-danger  del_user"><i class="glyphicon 
+
+                return '<a data-edit-consignee="'.$consignee->id.'" class="btn btn-flat btn-info 
+                edit_consignee"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
+                '<a  data-delete-consignee="'.$consignee->id.'"  class="btn btn-flat btn-danger  del_consignee"><i class="glyphicon 
                 glyphicon-edit"></i> Delete</a>';
             })
             ->make(true);

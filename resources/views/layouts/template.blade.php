@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
   <title>Apex - A Logistic and CRM Solution</title>
@@ -23,6 +24,23 @@
   <link href="{{ asset('temp/css/helper.css') }}" rel="stylesheet">
   <link href="{{ asset('temp/css/style.css') }}" rel="stylesheet">
   <link href="{{ asset('temp/css/custom.css') }}" rel="stylesheet">
+
+    <!-- All Jquery -->
+    <script src="{{ asset('temp/js/lib/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{{ asset('temp/js/lib/bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('temp/js/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{{ asset('temp/js/jquery.slimscroll.js') }}"></script>
+
+    {{--Set CSRF Header for sending request via javascript--}}
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
   @yield('styles')
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -286,7 +304,7 @@
 
             <!-- Add User Modal Here -->
             <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-              <div class="modal-dialog">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title">Create User
@@ -337,7 +355,7 @@
 
             <!-- Edit User Modal Here -->
             <div id="user-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-              <div class="modal-dialog">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h4 class="modal-title">Edit User
@@ -423,64 +441,6 @@
             </div>
             <!-- End Permission Modal -->
 
-            <!-- Add Role Modal Here -->
-            <div id="role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Create Role
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                    </h4>
-                  </div>
-                  <div class="modal-body">
-                    <div class="container">
-
-                        {{ Form::open(array('url' => 'roles')) }}
-                        <div class="form-group row">
-                          {{ Form::label('name', 'Name') }}
-                          {{ Form::text('name', null, array('class' => 'form-control')) }}
-                        </div>
-                        <h5><b>Assign Permissions</b></h5>
-                        <div class='form-group row'>
-                          @foreach ($permissions as $permission)
-                            <div class='col-sm-3'>
-                              {{ Form::checkbox('permissions[]',  $permission->id) }}
-                              {{ Form::label($permission->name, ucfirst($permission->name)) }}
-                            </div>
-                          @endforeach
-                        </div>
-                        <div class='form-group row'>
-                          {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
-                        </div>
-                        {{ Form::close() }}
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Role Modal -->
-
-
-              <div id="myModal" class="modal fade" role="dialog">
-                  <div class="modal-dialog">
-
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title">Modal Header</h4>
-                          </div>
-                          <div class="modal-body">
-                              <p>Some text in the modal.</p>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          </div>
-                      </div>
-
-                  </div>
-              </div>
 
 
 
@@ -503,18 +463,13 @@
                   </div>
                 </footer>
 
+
               <!-- End footer -->
             </div>
             <!-- End Page wrapper  -->
           </div>
           <!-- End Wrapper -->
-          <!-- All Jquery -->
-          <script src="{{ asset('temp/js/lib/jquery/jquery.min.js') }}"></script>
-          <!-- Bootstrap tether Core JavaScript -->
-          <script src="{{ asset('temp/js/lib/bootstrap/js/popper.min.js') }}"></script>
-          <script src="{{ asset('temp/js/lib/bootstrap/js/bootstrap.min.js') }}"></script>
-          <!-- slimscrollbar scrollbar JavaScript -->
-          <script src="{{ asset('temp/js/jquery.slimscroll.js') }}"></script>
+
           <!--Menu sidebar -->
           <script src="{{ asset('temp/js/sidebarmenu.js') }}"></script>
           <!--stickey kit -->
@@ -522,6 +477,14 @@
           <!--Custom JavaScript -->
 
           <script src="{{ asset('temp/js/custom.min.js') }}"></script>
+
+
+          <script>
+              $('#flash-overlay-modal').modal();
+          </script>
+          <script>
+            $('div.alert').not('.alert-important').delay(3000).fadeOut(500);
+          </script>
           @yield('scripts')
         </body>
 
