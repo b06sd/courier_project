@@ -39,6 +39,6 @@ Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
 
     //Product routes
     Route::resource('products', 'Product\ProductController');
-    Route::get('/allProducts', 'ProductController@allProducts')->name('allProducts');
+    Route::get('/allProducts', 'Product\ProductController@allProducts')->name('allProducts');
 
 });
