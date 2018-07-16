@@ -28,6 +28,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('allRoles', 'RoleController@allRoles')->name('allRoles');
     Route::get('allUsers', 'UserController@allUsers')->name('allUsers');
     Route::get('allConsignees', 'ConsigneeController@allConsignees')->name('allConsignees');
+    Route::get('allCouriers', 'CourierController@allCouriers')->name('allCouriers');
     Route::get('getAllPermissions', 'PermissionController@getAllPermissions')->name('getAllPermissions');
 
     // CRM Routes

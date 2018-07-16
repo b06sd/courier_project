@@ -124,9 +124,11 @@ class ConsigneeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Consignee $consignee)
     {
-        //
+        $consignee->delete();
+        flash('Operation successful')->success();
+        return response ()->json ();
     }
 
     public function allConsignees()

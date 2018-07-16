@@ -213,5 +213,25 @@
 		});
 	});
 
+	 $(document).on('click', '.del_consignee', function(ev) {
+                ev.preventDefault();
+                var val = $(this).data('delete-consignee');
+
+                var r = confirm("Do you want to delete this consignee");
+                if (r == true) {
+                    $.ajax({
+                        type: 'post',
+                        url: "consignee/"+val,
+                        data: {
+                            '_method': 'DELETE',
+                            'id': val
+                        },
+                        success: function(data) {
+                            window.location.href = "{{ route('consignee.index') }}";
+                        }
+                    });
+                }
+            });
+	 
 </script>
 @endsection
