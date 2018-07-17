@@ -213,9 +213,9 @@
 		});
 	});
 
-	 $(document).on('click', '.del_consignee', function(ev) {
-                ev.preventDefault();
-                var val = $(this).data('delete-consignee');
+	$(document).on('click', '.del_consignee', function(ev) {
+            ev.preventDefault();
+            var val = $(this).data('delete-consignee');
 
                 var r = confirm("Do you want to delete this consignee");
                 if (r == true) {

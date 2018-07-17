@@ -22,7 +22,8 @@ class CreateCouriersTable extends Migration
             $table->string('shipping_service');
             $table->text('description');
             $table->string('received_by');
-            $table->integer('consignee_id');
+            $table->integer('consignee_id')->unsigned();
+            $table->foreign('consignee_id')->references('id')->on('consignees')->onDelete('cascade');
             $table->date('pickup_date');
             $table->date('dispatch_date');
             $table->date('delivery_date');
