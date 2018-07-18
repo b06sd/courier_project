@@ -18,7 +18,7 @@ class CourierController extends Controller
     public function index()
     {
         $courier = Courier::all();
-        $consignees = Consignee::all();
+        $consignees = Consignee::all(['id', 'name']);
         return view('courier.index', compact('courier', 'consignees'));
     }
 
@@ -109,7 +109,7 @@ class CourierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Courier $courier)
     {
         $this->validate($request, [
             'name' => 'required|max:50',
@@ -169,9 +169,9 @@ class CourierController extends Controller
     public function allCouriers()
     {
 
-        $couriers =  Courier::with('consignee')
-        // ->select(DB::raw('couriers.*'))
-        ->get();
+        $couriers =  Courier::with(['consignee' => function($query){
+            $query->orderBy('name', 'asc');
+        }])->get();
 
         return Datatables::of($couriers)
         ->addColumn('action', function ($courier) {

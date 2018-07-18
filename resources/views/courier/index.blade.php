@@ -205,7 +205,12 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                             {!! Form::label('Consignee', 'Consignee') !!}
-                            {!!Form::select('consignee[]', $consignees->pluck('name'), '', ['class' => 'form-control', 'id' => 'consignee_id'])!!}
+                            <select name="consignee" class="form-control" required="required" id="consignee_id">
+                              <option value="">Select Consignee</option>
+                              @foreach ($consignees as $consignee)
+                                <option value="{{$consignee->id}}">{{$consignee->name}}</option>
+                              @endforeach
+                            </select>
                           </div>
                           <div class="form-group">
                             {!! Form::label('pickup date edit', 'Pickup Date') !!}
@@ -439,7 +444,7 @@
                     }
                   });
 
-                  localStorage.setItem("consignee", response.consignee);
+                  localStorage.setItem("consignee", response.consignee_id);
                   $('#consignee_id').find('option').each(function(i,e){
                     if($(e).val() == localStorage.getItem("consignee")){
                       $('#consignee_id').prop('selectedIndex', i);
