@@ -16,18 +16,6 @@ class ProductsTableSeeder extends Seeder
             [
                 'name'=>'Weavon',
                 'price' => 10000
-            ],
-            [
-                'name'=>'Waist trainer',
-                'price' => 4500
-            ],
-            [
-                'name'=>'Ear Piece',
-                'price' => 500
-            ],
-            [
-                'name'=>'Snickers',
-                'price' => 15000
             ]
         );
     }
