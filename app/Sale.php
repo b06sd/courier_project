@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
-    protected $fillable = ['consignee_id', 'courier_id', 'product_id', 'product_name', 'quantity'];
+    protected $fillable = ['consignee_id', 'courier_id', 'product_id', 'quantity'];
 
     public function consignees(){
       return $this->belongsToMany('App\Consignee');

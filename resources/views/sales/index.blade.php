@@ -37,8 +37,11 @@
                                     <thead>
                                         <tr>
                                             <th>Consignee Name</th>
+                                            <th>Courier Name</th>
                                             <th>Product Name</th>
+                                            <th>Product Price</th>
                                             <th>Quantity</th>
+                                            <th>Total</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -69,27 +72,47 @@
                             {{ Form::open(array('url' => 'sales')) }}
                             <div class="form-group">
                                 {{ Form::label('consignee_id', 'Consignee Id') }}
-                                {{ Form::text('consignee_id', '', array('class' => 'form-control')) }}
+                                <select name="consignee_id" id="consignee" class="form-control">
+                                  <option value="">Select Consignee</option>
+                                  @foreach ($consignees as $consignee)
+                                  <option value="{{$consignee->id}}">{{$consignee->name}}</option>
+                                  @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 {{ Form::label('courier_id', 'Courier Id') }}
-                                {{ Form::text('courier_id', '', array('class' => 'form-control')) }}
+                                <select name="courier_id" id="courier" class="form-control">
+                                  <option value="">Select Courier</option>
+                                  @foreach ($couriers as $courier)
+                                  <option value="{{$courier->id}}">{{$courier->name}}</option>
+                                  @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 {{ Form::label('product_id', 'Product Id') }}
-                                {{ Form::text('product_id', '', array('class' => 'form-control')) }}
+                                <select name="product_id" id="product" class="form-control">
+                                  <option value="">Select Product</option>
+                                  @foreach ($products as $product)
+                                  <option value="{{$product->id}}">{{$product->name}}</option>
+                                  @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
-                                {{ Form::label('product_name', 'Product Name') }}
-                                {{ Form::text('product_name', '', array('class' => 'form-control')) }}
+                                {{ Form::label('product_id', 'Product Id') }}
+                                <select name="product_id" id="product" class="form-control">
+                                  <option value="">Select Product</option>
+                                  @foreach ($products as $product)
+                                  <option value="{{$product->price}}">{{$product->price}}</option>
+                                  @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 {{ Form::label('quantity', 'Quantity') }}
-                                {{ Form::text('quantity', '', array('class' => 'form-control')) }}
+                                {!! Form::number('quantity', $value = '' , ['min' => '0' ,'class' => 'form-control', 'id' => 'number_count','required']) !!}
                             </div>
 
                             {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
@@ -130,11 +153,6 @@
                             <div class="form-group">
                                 {{ Form::label('product_id', 'Product Id') }}
                                 {{ Form::text('product_id', '', array('class' => 'form-control')) }}
-                            </div>
-
-                            <div class="form-group">
-                                {{ Form::label('product_name', 'Product Name') }}
-                                {{ Form::text('product_name', '', array('class' => 'form-control')) }}
                             </div>
 
                             <div class="form-group">
@@ -182,8 +200,11 @@
                 aoColumns: [
 
                     { data: 'consignee_name', name:'consignee_name' },
+                    { data: 'courier_name', name:'courier_name' },
                     { data: 'product_name', name: 'product_name' },
+                    { data: 'product_price', name: 'product_price' },
                     { data: 'quantity', name: 'quantity' },
+                    { data: 'total', name: 'total' },
                     { data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
@@ -231,7 +252,7 @@
                             'id': val
                         },
                         success: function(data) {
-                            window.location.href = "{{ route('users.index') }}";
+                            window.location.href = "{{ route('sales.index') }}";
                         }
                     });
                 }
