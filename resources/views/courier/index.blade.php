@@ -1,4 +1,8 @@
 @extends('layouts.template')
+
+@section('styles')
+@endsection
+
 @section('content')
 <!-- Bread crumb -->
 <div class="row page-titles">
@@ -11,50 +15,68 @@
       </ol>
     </div>
   </div>
+  <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                @include('flash::message')
+             </div>
+        </div>
+    </div>
   <!-- End Bread crumb -->
   <div class="container-fluid">
     <div class="content">
-      <div class="card">
-        <div class="card-body p-b-0">
-          <h4 class="card-title">Courier Management</h4>
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs customtab" role="tablist">
-            <li class="nav-item"> <a class="nav-link active show" data-toggle="tab" href="#add-courier" role="tab" aria-selected="true"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Add Courier</span></a> </li>
-            <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#view-courier" role="tab" aria-selected="false"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">View Courier</span></a> </li>
-          </ul>
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div class="tab-pane active show" id="add-courier" role="tabpanel">
-              <form>
-                <div class="p-20">
-                  <h5>Add Courier</h5>
-                  <hr class="featurette">
-                  <div class="row">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">Courier Management</div>
+            <div class="card-body">
+              <button class="btn btn-outline-info btn-flat pull-right m-t-10" data-toggle="modal"
+              data-target="#add-courier">Add Courier</button>
+              <br>
+              <form method="post" action="/courier" id="courier_form">
+                @csrf
+                <div class="modal fade" id="add-courier" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Create new Courier
+                        <button type="button" class="close" style="padding: 0.5rem;" data-dismiss="modal" aria-hidden="true">x</button>
+                      </h5>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="">Shipper's Name</label>
-                        <select name="ship_name" id="ship_name" class="form-control">
+                        <label for="">Shipper</label>
+                        <select name="shipper" id="shipper" class="form-control">
                           <option value="">Select Client</option>
-                          <option value="1">FIRS</option>
+                          <option value="new">New</option>
+                          @foreach ($courier as $client)
+                          <option value="{{$client->id}}">{{$client->name}}</option>
+                          @endforeach
                         </select>
                       </div>
                       <div id="client_detail" class="hidden">
                         <div class="form-group">
+                          <label for="">Shipper's Name</label>
+                          <input type="text" class="form-control" name="name" value="" />
+                        </div>
+                        <div class="form-group">
                           <label for="">Shipper's Address</label>
-                          <input type="text" class="form-control" name="ship_address" value="" />
+                          <input type="text" class="form-control" name="address" value="" />
                         </div>
                         <div class="form-group">
                           <label for="">Shipper's Phone Number</label>
-                          <input type="text" class="form-control" name="ship_phone" value="" />
+                          <input type="text" class="form-control" name="phone_number" value="" />
                         </div>
                         <div class="form-group">
                           <label for="">Shipper's Email</label>
-                          <input type="text" class="form-control" name="ship_email" value="" />
+                          <input type="text" class="form-control" name="email" value="" />
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="">Shipping Service</label>
-                        <select name="ship_service" id="" class="form-control">
+                        <select name="shipping_service" id="" class="form-control">
                           <option value="">Select a Shipping service</option>
                           <option value="Document" >Document</option>
                           <option value="Parcel" >Parcel</option>
@@ -62,20 +84,21 @@
                       </div>
                       <div class="form-group">
                         <label for="">Full Shipping Description</label>
-                        <textarea class="form-control" name="ship_receive" value="" rows="8"></textarea>
+                        <textarea class="form-control" name="description" value="" rows="8"></textarea>
                       </div>
                       <div class="form-group">
                         <label for="">Received By</label>
-                        <input type="text" class="form-control" name="ship_receive" value="" />
+                        <input type="text" class="form-control" name="received_by" value="" />
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Consignee</label>
-                        <select name="client_consignee" class="form-control" required="required" id="client_consignee">
+                        <select name="consignee" class="form-control" required="required" id="consignee">
                           <option value="">Select Consignee</option>
-                          <option value="new">New</option>
-                          <option value='1'>Kingsley Udenewu</option>
+                          @foreach ($consignees as $consignee)
+                          <option value="{{$consignee->id}}">{{$consignee->name}}</option>
+                          @endforeach
                         </select>
                       </div>
                       <div id="consignee_details" class="hidden">
@@ -98,19 +121,19 @@
                       </div>
                       <div class="form-group">
                         <label for="">Pickup Date</label>
-                        <input type="date" class="form-control" name="date_picked" id="date_picked" value="" />
+                        <input type="date" class="form-control" name="pickup_date" id="pickup_date" value="" />
                       </div>
                       <div class="form-group">
                         <label for="">Date Dispatched</label>
-                        <input type="date" class="form-control" name="date_dispatched" id="date_dispatched" value="" />
+                        <input type="date" class="form-control" name="dispatch_date" id="dispatch_date" value="" />
                       </div>
                       <div class="form-group">
                         <label for="">Date Delivered</label>
-                        <input type="date" class="form-control" name="date_delivered" id="date_delivered" value="" />
+                        <input type="date" class="form-control" name="delivery_date" id="delivery_date" value="" />
                       </div>
                       <div class="form-group">
                         <label for="">Mode of Payment</label>
-                        <select name="mod_pay" id="mod_pay" class="form-control">
+                        <select name="payment_mode" id="payment_mode" class="form-control">
                           <option value="">Select a Payment</option>
                           <option value="Credit" >Credit</option>
                           <option value="Cash" >Cash</option>
@@ -118,21 +141,107 @@
                       </div>
                       <div class="form-group">
                         <label for="">Amount</label>
-                        <input type="number" class="form-control" name="amount" value="" />
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">&#8358;</div>
+                          </div>
+                          <input type="number" class="form-control" id="inlineFormInputGroup" name="amount" value="" step="0.01" min="0">
+                        </div>
                       </div>
                       <div class="form-group">
                         <button class="btn btn-primary" type="submit" id="pharm_btn">Submit</button>
                       </div>
                     </div>
                   </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </form>
-            </div>
-            <div class="tab-pane p-20" id="view-courier" role="tabpanel">
-              <h5>View Courier</h5>
-              <table class="table table-borderless" id="users-table">
-                <thead>
-                  <tr>
+              {{-- courier Edit modal --}}
+              <div id="courier-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Edit Courier
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                      </h4>
+                    </div>
+                    <div class="modal-body">
+                      {!! Form::open(array('id' => 'edit_courier_form')) !!}
+                          {{ method_field('PATCH') }}
+                          {{ csrf_field() }}
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            {!! Form::label('Name edit', 'Name') !!}
+                            {!! Form::text('name', '', array('class' => 'form-control')) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('address edit', 'Address') !!}
+                            {!! Form::textarea('address', '', array('class' => 'form-control')) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('Phone Number edit', 'Phone Number') !!}
+                            {!! Form::text('phone_number', '', array('class' => 'form-control')) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('email edit', 'Email') !!}
+                            {!! Form::email('email', '', array('class' => 'form-control')) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('shipping_service edit', 'Shipping Service') !!}
+                            {!! Form::select('shipping_service', ['D' => 'Document', 'P' => 'Parcel'], '', ['class' => 'form-control']) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('desc edit', 'Description') !!}
+                            {!! Form::textarea('description', '', array('class' => 'form-control')) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('receiver edit', 'Received By') !!}
+                            {!! Form::text('received_by', '', array('class' => 'form-control')) !!}
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            {!! Form::label('Consignee', 'Consignee') !!}
+                            {!!Form::select('consignee[]', $consignees->pluck('name'), '', ['class' => 'form-control', 'id' => 'consignee_id'])!!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('pickup date edit', 'Pickup Date') !!}
+                            {!! Form::date('pickup_date', '', array('class' => 'form-control')) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('dispatch date edit', 'Dispatch Date') !!}
+                            {!! Form::date('dispatch_date', '', array('class' => 'form-control')) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('delivery date edit', 'Delivery Date') !!}
+                            {!! Form::date('delivery_date', '', array('class' => 'form-control')) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('payment mode edit', 'Payment Mode') !!}
+                            {!! Form::select('payment_mode', ['Ca' => 'Cash', 'Cr' => 'Credit'], '', ['class' => 'form-control']) !!}
+                          </div>
+                          <div class="form-group">
+                            {!! Form::label('amount edit', 'Amount') !!}
+                            {!! Form::number('amount', '', array('class' => 'form-control', 'step' => '0.01', 'min' => '0')) !!}
+                          </div>
+                        </div>
+                        </div>
+                          <div class="modal-footer">
+                            {!! Form::submit('Update Courier', array('class' => 'btn btn-primary')) !!}
+                          </div>
+                    </div>
+                    {!! Form::close() !!}
+                  </div>
+                </div>
+              </div>
+              {{-- End of consignee edit modal --}}
+              <div class="table-responsive m-t-40">
+                <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="courier_table">
+                  <thead>
+                    <tr>
                     <th scope="col">Consignee</th>
                     <th scope="col">Shipper</th>
                     <th scope="col">Dispatch Date</th>
@@ -141,72 +250,219 @@
                     <th scope="col">Amount</th>
                     <th scope="col">Action</th>
                   </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                  </tr>
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {{--@foreach ($users as $user)--}}
+                                {{-- <tr>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->phone }}</td>
+                                <td>
+                                <a href="{{ URL::to('users/'.$user->id.'/edit') }}" class="btn btn-warning pull-left">Edit</a>
+                                {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
+                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::close() !!}
+                                </td>
+                            </tr> --}}
+                            {{--@endforeach--}}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  @stop
-  @section('scripts')
-  <script type="text/javascript">
+</div>
+</div>
+</div>    
+@endsection
 
-  $('#ship_name').change(function(){
-    var ship_name = $('#ship_name').val();
-    if(ship_name != ''){
-      $('#client_detail').removeClass('hidden');
-      $.ajax({
-        url: BASE_URL+'courier',
-        type: "POST",
-        data: 'ship_name_id='+ship_name,
-        beforeSend: function () {
+@section('scripts')
+<script src="{{ asset('temp/js/lib/datatables/datatables.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js') }}"></script>
+{{--    <script src="{{ asset('temp/js/lib/datatables/datatables-init.js }}"></script>--}}
+<script>
 
-        },
-        success: function (response) {
-          var parse = JSON.parse(response);
-          console.log(parse);
-          if (parse.status_code == "200") {
-            $('#courier_form')
-            .find('[name="ship_address"]').val(parse.data.cu_address).end()
-            .find('[name="ship_phone"]').val(parse.data.cu_phone).end()
-            .find('[name="ship_fax"]').val(parse.data.cu_fax).end()
-            .find('[name="ship_email"]').val(parse.data.cu_email).end();
-          }
-        }
-      });
-    }
-    else $('#client_detail').addClass('hidden');
-  });
+          $(document).ready(function () {
+            var dataTable = $('#courier_table').DataTable({
+              dom: 'Bfrtip',
+              buttons: [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ],
+              "processing": true,
+              "serverSide": true,
+              "language": {
+                "processing": "Processing Request"
+              },
+              "ajax":{
+                            url :"{{ route('allCouriers') }}", // json datasource
+                            type: "get"
+                        },
+                        searchDelay: 350,
+                        "lengthMenu": [[10, 25, 50, 100, 200, 500], [10, 25, 50, 100, 200, 500]],
+                        aoColumns: [
+                        { data: 'consignee.name', name:'consignee.name' },
+                        { data: 'name', name: 'name' },
+                        { data: 'dispatch_date', name: 'dispatch_date' },
+                        { data: 'delivery_date', name: 'delivery_date' },
+                        { data: 'pickup_date', name: 'pickup_date' },
+                        { data: 'amount', name: 'amount' },
+                        { data: 'action', name: 'action', orderable: false, searchable: false}
+                        ]
+                    });
+          })
+
+          $('#shipper').change(function(){
+            var shipper = $('#shipper').val();
+            if(shipper != ''){
+
+              $('#client_detail').removeClass('hidden');
+
+              // var val = $(this).data('courier-id');
+
+              $.ajax({
+            url: 'courier/'+shipper,
+            type: 'GET',
+            beforeSend: function ()
+            {
+              //alert(name);
+            },
+            success: function(response) {
+              console.log(response);
+
+              $('#courier_form')
+              .find('[name="name"]').val(response.name).end()
+              .find('[name="address"]').val(response.address).end()
+              .find('[name="phone_number"]').val(response.phone_number).end()
+              .find('[name="email"]').val(response.email).end();
+
+              // $("#courier_form").attr("action", "courier/"+response.id);
+            },
+            error: function(response) {
+              console.log(response);
+              alert('Operation failed');
+            }
+          });
+              
+            }
+            else $('#client_detail').addClass('hidden');
+          });
+
+          $('#consignee').change(function(){
+            var consignee = $('#consignee').val();
+            if(consignee != ''){
+              $('#consignee_details').removeClass('hidden');
+             
+                $.ajax({
+            url: 'consignee/'+consignee,
+            type: 'GET',
+            beforeSend: function ()
+            {
+              //alert(name);
+            },
+            success: function(response) {
+              console.log(response);
+
+              $('#courier_form')
+              .find('[name="cons_name"]').val(response.name).end()
+              .find('[name="cons_address"]').val(response.address).end()
+              .find('[name="cons_phone"]').val(response.phone_number).end()
+              .find('[name="cons_email"]').val(response.email).end();
+
+              // $("#courier_form").attr("action", "courier/"+response.id);
+            },
+            error: function(response) {
+              console.log(response);
+              alert('Operation failed');
+            }
+          });
+              
+            }
+            else $('#consignee_details').addClass('hidden');
+          });
+
+          $(document).on('click', '.del_courier', function(ev) {
+                          ev.preventDefault();
+                          var val = $(this).data('delete-courier');
+
+                          var r = confirm("Do you want to delete this consignee");
+                          if (r == true) {
+                              $.ajax({
+                                  type: 'post',
+                                  url: "courier/"+val,
+                                  data: {
+                                      '_method': 'DELETE',
+                                      'id': val
+                                  },
+                                  success: function(data) {
+                                      window.location.href = "{{ route('courier.index') }}";
+                                  }
+                              });
+                          }
+                      });
+
+          $(document).on('click', '.edit_courier', function(ev) {
+            ev.preventDefault();
+            var val = $(this).data('edit-courier');
+
+            $.ajax({
+              url: 'courier/'+val,
+              type: 'GET',
+              beforeSend: function ()
+              {
+
+              },
+              success: function(response) {
+                console.log(response);
+
+                $('#edit_courier_form')
+                  .find('[name="name"]').val(response.name).end()
+                  .find('[name="address"]').val(response.address).end()
+                  .find('[name="phone_number"]').val(response.phone_number).end()
+                  .find('[name="email"]').val(response.email).end()
+                  .find('[name="description"]').val(response.description).end()
+                  .find('[name="received_by"]').val(response.received_by).end()
+                  .find('[name="pickup_date"]').val(response.pickup_date).end()
+                  .find('[name="dispatch_date"]').val(response.dispatch_date).end()
+                  .find('[name="delivery_date"]').val(response.delivery_date).end()
+                  .find('[name="amount"]').val(response.amount).end();
+
+                  localStorage.setItem("shipping_service", response.shipping_service);
+                  $('#shipping_service').find('option').each(function(i,e){
+                    if($(e).val() == localStorage.getItem("shipping_service")){
+                      $('#shipping_service').prop('selectedIndex', i);
+                    }
+                  });
+
+                  localStorage.setItem("consignee", response.consignee);
+                  $('#consignee_id').find('option').each(function(i,e){
+                    if($(e).val() == localStorage.getItem("consignee")){
+                      $('#consignee_id').prop('selectedIndex', i);
+                    }
+                  });
+
+                  localStorage.setItem("payment_mode", response.payment_mode);
+                  $('#payment_mode').find('option').each(function(i,e){
+                    if($(e).val() == localStorage.getItem("payment_mode")){
+                      $('#payment_mode').prop('selectedIndex', i);
+                    }
+                  });
+
+                $("#edit_courier_form").attr("action", "courier/"+response.id);
+                $("#courier-modal-edit").modal({backdrop: 'static', keyboard: true});
+              },
+              error: function(response) {
+                console.log(response);
+                alert('Operation failed');
+              }
+            });
+          });
+
 
 </script>
 @endsection

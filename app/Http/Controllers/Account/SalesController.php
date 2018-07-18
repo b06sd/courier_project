@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Account;
-
 use App\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +11,6 @@ use App\Http\Controllers\Controller;
 
 class SalesController extends Controller
 {
-
     public function index()
     {
         return view('sales.index');
@@ -30,6 +28,17 @@ class SalesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
       $this->validate($request, [
           'consignee_id' => 'required',
@@ -56,6 +65,7 @@ class SalesController extends Controller
     public function show(Sale $sale)
     {
       return response()->json($sale);
+
     }
 
     /**
@@ -69,6 +79,29 @@ class SalesController extends Controller
         //
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+      
+    }
 
     public function update(Request $request, Sale $sale)
     {
