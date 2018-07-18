@@ -205,7 +205,7 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                             {!! Form::label('Consignee', 'Consignee') !!}
-                            {!!Form::select('consignee[]', $consignees->pluck('name'), '', ['class' => 'form-control', 'id' => 'consignee_id'])!!}
+                            {!!Form::select('consignee', $consignees->pluck('name'), '', ['class' => 'form-control', 'id' => 'consignee_id'])!!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('pickup date edit', 'Pickup Date') !!}
