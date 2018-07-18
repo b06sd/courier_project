@@ -13,10 +13,9 @@ class CouriersTableSeeder extends Seeder
     {
     	$shipping_service = array('Document', 'Parcel');
 		$payment_mode = array('Credit', 'Cash');
-		$random = rand(0,2);
+		$random = rand(0,1);
 
         factory(App\Courier::class, 10)->create([
-
         	'shipping_service' => $shipping_service[$random],
         	'payment_mode' => $payment_mode[$random]
 

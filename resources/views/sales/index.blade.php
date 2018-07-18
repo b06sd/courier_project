@@ -1,18 +1,5 @@
 @extends('layouts.template')
 
-@section('content')
-<!-- Bread crumb -->
-<div class="row page-titles">
-  <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Customer Management</h3> </div>
-    <div class="col-md-7 align-self-center">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Sales</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
-      </ol>
-    </div>
-  </div>
-
 @section('styles')
 @endsection
 
@@ -44,12 +31,12 @@
                         <div class="card-header">Customer Management</div>
                         <div class="card-body">
                             <button class="btn btn-info btn-flat pull-right m-t-10" data-toggle="modal"
-                                    data-target="#product-modal">Add Sales</button>
+                                    data-target="#sale-modal">Add Sales</button>
                             <div class="table-responsive m-t-40">
                                 <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="sales_table">
                                     <thead>
                                         <tr>
-                                            <th>Consignee Id</th>
+                                            <th>Consignee Name</th>
                                             <th>Product Name</th>
                                             <th>Quantity</th>
                                             <th>Action</th>
