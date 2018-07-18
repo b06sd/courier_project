@@ -191,7 +191,7 @@
                           </div>
                           <div class="form-group">
                             {!! Form::label('shipping_service edit', 'Shipping Service') !!}
-                            {!! Form::select('shipping_service', ['D' => 'Document', 'P' => 'Parcel'], '', ['class' => 'form-control']) !!}
+                            {!! Form::select('shipping_service', ['D' => 'Document', 'P' => 'Parcel'], '', ['class' => 'form-control', 'id'=> 'shipping_service']) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('desc edit', 'Description') !!}
@@ -205,7 +205,12 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                             {!! Form::label('Consignee', 'Consignee') !!}
-                            {!!Form::select('consignee[]', $consignees->pluck('name'), '', ['class' => 'form-control', 'id' => 'consignee_id'])!!}
+                            <select name="consignee" class="form-control" required="required" id="consignee_id">
+                              <option value="">Select Consignee</option>
+                              @foreach ($consignees as $consignee)
+                                <option value="{{$consignee->id}}">{{$consignee->name}}</option>
+                              @endforeach
+                            </select>
                           </div>
                           <div class="form-group">
                             {!! Form::label('pickup date edit', 'Pickup Date') !!}
@@ -220,8 +225,8 @@
                             {!! Form::date('delivery_date', '', array('class' => 'form-control')) !!}
                           </div>
                           <div class="form-group">
-                            {!! Form::label('payment mode edit', 'Payment Mode') !!}
-                            {!! Form::select('payment_mode', ['Ca' => 'Cash', 'Cr' => 'Credit'], '', ['class' => 'form-control']) !!}
+                            {!! Form::label('', 'Payment Mode') !!}
+                            {!! Form::select('payment_mode', ['Ca' => 'Cash', 'Cr' => 'Credit'], '', ['class' => 'form-control', 'id' => 'payment_mode_edit']) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('amount edit', 'Amount') !!}
@@ -252,19 +257,6 @@
                   </tr>
                   </thead>
                   <tbody>
-                    {{--@foreach ($users as $user)--}}
-                                {{-- <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ $user->phone }}</td>
-                                <td>
-                                <a href="{{ URL::to('users/'.$user->id.'/edit') }}" class="btn btn-warning pull-left">Edit</a>
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id] ]) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
-                                </td>
-                            </tr> --}}
-                            {{--@endforeach--}}
                         </tbody>
                     </table>
                 </div>
@@ -439,7 +431,7 @@
                     }
                   });
 
-                  localStorage.setItem("consignee", response.consignee);
+                  localStorage.setItem("consignee", response.consignee_id);
                   $('#consignee_id').find('option').each(function(i,e){
                     if($(e).val() == localStorage.getItem("consignee")){
                       $('#consignee_id').prop('selectedIndex', i);
@@ -447,9 +439,9 @@
                   });
 
                   localStorage.setItem("payment_mode", response.payment_mode);
-                  $('#payment_mode').find('option').each(function(i,e){
+                  $('#payment_mode_edit').find('option').each(function(i,e){
                     if($(e).val() == localStorage.getItem("payment_mode")){
-                      $('#payment_mode').prop('selectedIndex', i);
+                      $('#payment_mode_edit').prop('selectedIndex', i);
                     }
                   });
 

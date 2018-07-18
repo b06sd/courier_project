@@ -17,8 +17,8 @@ class CouriersTableSeeder extends Seeder
 
         factory(App\Courier::class, 10)->create([
 
-        	'shipping_service' => $shipping_service[rand(0,1)],
-        	'payment_mode' => $payment_mode[rand(0,1)]
+        	'shipping_service' => $shipping_service[$random],
+        	'payment_mode' => $payment_mode[$random]
 
         ]);
     }
