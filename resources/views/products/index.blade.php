@@ -65,7 +65,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            {{ Form::open(array('url' => 'permissions')) }}
+                            {{ Form::open(array('url' => 'products')) }}
                             <div class="form-group">
                                 {{ Form::label('product_name', 'Name') }}
                                 {{ Form::text('name', '', array('class' => 'form-control')) }}
@@ -174,7 +174,7 @@
                                 .find('[name="price"]').val(response.price).end();
 
 
-                        $("#product_form").attr("action", "users/"+response.id);
+                        $("#product_form").attr("action", "products/"+response.id);
                         $("#product-modal-edit").modal({backdrop: 'static', keyboard: true});
                     },
                     error: function(response) {
@@ -198,7 +198,7 @@
                             'id': val
                         },
                         success: function(data) {
-                            window.location.href = "{{ route('users.index') }}";
+                            window.location.href = "{{ route('products.index') }}";
                         }
                     });
                 }
