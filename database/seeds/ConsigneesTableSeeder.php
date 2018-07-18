@@ -13,5 +13,6 @@ class ConsigneesTableSeeder extends Seeder
     {
        
       factory(App\Consignee::class, 10)->create();
+
     }
 }

@@ -13,7 +13,7 @@ class CouriersTableSeeder extends Seeder
     {
     	$shipping_service = array('Document', 'Parcel');
 		$payment_mode = array('Credit', 'Cash');
-		//$random = rand(0,1);
+		$random = rand(0,1);
 
         factory(App\Courier::class, 10)->create([
 
