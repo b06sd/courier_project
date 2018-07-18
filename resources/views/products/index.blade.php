@@ -1,18 +1,5 @@
 @extends('layouts.template')
 
-@section('content')
-<!-- Bread crumb -->
-<div class="row page-titles">
-  <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Customer Management</h3> </div>
-    <div class="col-md-7 align-self-center">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Sales</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
-      </ol>
-    </div>
-  </div>
-
 @section('styles')
 @endsection
 
@@ -20,10 +7,10 @@
     <!-- Bread crumb -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h3 class="text-primary">Customer Management</h3> </div>
+            <h3 class="text-primary">Product Management</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Sales</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Manage Product</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </div>
@@ -41,17 +28,16 @@
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">Customer Management</div>
+                        <div class="card-header">Product Management</div>
                         <div class="card-body">
                             <button class="btn btn-info btn-flat pull-right m-t-10" data-toggle="modal"
-                                    data-target="#product-modal">Add Sales</button>
+                                    data-target="#product-modal">Add Product</button>
                             <div class="table-responsive m-t-40">
-                                <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="sales_table">
+                                <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="products_table">
                                     <thead>
                                         <tr>
-                                            <th>Consignee Id</th>
-                                            <th>Product Name</th>
-                                            <th>Quantity</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -67,42 +53,27 @@
     </div>
 
     <!-- Add Product Modal Here -->
-    <div id="sale-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div id="product-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Create Sales
+                    <h4 class="modal-title">Create product
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                     </h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            {{ Form::open(array('url' => 'sales')) }}
+                            {{ Form::open(array('url' => 'permissions')) }}
                             <div class="form-group">
-                                {{ Form::label('consignee_id', 'Consignee Id') }}
-                                {{ Form::text('consignee_id', '', array('class' => 'form-control')) }}
+                                {{ Form::label('product_name', 'Name') }}
+                                {{ Form::text('name', '', array('class' => 'form-control')) }}
                             </div>
 
                             <div class="form-group">
-                                {{ Form::label('courier_id', 'Courier Id') }}
-                                {{ Form::text('courier_id', '', array('class' => 'form-control')) }}
-                            </div>
-
-                            <div class="form-group">
-                                {{ Form::label('product_id', 'Product Id') }}
-                                {{ Form::text('product_id', '', array('class' => 'form-control')) }}
-                            </div>
-
-                            <div class="form-group">
-                                {{ Form::label('product_name', 'Product Name') }}
-                                {{ Form::text('product_name', '', array('class' => 'form-control')) }}
-                            </div>
-
-                            <div class="form-group">
-                                {{ Form::label('quantity', 'Quantity') }}
-                                {{ Form::text('quantity', '', array('class' => 'form-control')) }}
+                                {{ Form::label('price', 'Price') }}
+                                {{ Form::text('price', '', array('class' => 'form-control')) }}
                             </div>
 
                             {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
@@ -116,11 +87,11 @@
     <!-- End Permission Modal -->
 
     <!-- Edit Product Modal Here -->
-    <div id="sale-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div id="product-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Update Sales
+                    <h4 class="modal-title">Update Product
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                     </h4>
                 </div>
@@ -131,28 +102,12 @@
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
                             <div class="form-group">
-                                {{ Form::label('consignee_id', 'Consignee Id') }}
-                                {{ Form::text('consignee_id', '', array('class' => 'form-control')) }}
+                                {{ Form::label('permission_name', 'Name') }}
+                                {{ Form::text('name', '', array('class' => 'form-control')) }}
                             </div>
-
                             <div class="form-group">
-                                {{ Form::label('courier_id', 'Courier Id') }}
-                                {{ Form::text('courier_id', '', array('class' => 'form-control')) }}
-                            </div>
-
-                            <div class="form-group">
-                                {{ Form::label('product_id', 'Product Id') }}
-                                {{ Form::text('product_id', '', array('class' => 'form-control')) }}
-                            </div>
-
-                            <div class="form-group">
-                                {{ Form::label('product_name', 'Product Name') }}
-                                {{ Form::text('product_name', '', array('class' => 'form-control')) }}
-                            </div>
-
-                            <div class="form-group">
-                                {{ Form::label('quantity', 'Quantity') }}
-                                {{ Form::text('quantity', '', array('class' => 'form-control')) }}
+                                {{ Form::label('price', 'Price') }}
+                                {{ Form::text('price', '', array('class' => 'form-control')) }}
                             </div>
                             {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
                             {{ Form::close() }}
@@ -176,7 +131,7 @@
     {{--    <script src="{{ asset('temp/js/lib/datatables/datatables-init.js }}"></script>--}}
     <script>
         $(document).ready(function () {
-            $('#sales_table').DataTable({
+            $('#products_table').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
@@ -187,26 +142,25 @@
                     "processing": "Processing Request"
                 },
                 "ajax":{
-                    url :"{{ route('allSales') }}", // json datasource
+                    url :"{{ route('allProducts') }}", // json datasource
                     type: "get"
                 },
                 searchDelay: 350,
                 "lengthMenu": [[10, 25, 50, 100, 200, 500], [10, 25, 50, 100, 200, 500]],
                 aoColumns: [
 
-                    { data: 'consignee_name', name:'consignee_name' },
-                    { data: 'product_name', name: 'product_name' },
-                    { data: 'quantity', name: 'quantity' },
+                    { data: 'name', name:'name' },
+                    { data: 'price', name: 'price' },
                     { data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
 
-            $(document).on('click', '.edit_sale', function(ev) {
+            $(document).on('click', '.edit_product', function(ev) {
                 ev.preventDefault();
-                var val = $(this).data('edit-sale');
+                var val = $(this).data('edit-product');
 
                 $.ajax({
-                    url: 'sales/'+val,
+                    url: 'products/'+val,
                     type: 'GET',
                     beforeSend: function ()
                     {
@@ -215,13 +169,13 @@
                     success: function(response) {
                         console.log(response);
 
-                        $('#sale_form')
+                        $('#product_form')
                                 .find('[name="name"]').val(response.name).end()
                                 .find('[name="price"]').val(response.price).end();
 
 
-                        $("#sale_form").attr("action", "users/"+response.id);
-                        $("#sale-modal-edit").modal({backdrop: 'static', keyboard: true});
+                        $("#product_form").attr("action", "users/"+response.id);
+                        $("#product-modal-edit").modal({backdrop: 'static', keyboard: true});
                     },
                     error: function(response) {
                         console.log(response);
@@ -230,15 +184,15 @@
                 });
             });
 
-            $(document).on('click', '.del_sale', function(ev) {
+            $(document).on('click', '.del_product', function(ev) {
                 ev.preventDefault();
-                var val = $(this).data('delete-sale');
+                var val = $(this).data('delete-product');
 
-                var r = confirm("Do you want to delete this sales");
+                var r = confirm("Do you want to delete this product");
                 if (r == true) {
                     $.ajax({
                         type: 'post',
-                        url: "sales/"+val,
+                        url: "products/"+val,
                         data: {
                             '_method': 'DELETE',
                             'id': val
