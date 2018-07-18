@@ -38,6 +38,7 @@
       <li><a href="{{ route('users.index') }}">Manage Users</a></li>
   </ul>
 </li>
+            <hr>
             <li class="nav-label">Global Configuration</li>
             <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">Settings</span></a>
                 <ul aria-expanded="false" class="collapse">
