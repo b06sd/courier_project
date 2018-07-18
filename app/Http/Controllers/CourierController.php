@@ -84,11 +84,9 @@ class CourierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Courier $courier)
     {
-        return Courier::select(DB::raw('id, name, address, phone_number, email, shipping_service, description, consignee_id, received_by, pickup_date, dispatch_date, delivery_date, payment_mode, amount'))
-            ->where('id', '=', $id)
-            ->first();
+        return response()->json($courier);
     }
 
     /**
