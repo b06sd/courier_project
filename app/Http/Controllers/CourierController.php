@@ -141,7 +141,7 @@ class CourierController extends Controller
         ]);
 
         if($update){
-            flash('Operation successful')->success();
+            flash('Courier Updated')->success();
             return redirect()->route('courier.index');
 
         }
@@ -160,7 +160,7 @@ class CourierController extends Controller
     public function destroy(Courier $courier)
     {
         $courier->delete();
-        flash('Operation successful')->success();
+        flash('Courier Deleted')->success();
         return response ()->json ();
     }
 
