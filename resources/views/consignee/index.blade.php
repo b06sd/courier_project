@@ -100,7 +100,7 @@
 														{!! Form::text('phone_number', '', array('class' => 'form-control')) !!}
 													</div>
 													<div class="modal-footer">
-														{!! Form::submit('Update User', array('class' => 'btn btn-primary')) !!}
+														{!! Form::submit('Update Consignee', array('class' => 'btn btn-primary')) !!}
 													</div>
 													{!! Form::close() !!}
 												</div>

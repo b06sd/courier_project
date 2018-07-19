@@ -231,12 +231,15 @@
                 }
             });
         });
+
         $('#product').change(function(){
             var product = $('#product').val();
             if(product != ''){
+
               // var val = $(this).data('courier-id');
+
               $.ajax({
-            url: 'sales/'+product,
+            url: 'products/'+product,
             type: 'GET',
             beforeSend: function ()
             {
@@ -244,8 +247,10 @@
             },
             success: function(response) {
               console.log(response);
+
               $('#add_sales_form')
-              .find('[name="product_price"]').val(response.product_price).end();
+              .find('[name="product_price"]').val(response.price).end();
+
               // $("#courier_form").attr("action", "courier/"+response.id);
             },
             error: function(response) {
@@ -255,7 +260,9 @@
           });
 
             }
-            // else $('#client_detail').addClass('hidden');
+            else $('#add_sales_form')
+              .find('[name="product_price"]').val('').end();
           });
+
     </script>
 @endsection

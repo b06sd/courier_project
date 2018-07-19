@@ -108,7 +108,7 @@ class ConsigneeController extends Controller
         ]);
 
         if($update){
-            flash('Operation successful')->success();
+            flash('Consignee Updated')->success();
             return redirect()->route('consignee.index');
 
         }
@@ -127,7 +127,7 @@ class ConsigneeController extends Controller
     public function destroy(Consignee $consignee)
     {
         $consignee->delete();
-        flash('Operation successful')->success();
+        flash('Consignee Deleted')->success();
         return response ()->json ();
     }
 
