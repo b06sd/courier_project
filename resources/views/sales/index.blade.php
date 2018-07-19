@@ -102,7 +102,7 @@
 
                             <div class="form-group">
                                 {{ Form::label('product_id', 'Product Price') }}
-                                {!! Form::number('product_id', $value = '' , ['min' => '0' ,'class' => 'form-control', 'id' => 'product_price','readonly' => 'true']) !!}
+                                {!! Form::number('product_price', '' , ['min' => '0' ,'class' => 'form-control','readonly' => 'true']) !!}
                             </div>
 
                             <div class="form-group">
@@ -253,6 +253,38 @@
                 }
             });
         });
+
+        $('#product').change(function(){
+            var product = $('#product').val();
+            if(product != ''){
+
+              // var val = $(this).data('courier-id');
+
+              $.ajax({
+            url: 'products/'+product,
+            type: 'GET',
+            beforeSend: function ()
+            {
+              //alert(name);
+            },
+            success: function(response) {
+              console.log(response);
+
+              $('#add_sales_form')
+              .find('[name="product_price"]').val(response.price).end();
+
+              // $("#courier_form").attr("action", "courier/"+response.id);
+            },
+            error: function(response) {
+              console.log(response);
+              alert('Operation failed');
+            }
+          });
+              
+            }
+            else $('#add_sales_form')
+              .find('[name="product_price"]').val('').end();
+          });
 
     </script>
 @endsection
