@@ -48,7 +48,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="">Shipper</label>
-                        <select name="shipper" id="shipper" class="form-control">
+                        <select name="shipper" id="shipper" class="form-control" required="required">
                           <option value="">Select Client</option>
                           <option value="new">New</option>
                           @foreach ($courier as $client)
@@ -59,24 +59,24 @@
                       <div id="client_detail" class="hidden">
                         <div class="form-group">
                           <label for="">Shipper's Name</label>
-                          <input type="text" id="one" class="form-control" name="name" value="" readonly />
+                          <input type="text" id="one" class="form-control" name="name" value="" readonly required="required" />
                         </div>
                         <div class="form-group">
                           <label for="">Shipper's Address</label>
-                          <input type="text" id="two" class="form-control" name="address" value="" readonly />
+                          <input type="text" id="two" class="form-control" name="address" value="" readonly required="required" />
                         </div>
                         <div class="form-group">
                           <label for="">Shipper's Phone Number</label>
-                          <input type="text" id="three" class="form-control" name="phone_number" value="" readonly />
+                          <input type="text" id="three" class="form-control" name="phone_number" value="" readonly required="required" />
                         </div>
                         <div class="form-group">
                           <label for="">Shipper's Email</label>
-                          <input type="text" id="four" class="form-control" name="email" value="" readonly />
+                          <input type="text" id="four" class="form-control" name="email" value="" readonly required="required" />
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="">Shipping Service</label>
-                        <select name="shipping_service" id="" class="form-control">
+                        <select name="shipping_service" id="" class="form-control" required="required">
                           <option value="">Select a Shipping service</option>
                           <option value="Document" >Document</option>
                           <option value="Parcel" >Parcel</option>
@@ -84,11 +84,11 @@
                       </div>
                       <div class="form-group">
                         <label for="">Full Shipping Description</label>
-                        <textarea class="form-control" name="description" value="" rows="8"></textarea>
+                        <textarea class="form-control" name="description" value="" rows="8" required="required"></textarea>
                       </div>
                       <div class="form-group">
                         <label for="">Received By</label>
-                        <input type="text" class="form-control" name="received_by" value="" />
+                        <input type="text" class="form-control" name="received_by" value="" required="required" />
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -104,36 +104,36 @@
                       <div id="consignee_details" class="hidden">
                         <div class="form-group">
                           <label for="">Consignee's Name</label>
-                          <input type="text" class="form-control" name="cons_name" value="" readonly />
+                          <input type="text" class="form-control" name="cons_name" value="" readonly required="required" />
                         </div>
                         <div class="form-group">
                           <label for="">Consignee's Address</label>
-                          <input type="text" class="form-control" name="cons_address" value="" readonly />
+                          <input type="text" class="form-control" name="cons_address" value="" readonly required="required" />
                         </div>
                         <div class="form-group">
                           <label for="">Consignee's Phone Number</label>
-                          <input type="text" class="form-control" name="cons_phone" value="" readonly />
+                          <input type="text" class="form-control" name="cons_phone" value="" readonly required="required" />
                         </div>
                         <div class="form-group">
                           <label for="">Consignee's Email</label>
-                          <input type="email" class="form-control" name="cons_email" value="" readonly />
+                          <input type="email" class="form-control" name="cons_email" value="" readonly required="required" />
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="">Pickup Date</label>
-                        <input type="date" class="form-control" name="pickup_date" id="pickup_date" value="" />
+                        <input type="date" class="form-control" name="pickup_date" id="pickup_date" value="" required="required" />
                       </div>
                       <div class="form-group">
                         <label for="">Date Dispatched</label>
-                        <input type="date" class="form-control" name="dispatch_date" id="dispatch_date" value="" />
+                        <input type="date" class="form-control" name="dispatch_date" id="dispatch_date" value="" required="required" />
                       </div>
                       <div class="form-group">
                         <label for="">Date Delivered</label>
-                        <input type="date" class="form-control" name="delivery_date" id="delivery_date" value="" />
+                        <input type="date" class="form-control" name="delivery_date" id="delivery_date" value="" required="required" />
                       </div>
                       <div class="form-group">
                         <label for="">Mode of Payment</label>
-                        <select name="payment_mode" id="payment_mode" class="form-control">
+                        <select name="payment_mode" id="payment_mode" class="form-control" required="required">
                           <option value="">Select a Payment</option>
                           <option value="Credit" >Credit</option>
                           <option value="Cash" >Cash</option>
@@ -145,7 +145,7 @@
                           <div class="input-group-prepend">
                             <div class="input-group-text">&#8358;</div>
                           </div>
-                          <input type="number" class="form-control" id="inlineFormInputGroup" name="amount" value="" step="0.01" min="0">
+                          <input type="number" class="form-control" id="inlineFormInputGroup" name="amount" value="" step="0.01" min="0" required="required">
                         </div>
                       </div>
                       <div class="form-group">
@@ -175,31 +175,31 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                             {!! Form::label('Name edit', 'Name') !!}
-                            {!! Form::text('name', '', array('class' => 'form-control')) !!}
+                            {!! Form::text('name', '', array('class' => 'form-control', 'required' => 'required')) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('address edit', 'Address') !!}
-                            {!! Form::textarea('address', '', array('class' => 'form-control')) !!}
+                            {!! Form::textarea('address', '', array('class' => 'form-control', 'required' => 'required')) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('Phone Number edit', 'Phone Number') !!}
-                            {!! Form::text('phone_number', '', array('class' => 'form-control')) !!}
+                            {!! Form::text('phone_number', '', array('class' => 'form-control', 'required' => 'required')) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('email edit', 'Email') !!}
-                            {!! Form::email('email', '', array('class' => 'form-control')) !!}
+                            {!! Form::email('email', '', array('class' => 'form-control', 'required' => 'required')) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('shipping_service edit', 'Shipping Service') !!}
-                            {!! Form::select('shipping_service', ['D' => 'Document', 'P' => 'Parcel'], '', ['class' => 'form-control', 'id'=> 'shipping_service']) !!}
+                            {!! Form::select('shipping_service', ['Document' => 'Document', 'Parcel' => 'Parcel'], '', ['class' => 'form-control', 'id'=> 'shipping_service', 'required' => 'required']) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('desc edit', 'Description') !!}
-                            {!! Form::textarea('description', '', array('class' => 'form-control')) !!}
+                            {!! Form::textarea('description', '', array('class' => 'form-control', 'required' => 'required')) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('receiver edit', 'Received By') !!}
-                            {!! Form::text('received_by', '', array('class' => 'form-control')) !!}
+                            {!! Form::text('received_by', '', array('class' => 'form-control', 'required' => 'required')) !!}
                           </div>
                         </div>
                         <div class="col-sm-6">
@@ -214,23 +214,23 @@
                           </div>
                           <div class="form-group">
                             {!! Form::label('pickup date edit', 'Pickup Date') !!}
-                            {!! Form::date('pickup_date', '', array('class' => 'form-control')) !!}
+                            {!! Form::date('pickup_date', '', array('class' => 'form-control', 'required' => 'required')) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('dispatch date edit', 'Dispatch Date') !!}
-                            {!! Form::date('dispatch_date', '', array('class' => 'form-control')) !!}
+                            {!! Form::date('dispatch_date', '', array('class' => 'form-control', 'required' => 'required')) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('delivery date edit', 'Delivery Date') !!}
-                            {!! Form::date('delivery_date', '', array('class' => 'form-control')) !!}
+                            {!! Form::date('delivery_date', '', array('class' => 'form-control', 'required' => 'required')) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('', 'Payment Mode') !!}
-                            {!! Form::select('payment_mode', ['Ca' => 'Cash', 'Cr' => 'Credit'], '', ['class' => 'form-control', 'id' => 'payment_mode_edit']) !!}
+                            {!! Form::select('payment_mode', ['Cash' => 'Cash', 'Credit' => 'Credit'], '', ['class' => 'form-control', 'id' => 'payment_mode_edit', 'required' => 'required']) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('amount edit', 'Amount') !!}
-                            {!! Form::number('amount', '', array('class' => 'form-control', 'step' => '0.01', 'min' => '0')) !!}
+                            {!! Form::number('amount', '', array('class' => 'form-control', 'step' => '0.01', 'min' => '0', 'required' => 'required')) !!}
                           </div>
                         </div>
                         </div>
