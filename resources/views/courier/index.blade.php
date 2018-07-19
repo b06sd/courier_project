@@ -191,7 +191,7 @@
                           </div>
                           <div class="form-group">
                             {!! Form::label('shipping_service edit', 'Shipping Service') !!}
-                            {!! Form::select('shipping_service', ['D' => 'Document', 'P' => 'Parcel'], '', ['class' => 'form-control', 'id'=> 'shipping_service']) !!}
+                            {!! Form::select('shipping_service', ['Document' => 'Document', 'Parcel' => 'Parcel'], '', ['class' => 'form-control', 'id'=> 'shipping_service']) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('desc edit', 'Description') !!}
@@ -226,7 +226,7 @@
                           </div>
                           <div class="form-group">
                             {!! Form::label('', 'Payment Mode') !!}
-                            {!! Form::select('payment_mode', ['Ca' => 'Cash', 'Cr' => 'Credit'], '', ['class' => 'form-control', 'id' => 'payment_mode_edit']) !!}
+                            {!! Form::select('payment_mode', ['Cash' => 'Cash', 'Credit' => 'Credit'], '', ['class' => 'form-control', 'id' => 'payment_mode_edit']) !!}
                           </div>
                           <div class="form-group">
                             {!! Form::label('amount edit', 'Amount') !!}
