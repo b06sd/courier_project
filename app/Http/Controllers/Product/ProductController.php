@@ -69,7 +69,7 @@ class ProductController extends Controller
         return Datatables::of($products)
             ->addColumn('action', function ($user) {
                 if (Auth::user()->hasAnyPermission('Edit Product') && !Auth::user()->hasAnyPermission('Delete Product')){
-                    return '<a data-edit-product="'.$user->id.'" class="btn btn-xs btn-primary edit_product"><i 
+                    return '<a data-edit-product="'.$user->id.'" class="btn btn-xs btn-primary edit_product"><i
                     class="glyphicon glyphicon-edit"></i> Edit</a>';
                 }
                 if (Auth::user()->hasAnyPermission('Delete Product') && !Auth::user()->hasAnyPermission('Edit Product')){
