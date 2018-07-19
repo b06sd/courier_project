@@ -104,19 +104,19 @@
                       <div id="consignee_details" class="hidden">
                         <div class="form-group">
                           <label for="">Consignee's Name</label>
-                          <input type="text" class="form-control" name="cons_name" value="" />
+                          <input type="text" class="form-control" name="cons_name" value="" readonly />
                         </div>
                         <div class="form-group">
                           <label for="">Consignee's Address</label>
-                          <input type="text" class="form-control" name="cons_address" value="" />
+                          <input type="text" class="form-control" name="cons_address" value="" readonly />
                         </div>
                         <div class="form-group">
                           <label for="">Consignee's Phone Number</label>
-                          <input type="text" class="form-control" name="cons_phone" value="" />
+                          <input type="text" class="form-control" name="cons_phone" value="" readonly />
                         </div>
                         <div class="form-group">
                           <label for="">Consignee's Email</label>
-                          <input type="email" class="form-control" name="cons_email" value="" />
+                          <input type="email" class="form-control" name="cons_email" value="" readonly />
                         </div>
                       </div>
                       <div class="form-group">
@@ -316,6 +316,7 @@
               $('#client_detail').removeClass('hidden');
 
               // var val = $(this).data('courier-id');
+              if (shipper != 'new') {
 
               $.ajax({
             url: 'courier/'+shipper,
@@ -340,7 +341,7 @@
               alert('Operation failed');
             }
           });
-              
+              }
             }
             else $('#client_detail').addClass('hidden');
           });
