@@ -40,7 +40,7 @@
 </li>
             <hr>
             <li class="nav-label">Global Configuration</li>
-            <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">Settings</span></a>
+            <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-cog"></i><span class="hide-menu">Settings</span></a>
                 <ul aria-expanded="false" class="collapse">
                     <li><a href="{{ route('permissions.index') }}">Manage SMS</a></li>
                     <li><a href="{{ route('roles.index') }}">Manage Roles</a></li>

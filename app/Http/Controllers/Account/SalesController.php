@@ -93,8 +93,11 @@ public function allSales(){
   $sales = Sale::join('consignees', 'consignee_id', '=', 'consignees.id')
   ->join('products', 'product_id', '=', 'products.id')
   ->join('couriers', 'courier_id', '=', 'couriers.id')
-  ->select(DB::raw('consignees.name as consignee_name, products.name as product_name, products.price as product_price, couriers.name as courier_name, products.price * quantity as total, quantity'))
-  ->get();
+  ->select(DB::raw(
+    'consignees.name as consignee_name,
+  products.name as product_name, products.price as product_price,
+  couriers.name as courier_name, products.price * quantity as total, quantity'
+  ))->get();
 
   return Datatables::of($sales)
   ->addColumn('action', function ($user) {

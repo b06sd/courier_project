@@ -30,7 +30,7 @@
                     <div class="card">
                         <div class="card-header">Customer Management</div>
                         <div class="card-body">
-                            <button class="btn btn-info btn-flat pull-right m-t-10" data-toggle="modal"
+                            <button class="btn btn-info btn-flat pull-right m-t-10" id="add-sales" data-toggle="modal"
                                     data-target="#sale-modal">Add Sales</button>
                             <div class="table-responsive m-t-40">
                                 <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="sales_table">
@@ -69,7 +69,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            {{ Form::open(array('url' => 'sales')) }}
+                            {{ Form::open(array('url' => 'sales', 'id' => 'add_sales_form')) }}
                             <div class="form-group">
                                 {{ Form::label('consignee_id', 'Consignee Id') }}
                                 <select name="consignee_id" id="consignee" class="form-control">
@@ -101,13 +101,8 @@
                             </div>
 
                             <div class="form-group">
-                                {{ Form::label('product_id', 'Product Id') }}
-                                <select name="product_id" id="product" class="form-control">
-                                  <option value="">Select Product</option>
-                                  @foreach ($products as $product)
-                                  <option value="{{$product->price}}">{{$product->price}}</option>
-                                  @endforeach
-                                </select>
+                                {{ Form::label('product_id', 'Product Price') }}
+                                {!! Form::number('product_id', $value = '' , ['min' => '0' ,'class' => 'form-control', 'id' => 'product_price','readonly' => 'true']) !!}
                             </div>
 
                             <div class="form-group">
@@ -258,5 +253,6 @@
                 }
             });
         });
+
     </script>
 @endsection
