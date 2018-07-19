@@ -59,19 +59,19 @@
                       <div id="client_detail" class="hidden">
                         <div class="form-group">
                           <label for="">Shipper's Name</label>
-                          <input type="text" class="form-control" name="name" value="" />
+                          <input type="text" id="one" class="form-control" name="name" value="" readonly />
                         </div>
                         <div class="form-group">
                           <label for="">Shipper's Address</label>
-                          <input type="text" class="form-control" name="address" value="" />
+                          <input type="text" id="two" class="form-control" name="address" value="" readonly />
                         </div>
                         <div class="form-group">
                           <label for="">Shipper's Phone Number</label>
-                          <input type="text" class="form-control" name="phone_number" value="" />
+                          <input type="text" id="three" class="form-control" name="phone_number" value="" readonly />
                         </div>
                         <div class="form-group">
                           <label for="">Shipper's Email</label>
-                          <input type="text" class="form-control" name="email" value="" />
+                          <input type="text" id="four" class="form-control" name="email" value="" readonly />
                         </div>
                       </div>
                       <div class="form-group">
@@ -318,13 +318,20 @@
               // var val = $(this).data('courier-id');
               if (shipper != 'new') {
 
+                document.getElementById("one").setAttribute("readonly", true);
+                document.getElementById("two").setAttribute("readonly", true);
+                document.getElementById("three").setAttribute("readonly", true);
+                document.getElementById("four").setAttribute("readonly", true);
+
               $.ajax({
-            url: 'courier/'+shipper,
-            type: 'GET',
-            beforeSend: function ()
+              url: 'courier/'+shipper,
+              type: 'GET',
+              beforeSend: function ()
             {
               //alert(name);
             },
+
+
             success: function(response) {
               console.log(response);
 
@@ -341,6 +348,21 @@
               alert('Operation failed');
             }
           });
+              }
+              else { 
+
+                document.getElementById("one").removeAttribute("readonly");
+                document.getElementById("two").removeAttribute("readonly");
+                document.getElementById("three").removeAttribute("readonly");
+                document.getElementById("four").removeAttribute("readonly");
+
+                $('#courier_form') 
+
+              .find('[name="name"]').val('').end()
+              .find('[name="address"]').val('').end()
+              .find('[name="phone_number"]').val('').end()
+              .find('[name="email"]').val('').end();
+
               }
             }
             else $('#client_detail').addClass('hidden');
