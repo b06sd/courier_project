@@ -13,8 +13,11 @@ class CreateCourierProductTable extends Migration
      */
     public function up()
     {
-        Schema::table('courier_product', function (Blueprint $table) {
-            //
+        Schema::create('courier_product', function (Blueprint $table) {
+            $table->integer('courier_id');
+            $table->integer('product_id');
+            $table->decimal('price', 10, 2);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class CreateCourierProductTable extends Migration
      */
     public function down()
     {
-        Schema::table('courier_product', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('courier_product');
     }
 }

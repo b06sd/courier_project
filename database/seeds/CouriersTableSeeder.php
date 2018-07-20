@@ -11,13 +11,13 @@ class CouriersTableSeeder extends Seeder
      */
     public function run()
     {
-    	$shipping_service = array('Document', 'Parcel');
+    	$product = \App\Product::all();
 		$payment_mode = array('Credit', 'Cash');
 		$random = rand(0,1);
 
         factory(App\Courier::class, 10)->create([
 
-        	'shipping_service' => $shipping_service[$random],
+        	'product_id' => $product[$random],
         	'payment_mode' => $payment_mode[$random]
 
         ]);
