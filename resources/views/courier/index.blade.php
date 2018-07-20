@@ -75,12 +75,24 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="">Shipping Service</label>
-                        <select name="shipping_service" id="" class="form-control" required="required">
-                          <option value="">Select a Shipping service</option>
-                          <option value="Document" >Document</option>
-                          <option value="Parcel" >Parcel</option>
+                        <label for="">Product</label>
+                        <select name="product" id="product" class="form-control" required="required">
+                          <option value="">Select Product</option>
+                          @foreach ($products as $product)
+                          <option value="{{$product->id}}">{{$product->name}}</option>
+                          @endforeach
                         </select>
+                      </div>
+                      <div id="product_price" class="hidden">
+                        <div class="form-group">
+                          <label for="">Price</label>
+                          <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">&#8358;</div>
+                          </div>
+                          <input type="number" class="form-control" id="inlineFormInputGroup" name="price" value="" step="0.01" min="0" required="required" readonly>
+                        </div>
+                        </div>
                       </div>
                       <div class="form-group">
                         <label for="">Full Shipping Description</label>
@@ -399,6 +411,42 @@
               
             }
             else $('#consignee_details').addClass('hidden');
+          });
+
+          $('#product').change(function(){
+            var product = $('#product').val();
+            if(product != ''){
+              $('#product_price').removeClass('hidden');
+             
+                $.ajax({
+            url: 'products/'+product,
+            type: 'GET',
+            beforeSend: function ()
+            {
+              //alert(name);
+            },
+            success: function(response) {
+              console.log(response);
+
+              $('#courier_form')
+              .find('[name="price"]').val(response.price).end();
+
+              // $("#courier_form").attr("action", "courier/"+response.id);
+            },
+            error: function(response) {
+              console.log(response);
+              alert('Operation failed');
+            }
+          });
+              
+            }
+            else {
+              $('#product_price').addClass('hidden');
+
+              $('#courier_form')
+              .find('[name="price"]').val('').end();
+
+            }
           });
 
           $(document).on('click', '.del_courier', function(ev) {

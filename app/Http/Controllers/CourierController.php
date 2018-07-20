@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Courier;
 use App\Consignee;
+use App\Product;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -19,7 +20,8 @@ class CourierController extends Controller
     {
         $courier = Courier::all();
         $consignees = Consignee::all(['id', 'name']);
-        return view('courier.index', compact('courier', 'consignees'));
+        $products = Product::all(['id', 'name', 'price']);
+        return view('courier.index', compact('courier', 'consignees', 'products'));
     }
 
     /**
