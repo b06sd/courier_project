@@ -19,7 +19,7 @@ class CreateCouriersTable extends Migration
             $table->text('address');
             $table->string('phone_number');
             $table->string('email');
-            $table->unsignedInteger('product_id');
+//            $table->unsignedInteger('product_id');
             $table->text('description');
             $table->string('received_by');
             $table->integer('consignee_id')->unsigned();

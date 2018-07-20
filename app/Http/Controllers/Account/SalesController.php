@@ -95,9 +95,9 @@ public function allSales(){
   $sales = Courier::join('consignees', 'consignee_id', '=', 'consignees.id')
   ->join('products', 'product_id', '=', 'products.id')
   ->select(DB::raw(
-    'consignees.name as consignee_name,
-  products.name as product_name, products.price as product_price,
-  couriers.name as courier_name '
+    '   consignees.name as consignee_name,
+        products.name as product_name, products.price as product_price,
+        couriers.name as courier_name '
   ))->get();
 
   return Datatables::of($sales)
