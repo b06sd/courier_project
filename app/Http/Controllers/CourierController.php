@@ -20,7 +20,8 @@ class CourierController extends Controller
     {
         $courier = Courier::all();
         $consignees = Consignee::all(['id', 'name']);
-        return view('courier.index', compact('courier', 'consignees'));
+        $products = Product::all(['id', 'name', 'price']);
+        return view('courier.index', compact('courier', 'consignees', 'products'));
     }
 
     /**
