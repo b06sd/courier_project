@@ -1,8 +1,6 @@
 @extends('layouts.template')
-
 @section('styles')
 @endsection
-
 @section('content')
     <!-- Bread crumb -->
     <div class="row page-titles">
@@ -55,7 +53,6 @@
             </div>
         </div>
     </div>
-
     <!-- Add Product Modal Here -->
     <div id="sale-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true" style="display: none;">
@@ -79,7 +76,6 @@
                                   @endforeach
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 {{ Form::label('courier_id', 'Courier Id') }}
                                 <select name="courier_id" id="courier" class="form-control">
@@ -89,7 +85,6 @@
                                   @endforeach
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 {{ Form::label('product_id', 'Product Id') }}
                                 <select name="product_id" id="product" class="form-control">
@@ -99,17 +94,14 @@
                                   @endforeach
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 {{ Form::label('product_id', 'Product Price') }}
                                 {!! Form::number('product_price', '' , ['min' => '0' ,'class' => 'form-control','readonly' => 'true']) !!}
                             </div>
-
                             <div class="form-group">
                                 {{ Form::label('quantity', 'Quantity') }}
                                 {!! Form::number('quantity', $value = '' , ['min' => '0' ,'class' => 'form-control', 'id' => 'number_count','required']) !!}
                             </div>
-
                             {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
                             {{ Form::close() }}
                         </div>
@@ -119,7 +111,6 @@
         </div>
     </div>
     <!-- End Permission Modal -->
-
     <!-- Edit Product Modal Here -->
     <div id="sale-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
@@ -139,17 +130,14 @@
                                 {{ Form::label('consignee_id', 'Consignee Id') }}
                                 {{ Form::text('consignee_id', '', array('class' => 'form-control')) }}
                             </div>
-
                             <div class="form-group">
                                 {{ Form::label('courier_id', 'Courier Id') }}
                                 {{ Form::text('courier_id', '', array('class' => 'form-control')) }}
                             </div>
-
                             <div class="form-group">
                                 {{ Form::label('product_id', 'Product Id') }}
                                 {{ Form::text('product_id', '', array('class' => 'form-control')) }}
                             </div>
-
                             <div class="form-group">
                                 {{ Form::label('quantity', 'Quantity') }}
                                 {{ Form::text('quantity', '', array('class' => 'form-control')) }}
@@ -163,7 +151,6 @@
         </div>
     </div>
 @endsection
-
 @section('scripts')
     <script src="{{ asset('temp/js/lib/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js') }}"></script>
@@ -193,7 +180,6 @@
                 searchDelay: 350,
                 "lengthMenu": [[10, 25, 50, 100, 200, 500], [10, 25, 50, 100, 200, 500]],
                 aoColumns: [
-
                     { data: 'consignee_name', name:'consignee_name' },
                     { data: 'courier_name', name:'courier_name' },
                     { data: 'product_name', name: 'product_name' },
@@ -203,26 +189,20 @@
                     { data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
-
             $(document).on('click', '.edit_sale', function(ev) {
                 ev.preventDefault();
                 var val = $(this).data('edit-sale');
-
                 $.ajax({
                     url: 'sales/'+val,
                     type: 'GET',
                     beforeSend: function ()
                     {
-
                     },
                     success: function(response) {
                         console.log(response);
-
                         $('#sale_form')
                                 .find('[name="name"]').val(response.name).end()
                                 .find('[name="price"]').val(response.price).end();
-
-
                         $("#sale_form").attr("action", "users/"+response.id);
                         $("#sale-modal-edit").modal({backdrop: 'static', keyboard: true});
                     },
@@ -232,11 +212,9 @@
                     }
                 });
             });
-
             $(document).on('click', '.del_sale', function(ev) {
                 ev.preventDefault();
                 var val = $(this).data('delete-sale');
-
                 var r = confirm("Do you want to delete this sales");
                 if (r == true) {
                     $.ajax({
@@ -280,7 +258,7 @@
               alert('Operation failed');
             }
           });
-              
+
             }
             else $('#add_sales_form')
               .find('[name="product_price"]').val('').end();
