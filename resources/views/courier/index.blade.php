@@ -74,14 +74,14 @@
                           <input type="text" id="four" class="form-control" name="email" value="" readonly required="required" />
                         </div>
                       </div>
-                      <div class="form-group">
+                      {{-- <div class="form-group">
                         <label for="">Shipping Service</label>
                         <select name="shipping_service" id="" class="form-control" required="required">
                           <option value="">Select a Shipping service</option>
                           <option value="Document" >Document</option>
                           <option value="Parcel" >Parcel</option>
                         </select>
-                      </div>
+                      </div> --}}
                       <div class="form-group">
                         <label for="">Full Shipping Description</label>
                         <textarea class="form-control" name="description" value="" rows="8" required="required"></textarea>
