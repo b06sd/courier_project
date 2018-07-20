@@ -14,12 +14,7 @@ class CreateCourierProductTable extends Migration
     public function up()
     {
         Schema::table('courier_product', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('courier_id');
-            $table->integer('product_id');
-            $table->decimal('amount', 10, 2);
-
-
+            //
         });
     }
 
