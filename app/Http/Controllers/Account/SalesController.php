@@ -33,13 +33,20 @@ class SalesController extends Controller
       'quantity' => 'required'
     ]);
 
-    $sale = new Sale;
+    $sale = Sale::create([
+    'consignee_id' => $request->consignee_id,
+    'courier_id' => $request->courier_id,
+    'product_id' => $request->product_id,
+    'quantity' => $request->quantity
+  ]);
 
-    $sale->consignee_id = request('consignee_id');
-    $sale->courier_id = request('courier_id');
-    $sale->product_id = request('product_id');
-    $sale->quantity = request('quantity');
-
+    if($sale){
+        flash('Operation successful')->success();
+        return redirect()->route('sales.index');
+    }else{
+        flash('Operation failed')->error()->important();
+        return redirect()->route('sales.index');
+    }
   }
 
   public function show(Sale $sale)

@@ -28,8 +28,6 @@
                     <div class="card">
                         <div class="card-header">Customer Management</div>
                         <div class="card-body">
-                            <button class="btn btn-info btn-flat pull-right m-t-10" id="add-sales" data-toggle="modal"
-                                    data-target="#sale-modal">Add Sales</button>
                             <div class="table-responsive m-t-40">
                                 <table class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%" id="sales_table">
                                     <thead>
@@ -68,7 +66,7 @@
                         <div class="col-md-12">
                             {{ Form::open(array('url' => 'sales', 'id' => 'add_sales_form')) }}
                             <div class="form-group">
-                                {{ Form::label('consignee_id', 'Consignee Id') }}
+                                {{ Form::label('consignee_id', 'Customer') }}
                                 <select name="consignee_id" id="consignee" class="form-control">
                                   <option value="">Select Consignee</option>
                                   @foreach ($consignees as $consignee)
@@ -77,7 +75,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                {{ Form::label('courier_id', 'Courier Id') }}
+                                {{ Form::label('courier_id', 'Courier') }}
                                 <select name="courier_id" id="courier" class="form-control">
                                   <option value="">Select Courier</option>
                                   @foreach ($couriers as $courier)
@@ -86,7 +84,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                {{ Form::label('product_id', 'Product Id') }}
+                                {{ Form::label('product_id', 'Product') }}
                                 <select name="product_id" id="product" class="form-control">
                                   <option value="">Select Product</option>
                                   @foreach ($products as $product)
@@ -112,7 +110,7 @@
     </div>
     <!-- End Permission Modal -->
     <!-- Edit Product Modal Here -->
-    <div id="sale-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <!--  <div id="sale-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -149,7 +147,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 @endsection
 @section('scripts')
     <script src="{{ asset('temp/js/lib/datatables/datatables.min.js') }}"></script>
