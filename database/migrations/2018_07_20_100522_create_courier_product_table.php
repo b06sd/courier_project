@@ -14,8 +14,9 @@ class CreateCourierProductTable extends Migration
     public function up()
     {
         Schema::create('courier_product', function (Blueprint $table) {
-            $table->integer('courier_id');
-            $table->integer('product_id');
+            $table->unsignedInteger('courier_id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('quantity');
             $table->decimal('price', 10, 2);
             $table->timestamps();
         });

@@ -47,7 +47,7 @@ class CourierController extends Controller
             'address' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email',
-            'shipping_service' => 'required',
+            'product_id' => 'required',
             'description' => 'required',
             'received_by' => 'required',
             'pickup_date' => 'required',
@@ -63,7 +63,7 @@ class CourierController extends Controller
         $courier->address = request('address');
         $courier->phone_number = request('phone_number');
         $courier->email = request('email');
-        $courier->shipping_service = request('shipping_service');
+        $courier->product_id = request('product_id');
         $courier->description = request('description');
         $courier->consignee_id = request('consignee');
         $courier->received_by = request('received_by');
@@ -116,7 +116,7 @@ class CourierController extends Controller
             'address' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email',
-            'shipping_service' => 'required',
+            'product_id' => 'required',
             'description' => 'required',
             'received_by' => 'required',
             'pickup_date' => 'required',
@@ -131,7 +131,7 @@ class CourierController extends Controller
             'address' => $request->address,
             'phone_number' => $request->phone_number,
             'email' => $request->email,
-            'shipping_service' => $request->shipping_service,
+            'product_id' => $request->product_id,
             'description' => $request->description,
             'consignee_id' => $request->consignee,
             'received_by' => $request->received_by,

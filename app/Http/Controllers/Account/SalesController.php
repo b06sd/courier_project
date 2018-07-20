@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Account;
-use App\Sale;
+//use App\Sale;
 use App\Courier;
 use App\Consignee;
 use App\Product;
@@ -19,9 +19,9 @@ class SalesController extends Controller
     $couriers = Courier::all(['id', 'name']);
     $consignees = Consignee::all(['id', 'name']);
     $products = Product::all(['id', 'name', 'price']);
-    $sales = Sale::all(['id', 'quantity']);
+//    $sales = Sale::all(['id', 'quantity']);
 
-    return view('sales.index', compact('couriers', 'consignees', 'products', 'sales'));
+    return view('sales.index', compact('couriers', 'consignees', 'products'));
   }
 
   public function store(Request $request)
@@ -92,18 +92,12 @@ public function destroy(Sale $sale)
 
 public function allSales(){
 
-  // Will look at you later
-  // $sales = Sale::with('products')
-  //         ->select(DB::raw('sales.*, products.name as product_name'))
-  //         ->get();
-
-  $sales = Sale::join('consignees', 'consignee_id', '=', 'consignees.id')
+  $sales = Courier::join('consignees', 'consignee_id', '=', 'consignees.id')
   ->join('products', 'product_id', '=', 'products.id')
-  ->join('couriers', 'courier_id', '=', 'couriers.id')
   ->select(DB::raw(
     'consignees.name as consignee_name,
   products.name as product_name, products.price as product_price,
-  couriers.name as courier_name, products.price * quantity as total, quantity'
+  couriers.name as courier_name '
   ))->get();
 
   return Datatables::of($sales)
