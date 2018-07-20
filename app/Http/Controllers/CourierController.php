@@ -181,15 +181,5 @@ class CourierController extends Controller
                 glyphicon-edit"></i> Delete</a>';
             })
         ->make(true);
-
-        // return Datatables::of($couriers)
-        //     ->addColumn('action', function ($courier) {
-
-        //         return '<a data-edit-courier="'.$courier->id.'" class="btn btn-flat btn-info 
-        //         edit_courier"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
-        //         '<a  data-delete-courier="'.$consignee->id.'"  class="btn btn-flat btn-danger  del_courier"><i class="glyphicon 
-        //         glyphicon-edit"></i> Delete</a>';
-        //     })
-        //     ->make(true);
     }
 }

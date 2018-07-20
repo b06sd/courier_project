@@ -30,7 +30,7 @@
 					<div class="card">
 						<div class="card-header">Consignee Management</div>
 						<div class="card-body">
-							<button class="btn btn-outline-info btn-flat pull-right m-t-10" data-toggle="modal"
+							<button class="btn btn-info btn-flat pull-right m-t-10" data-toggle="modal"
 							data-target="#add-consignee">Add Consignee</button>
 							<br>
 							<form method="post" action="/consignee">
@@ -62,7 +62,7 @@
 												</div>
 											</div>
 											<div class="modal-footer">
-												<button type="submit" class="btn btn-outline-primary">Submit</button>
+												<button type="submit" class="btn btn-primary">Submit</button>
 											</div>
 										</div>
 									</div>

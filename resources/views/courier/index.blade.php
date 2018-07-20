@@ -30,7 +30,7 @@
           <div class="card">
             <div class="card-header">Courier Management</div>
             <div class="card-body">
-              <button class="btn btn-outline-info btn-flat pull-right m-t-10" data-toggle="modal"
+              <button class="btn btn-info btn-flat pull-right m-t-10" data-toggle="modal"
               data-target="#add-courier">Add Courier</button>
               <br>
               <form method="post" action="/courier" id="courier_form">
@@ -264,7 +264,6 @@
                     <th scope="col">Dispatch Date</th>
                     <th scope="col">Delivery Date</th>
                     <th scope="col">Pickup Date</th>
-                    <th scope="col">Amount</th>
                     <th scope="col">Action</th>
                   </tr>
                   </thead>
@@ -289,187 +288,185 @@
 <script src="{{ asset('temp/js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js') }}"></script>
 <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('temp/js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js') }}"></script>
-{{--    <script src="{{ asset('temp/js/lib/datatables/datatables-init.js }}"></script>--}}
 <script>
 
-          $(document).ready(function () {
-            var dataTable = $('#courier_table').DataTable({
-              dom: 'Bfrtip',
-              buttons: [
-              'copy', 'csv', 'excel', 'pdf', 'print'
-              ],
-              "processing": true,
-              "serverSide": true,
-              "language": {
-                "processing": "Processing Request"
-              },
-              "ajax":{
-                            url :"{{ route('allCouriers') }}", // json datasource
-                            type: "get"
-                        },
-                        searchDelay: 350,
-                        "lengthMenu": [[10, 25, 50, 100, 200, 500], [10, 25, 50, 100, 200, 500]],
-                        aoColumns: [
-                        { data: 'consignee.name', name:'consignee.name' },
-                        { data: 'name', name: 'name' },
-                        { data: 'dispatch_date', name: 'dispatch_date' },
-                        { data: 'delivery_date', name: 'delivery_date' },
-                        { data: 'pickup_date', name: 'pickup_date' },
-                        { data: 'amount', name: 'amount' },
-                        { data: 'action', name: 'action', orderable: false, searchable: false}
-                        ]
-                    });
-          })
-
-          $('#shipper').change(function(){
-            var shipper = $('#shipper').val();
-            if(shipper != ''){
-
-              $('#client_detail').removeClass('hidden');
-
-              // var val = $(this).data('courier-id');
-              if (shipper != 'new') {
-
-                document.getElementById("one").setAttribute("readonly", true);
-                document.getElementById("two").setAttribute("readonly", true);
-                document.getElementById("three").setAttribute("readonly", true);
-                document.getElementById("four").setAttribute("readonly", true);
-
-              $.ajax({
-              url: 'courier/'+shipper,
-              type: 'GET',
-              beforeSend: function ()
-            {
-              //alert(name);
+    $(document).ready(function () {
+      var dataTable = $('#courier_table').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        "processing": true,
+        "serverSide": true,
+        "language": {
+          "processing": "Processing Request"
+        },
+        "ajax":{
+                url :"{{ route('allCouriers') }}", // json datasource
+                type: "get"
             },
+            searchDelay: 350,
+            "lengthMenu": [[10, 25, 50, 100, 200, 500], [10, 25, 50, 100, 200, 500]],
+            aoColumns: [
+            { data: 'consignee.name', name:'consignee.name' },
+            { data: 'name', name: 'name' },
+            { data: 'dispatch_date', name: 'dispatch_date' },
+            { data: 'delivery_date', name: 'delivery_date' },
+            { data: 'pickup_date', name: 'pickup_date' },
+            { data: 'action', name: 'action', orderable: false, searchable: false}
+            ]
+        });
+    })
+
+    $('#shipper').change(function(){
+      var shipper = $('#shipper').val();
+      if(shipper != ''){
+
+        $('#client_detail').removeClass('hidden');
+
+        // var val = $(this).data('courier-id');
+        if (shipper != 'new') {
+
+          document.getElementById("one").setAttribute("readonly", true);
+          document.getElementById("two").setAttribute("readonly", true);
+          document.getElementById("three").setAttribute("readonly", true);
+          document.getElementById("four").setAttribute("readonly", true);
+
+        $.ajax({
+        url: 'courier/'+shipper,
+        type: 'GET',
+        beforeSend: function ()
+      {
+        //alert(name);
+      },
 
 
-            success: function(response) {
-              console.log(response);
+      success: function(response) {
+        console.log(response);
 
-              $('#courier_form')
-              .find('[name="name"]').val(response.name).end()
-              .find('[name="address"]').val(response.address).end()
-              .find('[name="phone_number"]').val(response.phone_number).end()
-              .find('[name="email"]').val(response.email).end();
+        $('#courier_form')
+        .find('[name="name"]').val(response.name).end()
+        .find('[name="address"]').val(response.address).end()
+        .find('[name="phone_number"]').val(response.phone_number).end()
+        .find('[name="email"]').val(response.email).end();
 
-              // $("#courier_form").attr("action", "courier/"+response.id);
-            },
-            error: function(response) {
-              console.log(response);
-              alert('Operation failed');
-            }
-          });
-              }
-              else { 
+        // $("#courier_form").attr("action", "courier/"+response.id);
+      },
+      error: function(response) {
+        console.log(response);
+        alert('Operation failed');
+      }
+    });
+        }
+        else {
 
-                document.getElementById("one").removeAttribute("readonly");
-                document.getElementById("two").removeAttribute("readonly");
-                document.getElementById("three").removeAttribute("readonly");
-                document.getElementById("four").removeAttribute("readonly");
+          document.getElementById("one").removeAttribute("readonly");
+          document.getElementById("two").removeAttribute("readonly");
+          document.getElementById("three").removeAttribute("readonly");
+          document.getElementById("four").removeAttribute("readonly");
 
-                $('#courier_form') 
+          $('#courier_form')
 
-              .find('[name="name"]').val('').end()
-              .find('[name="address"]').val('').end()
-              .find('[name="phone_number"]').val('').end()
-              .find('[name="email"]').val('').end();
+        .find('[name="name"]').val('').end()
+        .find('[name="address"]').val('').end()
+        .find('[name="phone_number"]').val('').end()
+        .find('[name="email"]').val('').end();
 
-              }
-            }
-            else $('#client_detail').addClass('hidden');
-          });
+        }
+      }
+      else $('#client_detail').addClass('hidden');
+    });
 
-          $('#consignee').change(function(){
-            var consignee = $('#consignee').val();
-            if(consignee != ''){
-              $('#consignee_details').removeClass('hidden');
-             
-                $.ajax({
-            url: 'consignee/'+consignee,
-            type: 'GET',
-            beforeSend: function ()
-            {
-              //alert(name);
-            },
-            success: function(response) {
-              console.log(response);
+    $('#consignee').change(function(){
+      var consignee = $('#consignee').val();
+      if(consignee != ''){
+        $('#consignee_details').removeClass('hidden');
 
-              $('#courier_form')
-              .find('[name="cons_name"]').val(response.name).end()
-              .find('[name="cons_address"]').val(response.address).end()
-              .find('[name="cons_phone"]').val(response.phone_number).end()
-              .find('[name="cons_email"]').val(response.email).end();
+          $.ajax({
+      url: 'consignee/'+consignee,
+      type: 'GET',
+      beforeSend: function ()
+      {
+        //alert(name);
+      },
+      success: function(response) {
+        console.log(response);
 
-              // $("#courier_form").attr("action", "courier/"+response.id);
-            },
-            error: function(response) {
-              console.log(response);
-              alert('Operation failed');
-            }
-          });
-              
-            }
-            else $('#consignee_details').addClass('hidden');
-          });
+        $('#courier_form')
+        .find('[name="cons_name"]').val(response.name).end()
+        .find('[name="cons_address"]').val(response.address).end()
+        .find('[name="cons_phone"]').val(response.phone_number).end()
+        .find('[name="cons_email"]').val(response.email).end();
 
-          $('#product').change(function(){
-            var product = $('#product').val();
-            if(product != ''){
-              $('#product_price').removeClass('hidden');
-             
-                $.ajax({
-            url: 'products/'+product,
-            type: 'GET',
-            beforeSend: function ()
-            {
-              //alert(name);
-            },
-            success: function(response) {
-              console.log(response);
+        // $("#courier_form").attr("action", "courier/"+response.id);
+      },
+      error: function(response) {
+        console.log(response);
+        alert('Operation failed');
+      }
+    });
 
-              $('#courier_form')
-              .find('[name="price"]').val(response.price).end();
+      }
+      else $('#consignee_details').addClass('hidden');
+    });
 
-              // $("#courier_form").attr("action", "courier/"+response.id);
-            },
-            error: function(response) {
-              console.log(response);
-              alert('Operation failed');
-            }
-          });
-              
-            }
-            else {
-              $('#product_price').addClass('hidden');
+    $('#product').change(function(){
+      var product = $('#product').val();
+      if(product != ''){
+        $('#product_price').removeClass('hidden');
 
-              $('#courier_form')
-              .find('[name="price"]').val('').end();
+          $.ajax({
+      url: 'products/'+product,
+      type: 'GET',
+      beforeSend: function ()
+      {
+        //alert(name);
+      },
+      success: function(response) {
+        console.log(response);
 
-            }
-          });
+        $('#courier_form')
+        .find('[name="price"]').val(response.price).end();
 
-          $(document).on('click', '.del_courier', function(ev) {
-                          ev.preventDefault();
-                          var val = $(this).data('delete-courier');
+        // $("#courier_form").attr("action", "courier/"+response.id);
+      },
+      error: function(response) {
+        console.log(response);
+        alert('Operation failed');
+      }
+    });
 
-                          var r = confirm("Do you want to delete this consignee");
-                          if (r == true) {
-                              $.ajax({
-                                  type: 'post',
-                                  url: "courier/"+val,
-                                  data: {
-                                      '_method': 'DELETE',
-                                      'id': val
-                                  },
-                                  success: function(data) {
-                                      window.location.href = "{{ route('courier.index') }}";
-                                  }
-                              });
-                          }
-                      });
+      }
+      else {
+        $('#product_price').addClass('hidden');
 
-          $(document).on('click', '.edit_courier', function(ev) {
+        $('#courier_form')
+        .find('[name="price"]').val('').end();
+
+      }
+    });
+
+    $(document).on('click', '.del_courier', function(ev) {
+        ev.preventDefault();
+        var val = $(this).data('delete-courier');
+
+        var r = confirm("Do you want to delete this consignee");
+        if (r == true) {
+            $.ajax({
+                type: 'post',
+                url: "courier/"+val,
+                data: {
+                    '_method': 'DELETE',
+                    'id': val
+                },
+                success: function(data) {
+                    window.location.href = "{{ route('courier.index') }}";
+                }
+            });
+        }
+    });
+
+    $(document).on('click', '.edit_courier', function(ev) {
             ev.preventDefault();
             var val = $(this).data('edit-courier');
 
@@ -525,7 +522,5 @@
               }
             });
           });
-
-
 </script>
 @endsection
