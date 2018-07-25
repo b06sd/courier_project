@@ -47,7 +47,7 @@ class CourierController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'bail|required|max:50',
+            'name' => 'bail|required|max:100',
             'address' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email',
@@ -63,11 +63,37 @@ class CourierController extends Controller
             'amount' => 'required'
         ]);
 
-        $courier = Courier::create($request->except(['product_id','quantity']));
+
+
+        $total_amount = 0;
+        foreach (array_unique($request->product_id) as $key => $product) {
+            //Fetch the price of each product from the products table
+            $getProductPrice = Product::select('price')->where('id', '=', $product)->first();
+            //Multiply the price of the product from the quantity entered by the user
+            $total_amount += $getProductPrice->price * $request->quantity[$key];
+        }
+
+        $request->amount = $total_amount;
+
+        $courier = Courier::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email,
+            'description' => $request->description,
+            'received_by' => $request->received_by,
+            'consignee_id' => $request->consignee_id,
+            'pickup_date' => $request->pickup_date,
+            'dispatch_date' => $request->dispatch_date,
+            'delivery_date' => $request->delivery_date,
+            'payment_mode' => $request->payment_mode,
+            'amount' => $request->amount
+        ]);
+
 
         if($request->product_id <> ''){
-            foreach (array_unique($request->product_id) as $key => $userRole) {
-                $courier->product()->attach($userRole, ['quantity' => $request->quantity[$key]]);
+            foreach (array_unique($request->product_id) as $key => $product) {
+                $courier->product()->attach($product, ['quantity' => $request->quantity[$key]]);
             }
         }
         flash('Operation successful')->success();
@@ -95,7 +121,6 @@ class CourierController extends Controller
     {
         $consignees = Consignee::pluck('name', 'id')->all();
         $prod = $courier->product()->get();
-//        return $courier;
         return view('courier.edit', compact('courier', 'consignees', 'prod'));
     }
 
@@ -144,14 +169,15 @@ class CourierController extends Controller
                 //Multiply the price of the product from the quantity entered by the user
                 $total_amount += $getProductPrice->price * $request->quantity[$key];
             }
+
             //Update the total courier price here
             $update = Courier::where('id', $courier->id)->update([
                 'amount'=> $total_amount
             ]);
-            if($update){
-                flash('Operation successful')->success();
-                return redirect()->route('courier.index');
-            }
+
+            flash('Operation successful')->success();
+            return redirect()->route('courier.index');
+
         }
         else{
             flash('Operation failed')->danger();

@@ -70,7 +70,7 @@
                                         <div class="m-t-20 p-20 col-md-6">
                                             <div class="form-group">
                                                 <label>Consignee</label>
-                                                <select name="consignee" class="form-control" required="required" id="consignee">
+                                                <select name="consignee_id" class="form-control" required="required" id="consignee">
                                                     <option value="">Select Consignee</option>
                                                     @foreach ($consignees as $consignee)
                                                         <option value="{{$consignee->id}}">{{$consignee->name}}</option>
@@ -133,7 +133,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="">Product</label>
-                                                <select name="product[]" id="product" class="form-control product" required="required">
+                                                <select name="product_id[]" id="product" class="form-control product" required="required">
                                                     <option value="">Select Product</option>
                                                     @foreach ($products as $product)
                                                         <option value="{{$product->id}}">{{$product->name}}</option>
@@ -238,11 +238,10 @@
                         document.getElementById("four").removeAttribute("readonly");
 
                         $('#courier_form')
-
-                                .find('[name="name"]').val('').end()
-                                .find('[name="address"]').val('').end()
-                                .find('[name="phone_number"]').val('').end()
-                                .find('[name="email"]').val('').end();
+                        .find('[name="name"]').val('').end()
+                        .find('[name="address"]').val('').end()
+                        .find('[name="phone_number"]').val('').end()
+                        .find('[name="email"]').val('').end();
 
                     }
                 }

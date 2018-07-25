@@ -12,7 +12,7 @@ class Courier extends Model
         'address',
         'phone_number',
         'email',
-        'product_id',
+        'consignee_id',
         'description',
         'received_by',
         'pickup_date',
@@ -35,34 +35,4 @@ class Courier extends Model
     {
         $this->attributes['amount'] = str_replace ([','], '' , $value);
     }
-
-//    public function setPickupDateAttribute($value)
-//    {
-//        $this->attributes['pickup_date'] = Carbon::createFromFormat('d/m/Y', $value)->toDateString();
-//    }
-
-//    public function getPickupDateAttribute($value)
-//    {
-//        return isset($value) ? Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y') : '';
-//    }
-
-//    public function setDispatchDateAttribute($value)
-//    {
-//        $this->attributes['dispatch_date'] = Carbon::createFromFormat('d/m/Y', $value)->toDateString();
-//    }
-
-//    public function getDispatchDateAttribute($value)
-//    {
-//        return isset($value) ? Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y') : '';
-//    }
-
-//    public function setDeliveryDateAttribute($value)
-//    {
-//        $this->attributes['delivery_date'] = Carbon::createFromFormat('d/m/Y', $value)->toDateString();
-//    }
-
-//    public function getDeliveryDateAttribute($value)
-//    {
-//        return isset($value) ? Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y') : '';
-//    }
 }

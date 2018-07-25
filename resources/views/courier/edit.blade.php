@@ -105,11 +105,12 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="">Mode of Payment</label>
-                                            <select name="payment_mode" id="payment_mode" class="form-control" required="required">
-                                                <option value="">Select a Payment</option>
-                                                <option value="Credit">Credit</option>
-                                                <option value="Cash">Cash</option>
-                                            </select>
+                                            {{--<select name="payment_mode" id="payment_mode" class="form-control" required="required">--}}
+                                                {{--<option value="">Select a Payment</option>--}}
+                                                {{--<option value="Credit">Credit</option>--}}
+                                                {{--<option value="Cash">Cash</option>--}}
+                                            {{--</select>--}}
+                                            {{ Form::select('payment_mode', ['Cash', 'Credit'], $courier->payment_mode, array( 'class' => 'form-control', 'id' => 'payment_mode')) }}
                                         </div>
                                     </div>
                                 </div>
@@ -241,12 +242,10 @@
                     console.log(response);
 
                     $('#courier_form')
-                            .find('[name="cons_name"]').val(response.name).end()
-                            .find('[name="cons_address"]').val(response.address).end()
-                            .find('[name="cons_phone"]').val(response.phone_number).end()
-                            .find('[name="cons_email"]').val(response.email).end();
-
-                    // $("#courier_form").attr("action", "courier/"+response.id);
+                        .find('[name="cons_name"]').val(response.name).end()
+                        .find('[name="cons_address"]').val(response.address).end()
+                        .find('[name="cons_phone"]').val(response.phone_number).end()
+                        .find('[name="cons_email"]').val(response.email).end();
                 },
                 error: function(response) {
                     console.log(response);
