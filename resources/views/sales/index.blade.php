@@ -34,7 +34,6 @@
                                         <tr>
                                             <th>Consignee Name</th>
                                             <th>Courier Name</th>
-                                            <th>Product Name</th>
                                             <th>Product Price</th>
                                             <th>Quantity</th>
                                             <th>Total</th>
@@ -52,62 +51,63 @@
         </div>
     </div>
     <!-- Add Product Modal Here -->
-    <div id="sale-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Create Sales
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            {{ Form::open(array('url' => 'sales', 'id' => 'add_sales_form')) }}
-                            <div class="form-group">
-                                {{ Form::label('consignee_id', 'Customer') }}
-                                <select name="consignee_id" id="consignee" class="form-control">
-                                  <option value="">Select Consignee</option>
-                                  @foreach ($consignees as $consignee)
-                                  <option value="{{$consignee->id}}">{{$consignee->name}}</option>
-                                  @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('courier_id', 'Courier') }}
-                                <select name="courier_id" id="courier" class="form-control">
-                                  <option value="">Select Courier</option>
-                                  @foreach ($couriers as $courier)
-                                  <option value="{{$courier->id}}">{{$courier->name}}</option>
-                                  @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('product_id', 'Product') }}
-                                <select name="product_id" id="product" class="form-control">
-                                  <option value="">Select Product</option>
-                                  @foreach ($products as $product)
-                                  <option value="{{$product->id}}">{{$product->name}}</option>
-                                  @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('product_id', 'Product Price') }}
-                                {!! Form::number('product_price', '' , ['min' => '0' ,'class' => 'form-control','readonly' => 'true']) !!}
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('quantity', 'Quantity') }}
-                                {!! Form::number('quantity', $value = '' , ['min' => '0' ,'class' => 'form-control', 'id' => 'number_count','required']) !!}
-                            </div>
-                            {{ Form::submit('Save', array('class' => 'btn btn-primary')) }}
-                            {{ Form::close() }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{--<div id="sale-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"--}}
+         {{--aria-hidden="true" style="display: none;">--}}
+        {{--<div class="modal-dialog">--}}
+            {{--<div class="modal-content">--}}
+                {{--<div class="modal-header">--}}
+                    {{--<h4 class="modal-title">Create Sales--}}
+                        {{--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>--}}
+                    {{--</h4>--}}
+                {{--</div>--}}
+                {{--<div class="modal-body">--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col-md-12">--}}
+                            {{--{{ Form::open(array('url' => 'sales', 'id' => 'add_sales_form')) }}--}}
+                            {{--<div class="form-group">--}}
+                                {{--{{ Form::label('consignee_id', 'Customer') }}--}}
+                                {{--<select name="consignee_id" id="consignee" class="form-control">--}}
+                                  {{--<option value="">Select Consignee</option>--}}
+                                  {{--@foreach ($consignees as $consignee)--}}
+                                  {{--<option value="{{$consignee->id}}">{{$consignee->name}}</option>--}}
+                                  {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--{{ Form::label('courier_id', 'Courier') }}--}}
+                                {{--<select name="courier_id" id="courier" class="form-control">--}}
+                                  {{--<option value="">Select Courier</option>--}}
+                                  {{--@foreach ($couriers as $courier)--}}
+                                  {{--<option value="{{$courier->id}}">{{$courier->name}}</option>--}}
+                                  {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--{{ Form::label('product_id', 'Product') }}--}}
+                                {{--<select name="product_id" id="product" class="form-control">--}}
+                                  {{--<option value="">Select Product</option>--}}
+                                  {{--@foreach ($products as $product)--}}
+                                  {{--<option value="{{$product->id}}">{{$product->name}}</option>--}}
+                                  {{--@endforeach--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--{{ Form::label('product_id', 'Product Price') }}--}}
+                                {{--{!! Form::number('product_price', '' , ['min' => '0' ,'class' => 'form-control','readonly' => 'true']) !!}--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--{{ Form::label('quantity', 'Quantity') }}--}}
+                                {{--{!! Form::number('quantity', $value = '' , ['min' => '0' ,'class' => 'form-control', 'id' => 'number_count','required']) !!}--}}
+                            {{--</div>--}}
+                            {{--{{ Form::submit('Save', array('class' => 'btn btn-primary')) }}--}}
+                            {{--{{ Form::close() }}--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+
     <!-- End Permission Modal -->
     <!-- Edit Product Modal Here -->
   <!--  <div id="sale-modal-edit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -121,27 +121,27 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            {{ Form::open(array('id' => 'product_form')) }}
-                            {{ method_field('PATCH') }}
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                {{ Form::label('consignee_id', 'Consignee Id') }}
-                                {{ Form::text('consignee_id', '', array('class' => 'form-control')) }}
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('courier_id', 'Courier Id') }}
-                                {{ Form::text('courier_id', '', array('class' => 'form-control')) }}
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('product_id', 'Product Id') }}
-                                {{ Form::text('product_id', '', array('class' => 'form-control')) }}
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('quantity', 'Quantity') }}
-                                {{ Form::text('quantity', '', array('class' => 'form-control')) }}
-                            </div>
-                            {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
-                            {{ Form::close() }}
+                            {{--{{ Form::open(array('id' => 'product_form')) }}--}}
+                            {{--{{ method_field('PATCH') }}--}}
+                            {{--{{ csrf_field() }}--}}
+                            {{--<div class="form-group">--}}
+                                {{--{{ Form::label('consignee_id', 'Consignee Id') }}--}}
+                                {{--{{ Form::text('consignee_id', '', array('class' => 'form-control')) }}--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--{{ Form::label('courier_id', 'Courier Id') }}--}}
+                                {{--{{ Form::text('courier_id', '', array('class' => 'form-control')) }}--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--{{ Form::label('product_id', 'Product Id') }}--}}
+                                {{--{{ Form::text('product_id', '', array('class' => 'form-control')) }}--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--{{ Form::label('quantity', 'Quantity') }}--}}
+                                {{--{{ Form::text('quantity', '', array('class' => 'form-control')) }}--}}
+                            {{--</div>--}}
+                            {{--{{ Form::submit('Update', array('class' => 'btn btn-primary')) }}--}}
+                            {{--{{ Form::close() }}--}}
                         </div>
                     </div>
                 </div>
@@ -180,7 +180,6 @@
                 aoColumns: [
                     { data: 'consignee_name', name:'consignee_name' },
                     { data: 'courier_name', name:'courier_name' },
-                    { data: 'product_name', name: 'product_name' },
                     { data: 'product_price', name: 'product_price' },
                     { data: 'quantity', name: 'quantity' },
                     { data: 'total', name: 'total' },

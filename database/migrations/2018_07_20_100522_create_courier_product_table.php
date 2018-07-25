@@ -17,7 +17,6 @@ class CreateCourierProductTable extends Migration
             $table->unsignedInteger('courier_id');
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('quantity');
-            $table->decimal('amount', 10, 2);
             $table->timestamps();
         });
     }

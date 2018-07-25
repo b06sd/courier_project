@@ -1345,6 +1345,13 @@ ul.list-style-none li a:hover {
 textarea {
   resize: none;
 }
+textarea.form-control {
+  height: 100px !important;
+  border-radius: 0;
+  box-shadow: none;
+  border-color: #e7e7e7;
+  font-family: 'Poppins', sans-serif;
+}
 .mailbox ul li .drop-title {
   font-weight: 500;
   padding: 11px 20px 15px;
@@ -4861,7 +4868,7 @@ footer p {
   margin-bottom: 20px;
 }
 .form-control {
-  height: 42px;
+  height: 42px !important;
   border-radius: 0;
   box-shadow: none;
   border-color: #e7e7e7;

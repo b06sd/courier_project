@@ -49,38 +49,38 @@ class SalesController extends Controller
     }
   }
 
-  public function show(Sale $sale)
-  {
-    return response()->json($sale);
-  }
+//  public function show(Sale $sale)
+//  {
+//    return response()->json($sale);
+//  }
 
 
-  public function update(Request $request, Sale $sale)
-  {
-    $this->validate($request, [
-      'consignee_id' => 'required',
-      'courier_id'=>'required',
-      'product_id' => 'required',
-      'quantity' => 'required'
-    ]);
-
-    $update = Sale::where('id', $sale->id)->update([
-      'consignee_id'=> $request->consignee_id,
-      'courier_id'=> $request->courier_id,
-      'product_id'=> $request->product_id,
-      'quantity'=> $request->quantity
-    ]);
-
-    if($update){
-      flash('Operation successful')->success();
-      return redirect()->route('sales.index');
-
-    }
-    else{
-      flash('Operation failed')->error();
-      return redirect()->route('sales.index');
-    }
-  }
+//  public function update(Request $request, Sale $sale)
+//  {
+//    $this->validate($request, [
+//      'consignee_id' => 'required',
+//      'courier_id'=>'required',
+//      'product_id' => 'required',
+//      'quantity' => 'required'
+//    ]);
+//
+//    $update = Sale::where('id', $sale->id)->update([
+//      'consignee_id'=> $request->consignee_id,
+//      'courier_id'=> $request->courier_id,
+//      'product_id'=> $request->product_id,
+//      'quantity'=> $request->quantity
+//    ]);
+//
+//    if($update){
+//      flash('Operation successful')->success();
+//      return redirect()->route('sales.index');
+//
+//    }
+//    else{
+//      flash('Operation failed')->error();
+//      return redirect()->route('sales.index');
+//    }
+//  }
 
 
 public function destroy(Sale $sale)
@@ -92,13 +92,22 @@ public function destroy(Sale $sale)
 
 public function allSales(){
 
-  $sales = Courier::join('consignees', 'consignee_id', '=', 'consignees.id')
-  ->join('products', 'product_id', '=', 'products.id')
-  ->select(DB::raw(
-    '   consignees.name as consignee_name,
-        products.name as product_name, products.price as product_price,
-        couriers.name as courier_name '
-  ))->get();
+//  $sales = Courier::join('consignees', 'consignee_id', '=', 'consignees.id')
+//  ->join('products', 'product_id', '=', 'products.id')
+//  ->select(DB::raw(
+//    '   consignees.name as consignee_name,
+//        products.name as product_name, products.price as product_price,
+//        couriers.name as courier_name '
+//  ))->get();
+
+    $sales = DB::table('courier_product')
+        ->join('couriers', 'courier_id', '=', 'couriers.id')
+//        ->join('consignees', 'consignee_id', '=', 'consignees.id')
+        ->select(DB::raw('couriers.name as courier_name, courier_product.amount as total_amount'))
+//        ->groupBy('courier_product.courier_id')
+        ->get();
+
+
 
   return Datatables::of($sales)
   ->addColumn('action', function ($user) {

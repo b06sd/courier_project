@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Courier;
 use App\Permission;
+use App\Product;
 use App\Role;
 use App\User;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
             $permissions = Permission::get();
             $getUsers = User::all();
 
+
             $users = [];
 
             foreach ($getUsers as $value){
@@ -38,6 +41,13 @@ class AppServiceProvider extends ServiceProvider
             $permissions = Permission::get();
 
             $view->with(array('permissions' => $permissions));
+        });
+
+        view()->composer('courier.edit', function($view) {
+            $couriers = Courier::pluck('name', 'id','address', 'phone_number')->all();
+            $products = Product::all();
+
+            $view->with(array('couriers' => $couriers, 'products' => $products));
         });
     }
 

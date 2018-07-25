@@ -25,12 +25,12 @@
                    <li><a href="{{ route('accounts.list')}}">Account List</a></li>
                </ul>
            </li>
-          <li><a href="{{ route('sales.index' )}}">Manage Sales</a></li>
+          <li><a href="{{ route('sales' )}}">Manage Sales</a></li>
           <li><a href="{{ route('products.index' )}}">Manage Products</a></li>
       </ul>
   </li>
   <hr/>
-  <li class="nav-label">PROFILE</li>
+  <li class="nav-label">USERS</li>
   <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu">User Management</span></a>
     <ul aria-expanded="false" class="collapse">
       <li><a href="{{ route('permissions.index') }}">Manage Permissions</a></li>
