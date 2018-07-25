@@ -200,9 +200,7 @@ class CourierController extends Controller
 
     public function allCouriers()
     {
-        $couriers =  Courier::with(['consignee' => function($query){
-            $query->orderBy('name', 'asc');
-        }])->get();
+        $couriers =  Courier::with('consignee:id,name')->orderByRaw('couriers.id DESC')->get();
 
         return Datatables::of($couriers)
         ->addColumn('action', function ($courier) {
@@ -216,7 +214,6 @@ class CourierController extends Controller
                 return '<a href="courier/'.$courier->id.'/edit" class="btn btn-flat btn-info edit_courier1"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
                 '<a href="'.$courier->id.'"  class="btn btn-flat btn-danger  del_courier1"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
             }
-//            return '<a href="courier/'.$courier->id.'/edit" class="btn btn-flat btn-info edit_courier1"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.'<a href="'.$courier->id.'"  class="btn btn-flat btn-danger  del_courier1"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
         })
         ->make(true);
     }

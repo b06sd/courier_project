@@ -169,11 +169,11 @@
             searchDelay: 350,
             "lengthMenu": [[10, 25, 50, 100, 200, 500], [10, 25, 50, 100, 200, 500]],
             aoColumns: [
-            { data: 'consignee.name', name:'consignee.name' },
-            { data: 'name', name: 'name' },
-            { data: 'dispatch_date', name: 'dispatch_date' },
-            { data: 'delivery_date', name: 'delivery_date' },
-            { data: 'pickup_date', name: 'pickup_date' },
+            { data: 'consignee.name', name:'consignee.name', orderable: false, searchable: false },
+            { data: 'name', name: 'name', orderable: false, searchable: false },
+            { data: 'dispatch_date', name: 'dispatch_date', orderable: false, searchable: false },
+            { data: 'delivery_date', name: 'delivery_date', orderable: false, searchable: false },
+            { data: 'pickup_date', name: 'pickup_date', orderable: false, searchable: false },
             { data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
