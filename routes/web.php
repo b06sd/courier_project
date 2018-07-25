@@ -33,13 +33,13 @@ Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
 
     // CRM Routes
     Route::resource('accounts', 'Account\AccountsController');
-    Route::get('/list', 'Account\AccountsController@list')->name('accounts.list');
+    Route::get('list', 'Account\AccountsController@list')->name('accounts.list');
 
     // Sales Person
-    Route::resource('sales', 'Account\SalesController');
-    Route::get('/allSales', 'Account\SalesController@allSales')->name('allSales');
+    Route::get('sales', 'CourierController@sales')->name('sales');
+    Route::get('allSales', 'CourierController@allSales')->name('allSales');
 
     //Product routes
     Route::resource('products', 'Product\ProductController');
-    Route::get('/allProducts', 'Product\ProductController@allProducts')->name('allProducts');
+    Route::get('allProducts', 'Product\ProductController@allProducts')->name('allProducts');
 });

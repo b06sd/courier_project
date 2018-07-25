@@ -11,15 +11,14 @@ class CouriersTableSeeder extends Seeder
      */
     public function run()
     {
-    	$shipping_service = array('Document', 'Parcel');
+        $consignee = \App\Consignee::pluck('id');
 		$payment_mode = array('Credit', 'Cash');
-		$random = rand(0,1);
 
         factory(App\Courier::class, 10)->create([
+        	'payment_mode' => $payment_mode[rand(0,1)]
+        ])->each(function ($u){
 
-        	'shipping_service' => $shipping_service[$random],
-        	'payment_mode' => $payment_mode[$random]
-
-        ]);
+            $u->product()->attach(\App\Product::all(), ['quantity' => rand(1,10)]);
+        });
     }
 }

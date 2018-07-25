@@ -19,7 +19,6 @@ class CreateCouriersTable extends Migration
             $table->text('address');
             $table->string('phone_number');
             $table->string('email');
-            $table->integer('product_id');
             $table->text('description');
             $table->string('received_by');
             $table->integer('consignee_id')->unsigned();
@@ -28,7 +27,7 @@ class CreateCouriersTable extends Migration
             $table->date('dispatch_date');
             $table->date('delivery_date');
             $table->string('payment_mode');
-            $table->decimal('amount', 10, 2);
+            $table->decimal('amount', 22, 2);
             $table->timestamps();
         });
     }

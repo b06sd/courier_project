@@ -12,11 +12,6 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        Product::create(
-            [
-                'name'=>'Weavon',
-                'price' => 10000
-            ]
-        );
+        factory(Product::class, 5)->create();
     }
 }

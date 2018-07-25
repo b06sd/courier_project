@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Courier;
 use App\Consignee;
 use App\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -31,7 +32,10 @@ class CourierController extends Controller
      */
     public function create()
     {
-        //
+        $couriers = Courier::all();
+        $consignees = Consignee::all(['id', 'name']);
+        $products = Product::all(['id', 'name', 'price']);
+        return view('courier.create', compact('couriers', 'consignees', 'products'));
     }
 
     /**
@@ -42,14 +46,16 @@ class CourierController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'name' => 'required|max:50',
+        $this->validate($request, [
+            'name' => 'bail|required|max:100',
             'address' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email',
-            'shipping_service' => 'required',
+            'product_id.*' => 'required',
+            'quantity.*' => 'required',
             'description' => 'required',
             'received_by' => 'required',
+            'consignee_id' => 'required',
             'pickup_date' => 'required',
             'dispatch_date' => 'required',
             'delivery_date' => 'required',
@@ -57,27 +63,41 @@ class CourierController extends Controller
             'amount' => 'required'
         ]);
 
-        $courier = new Courier;
 
-        $courier->name = request('name');
-        $courier->address = request('address');
-        $courier->phone_number = request('phone_number');
-        $courier->email = request('email');
-        $courier->shipping_service = request('shipping_service');
-        $courier->description = request('description');
-        $courier->consignee_id = request('consignee');
-        $courier->received_by = request('received_by');
-        $courier->pickup_date = request('pickup_date');
-        $courier->dispatch_date = request('dispatch_date');
-        $courier->delivery_date = request('delivery_date');
-        $courier->payment_mode = request('payment_mode');
-        $courier->amount = request('amount');
 
-        $courier->save();
+        $total_amount = 0;
+        foreach (array_unique($request->product_id) as $key => $product) {
+            //Fetch the price of each product from the products table
+            $getProductPrice = Product::select('price')->where('id', '=', $product)->first();
+            //Multiply the price of the product from the quantity entered by the user
+            $total_amount += $getProductPrice->price * $request->quantity[$key];
+        }
 
-        flash('Courier Succesfully added!')->success();
+        $request->amount = $total_amount;
 
-        return redirect('/courier');
+        $courier = Courier::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email,
+            'description' => $request->description,
+            'received_by' => $request->received_by,
+            'consignee_id' => $request->consignee_id,
+            'pickup_date' => $request->pickup_date,
+            'dispatch_date' => $request->dispatch_date,
+            'delivery_date' => $request->delivery_date,
+            'payment_mode' => $request->payment_mode,
+            'amount' => $request->amount
+        ]);
+
+
+        if($request->product_id <> ''){
+            foreach (array_unique($request->product_id) as $key => $product) {
+                $courier->product()->attach($product, ['quantity' => $request->quantity[$key]]);
+            }
+        }
+        flash('Operation successful')->success();
+        return redirect()->route('courier.index');
     }
 
     /**
@@ -97,9 +117,11 @@ class CourierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Courier $courier)
     {
-        //
+        $consignees = Consignee::pluck('name', 'id')->all();
+        $prod = $courier->product()->get();
+        return view('courier.edit', compact('courier', 'consignees', 'prod'));
     }
 
     /**
@@ -112,13 +134,15 @@ class CourierController extends Controller
     public function update(Request $request, Courier $courier)
     {
         $this->validate($request, [
-            'name' => 'required|max:50',
+            'name' => 'bail|required|max:50',
             'address' => 'required',
             'phone_number' => 'required',
             'email' => 'required|email',
-            'shipping_service' => 'required',
+            'product_id.*' => 'required',
+            'quantity.*' => 'required',
             'description' => 'required',
             'received_by' => 'required',
+            'consignee_id' => 'required',
             'pickup_date' => 'required',
             'dispatch_date' => 'required',
             'delivery_date' => 'required',
@@ -126,29 +150,37 @@ class CourierController extends Controller
             'amount' => 'required'
         ]);
 
-        $update = Courier::where('id', $courier->id)->update([
-            'name'=> $request->name,
-            'address' => $request->address,
-            'phone_number' => $request->phone_number,
-            'email' => $request->email,
-            'shipping_service' => $request->shipping_service,
-            'description' => $request->description,
-            'consignee_id' => $request->consignee,
-            'received_by' => $request->received_by,
-            'pickup_date' => $request->pickup_date,
-            'dispatch_date' => $request->dispatch_date,
-            'delivery_date' => $request->delivery_date,
-            'payment_mode' => $request->payment_mode,
-            'amount' => $request->amount
-        ]);
+        $input = $request->except(['product_id','quantity', 'amount']);
 
-        if($update){
-            flash('Courier Updated')->success();
+        $courier->fill($input)->save();
+        if($request->product_id <> ''){
+            $total_amount = 0;
+            //Loop through the product and update and insert into courier table
+            foreach (array_unique($request->product_id) as $key => $userRole) {
+                $getAllPivot = DB::table('courier_product')->select('courier_id', 'product_id')->where([['courier_id', '=', $courier->id],['product_id', '=', $userRole]])->first();
+                if($getAllPivot){
+                    $courier->product()->updateExistingPivot($userRole, ['quantity' => $request->quantity[$key]]);
+                }
+                else{
+                    $courier->product()->attach($userRole, ['quantity' => $request->quantity[$key]]);
+                }
+                //Fetch the price of each product from the products table
+                $getProductPrice = Product::select('price')->where('id', '=', $userRole)->first();
+                //Multiply the price of the product from the quantity entered by the user
+                $total_amount += $getProductPrice->price * $request->quantity[$key];
+            }
+
+            //Update the total courier price here
+            $update = Courier::where('id', $courier->id)->update([
+                'amount'=> $total_amount
+            ]);
+
+            flash('Operation successful')->success();
             return redirect()->route('courier.index');
 
         }
         else{
-            flash('Operation failed')->error();
+            flash('Operation failed')->danger();
             return redirect()->route('courier.index');
         }
     }
@@ -168,28 +200,42 @@ class CourierController extends Controller
 
     public function allCouriers()
     {
-
         $couriers =  Courier::with(['consignee' => function($query){
             $query->orderBy('name', 'asc');
         }])->get();
 
         return Datatables::of($couriers)
         ->addColumn('action', function ($courier) {
-                return '<a data-edit-courier="'.$courier->id.'" class="btn btn-flat btn-info 
-                edit_courier"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
-                '<a  data-delete-courier="'.$courier->id.'"  class="btn btn-flat btn-danger  del_courier"><i class="glyphicon 
-                glyphicon-edit"></i> Delete</a>';
-            })
+            if (Auth::user()->hasAnyPermission('Edit Courier') && !Auth::user()->hasAnyPermission('Delete Courier')){
+                return '<a href="courier/'.$courier->id.'/edit" class="btn btn-flat btn-info edit_courier1"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+            }
+            if (Auth::user()->hasAnyPermission('Delete Courier') && !Auth::user()->hasAnyPermission('Edit Courier')){
+                return '<a href="'.$courier->id.'"  class="btn btn-flat btn-danger  del_courier1"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+            }
+            if (Auth::user()->hasAnyPermission('Delete Courier') && Auth::user()->hasAnyPermission('Edit Courier')){
+                return '<a href="courier/'.$courier->id.'/edit" class="btn btn-flat btn-info edit_courier1"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
+                '<a href="'.$courier->id.'"  class="btn btn-flat btn-danger  del_courier1"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+            }
+//            return '<a href="courier/'.$courier->id.'/edit" class="btn btn-flat btn-info edit_courier1"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.'<a href="'.$courier->id.'"  class="btn btn-flat btn-danger  del_courier1"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+        })
         ->make(true);
-
-        // return Datatables::of($couriers)
-        //     ->addColumn('action', function ($courier) {
-
-        //         return '<a data-edit-courier="'.$courier->id.'" class="btn btn-flat btn-info 
-        //         edit_courier"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
-        //         '<a  data-delete-courier="'.$consignee->id.'"  class="btn btn-flat btn-danger  del_courier"><i class="glyphicon 
-        //         glyphicon-edit"></i> Delete</a>';
-        //     })
-        //     ->make(true);
     }
+
+    public function sales(){
+        return view('courier.sales');
+    }
+
+    public function allSales(){
+
+        $sales = Courier::join('consignees', 'consignee_id', '=', 'consignees.id')
+                ->join('courier_product', 'couriers.id', '=', 'courier_product.courier_id')
+                ->select(DB::raw('consignees.name as consignee_name, couriers.amount as total_amount,
+                        couriers.name as courier_name, COUNT(courier_product.quantity) as qty'))
+                ->groupBy('couriers.id')
+                ->get();
+
+        return Datatables::of($sales)
+            ->make(true);
+    }
+
 }

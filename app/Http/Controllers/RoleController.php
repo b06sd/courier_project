@@ -87,19 +87,27 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $this->validate($request, [
-            'name'=>'required|max:10|unique:roles,name,'.$role->id,
-            'permissions' =>'required',
+        $validator = $this->validate($request, [
+            'name'=>'bail|required|max:20|unique:roles,name,'.$role->id,
+            'permissions' =>'required'
         ]);
-
-        $input = $request->except(['permissions']);
-        $role->fill($input)->save();
-        if($request->permissions <> ''){
-            $role->permissions()->sync($request->permissions);
+        if(!($validator)){
+            flash('Operation failed')->danger();
+            return redirect()->route('roles.index');
         }
-
-        flash('Operation successful')->success();
-        return redirect()->route('roles.index');
+        else{
+            $input = $request->except(['permissions']);
+            $role->fill($input)->save();
+            if($request->permissions <> ''){
+                $role->permissions()->sync($request->permissions);
+                flash('Operation successful')->success();
+                return redirect()->route('roles.index');
+            }
+            else{
+                flash('Operation failed')->danger();
+                return redirect()->route('roles.index');
+            }
+        }
     }
 
     /**
