@@ -24,6 +24,8 @@ Route::group(['middleware' => ['auth', 'permission_clearance']], function() {
     Route::resource('users','UserController');
     Route::resource('courier','CourierController');
     Route::resource('consignee','ConsigneeController');
+    Route::get('transactions/{consignee}', 'ConsigneeController@transactions')->name('transactions');
+    Route::get('allConsigeeSales/{consignee}', 'ConsigneeController@allConsigeeSales')->name('allConsigeeSales');
 
     Route::get('allRoles', 'RoleController@allRoles')->name('allRoles');
     Route::get('allUsers', 'UserController@allUsers')->name('allUsers');

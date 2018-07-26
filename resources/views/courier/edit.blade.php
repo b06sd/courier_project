@@ -110,7 +110,7 @@
                                                 {{--<option value="Credit">Credit</option>--}}
                                                 {{--<option value="Cash">Cash</option>--}}
                                             {{--</select>--}}
-                                            {{ Form::select('payment_mode', ['Cash', 'Credit'], $courier->payment_mode, array( 'class' => 'form-control', 'id' => 'payment_mode')) }}
+                                            {{ Form::select('payment_mode', ['Cash' => 'Cash', 'Credit' => 'Credit'], $courier->payment_mode, array( 'class' => 'form-control', 'id' => 'payment_mode')) }}
                                         </div>
                                     </div>
                                 </div>

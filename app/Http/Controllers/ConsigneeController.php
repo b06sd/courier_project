@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Courier;
 use Illuminate\Http\Request;
 use App\Consignee;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -66,10 +68,10 @@ class ConsigneeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Consignee $consignee)
     {
         return Consignee::select(DB::raw('id, name, address, email, phone_number'))
-            ->where('id', '=', $id)
+            ->where('id', '=', $consignee->id)
             ->first();
     }
 
@@ -138,12 +140,31 @@ class ConsigneeController extends Controller
 
         return Datatables::of($consignees)
             ->addColumn('action', function ($consignee) {
-
-                return '<a data-edit-consignee="'.$consignee->id.'" class="btn btn-flat btn-info 
-                edit_consignee"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
-                '<a  data-delete-consignee="'.$consignee->id.'"  class="btn btn-flat btn-danger  del_consignee"><i class="glyphicon 
-                glyphicon-edit"></i> Delete</a>';
+                if (Auth::user()->hasAnyPermission('Edit Consignee') && !Auth::user()->hasAnyPermission('Delete Consignee')){
+                    return '<a href="'.route("transactions", ['id' => $consignee->id] ).'" class="btn btn-flat btn-success"><i class="glyphicon glyphicon-edit"></i> Transactions</a>'.'<a data-edit-consignee="'.$consignee->id.'" class="btn btn-flat btn-info edit_consignee"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+                }
+                if (Auth::user()->hasAnyPermission('Delete Consignee') && !Auth::user()->hasAnyPermission('Edit Consignee')){
+                    return '<a href="'.route("transactions", ['id' => $consignee->id] ).'" class="btn btn-flat btn-success"><i class="glyphicon glyphicon-edit"></i> Transactions</a>'.'<a data-delete-consignee="'.$consignee->id.'"  class="btn btn-flat btn-danger  del_consignee"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+                }
+                if (Auth::user()->hasAnyPermission('Delete Consignee') && Auth::user()->hasAnyPermission('Edit Consignee')){
+                    return '<a href="'.route("transactions", ['id' => $consignee->id] ).'" class="btn btn-flat btn-success"><i class="glyphicon glyphicon-edit"></i> Transactions</a>'.'<a data-edit-consignee="'.$consignee->id.'" class="btn btn-flat btn-info edit_consignee"><i class="glyphicon glyphicon-edit"></i> Edit</a>'.
+                    '<a data-delete-consignee="'.$consignee->id.'"  class="btn btn-flat btn-danger  del_consignee"><i class="glyphicon glyphicon-edit"></i> Delete</a>';
+                }
             })
+            ->make(true);
+    }
+
+    public function transactions(Consignee $consignee){
+        return view('consignee.transactions', compact('consignee'));
+    }
+
+    public function allConsigeeSales(Consignee $consignee){
+        $sales = Consignee::join('couriers', 'consignees.id', '=', 'consignee_id')
+            ->select(DB::raw('consignees.id as id, couriers.id as courier_id, consignees.name as consignee_name, consignees.phone_number as phone, consignees.email as email, couriers.name as shipper, pickup_date, dispatch_date, delivery_date, payment_mode, amount'))
+            ->where('consignees.id', '=', $consignee->id)
+            ->get();
+
+        return Datatables::of($sales)
             ->make(true);
     }
 }
