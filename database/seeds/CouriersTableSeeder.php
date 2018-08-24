@@ -17,7 +17,6 @@ class CouriersTableSeeder extends Seeder
         factory(App\Courier::class, 10)->create([
         	'payment_mode' => $payment_mode[rand(0,1)]
         ])->each(function ($u){
-
             $u->product()->attach(\App\Product::all(), ['quantity' => rand(1,10)]);
         });
     }
